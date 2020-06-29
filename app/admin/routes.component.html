@@ -1,0 +1,28 @@
+<div>
+    <h1 class="routeHeader">List of routes</h1>
+</div>
+<div class="container">
+    <table class="table table-striped table-bordered no-margin">
+        <thead>
+            <tr>
+                   
+                <th>Routes Name</th>
+                <th>Order Days</th>
+                <th>No of Customers</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let route of routesArray; let i=index">
+                <td>
+                    <a [routerLink] = "['/route',route.primaryKey]">{{route.routeName}}</a>
+                </td>
+                <td>{{route.orderDays}}</td>
+                <td>{{route.custCount}}</td>
+                <td>{{route.notes}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- <router-outlet></router-outlet> -->

@@ -1,0 +1,34 @@
+
+<div>
+  <h1 class="orderChat" >Order Chart for <b>{{clientName}}</b></h1>
+  <button class="btn btn-primary saveBtn" (click)="saveItem()">Submit Order</button>
+</div>
+<!-- <addItem></addItem> -->
+<div class="container">
+  <table class="table table-striped table-bordered no-margin">
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Item ID</th>
+          <th>Item Decscritpion</th>          
+          <th>Unit</th>
+          <th>Price</th>
+          <th>On Hand</th>
+          <th>Quantity</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of orderItemArray; let i=index">
+          <td>{{i}}</td>
+         <td>{{item.itemID}}</td>
+         <td>{{item.name}}</td>
+         <td>{{item.baseUnit}}</td>
+         <td>{{item.unitCost}}</td>
+         <td>{{item.onHand}}</td>
+         <td><input type="number" [(ngModel)]="item.quantity" name="quantity"></td>
+        <td><input type="text" [(ngModel)]="item.notes" name="notes"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

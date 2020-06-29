@@ -1,0 +1,83 @@
+body {
+    background: #0147A7;
+    color: #fff;
+}
+
+thead {
+    background-color:  #6595d8;
+    color:white;
+ }
+
+ .chkBox{
+    height: 20px;
+    width: 20px;
+ }  
+ .delBtn{
+  height: 31px;
+  width: 70px;
+  color: red;
+  font-weight: 600;
+ }
+/* 
+Found solution from:-------Samdani Alam
+https://stackoverflow.com/questions/46977398/ng-bootstrap-modal-size
+
+ng-deep=>> “shadow-piercing” descendant combinator can be used to force a style down 
+through the child component tree into all the child component views.
+ In this case modal-dialog class.
+*/
+::ng-deep .my-class .modal-dialog { 
+    max-width: 90%;
+    width: 70%;  /* change size from here --> Samdani Alam*/
+  }
+
+
+  .modal-header {
+    background-color:#8693ad;
+    color: white;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+}
+.modal-footer {
+    height: 45px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+/* To unwrap row and show in one line */
+.choppOff {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* to resize row height */
+  .table th, .table td {
+    padding: 5px !important;
+  }
+
+
+  /* Table headers */
+
+thead {
+    background-color: #a9bad2;
+    color: white;
+}
+
+.tableHeading{
+    margin-left: 500px;
+    font-size: x-large;
+}

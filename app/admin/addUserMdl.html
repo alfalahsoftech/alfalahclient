@@ -1,0 +1,96 @@
+<ng-template style="width:1100px"  #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{modalHeader}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <form class="form-inline" >
+        <div class="row col-md-12">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">User ID:</label>
+            <input type="text" class="form-control " id="custID" name="custID" placeholder="Enter user name" [(ngModel)]="userInfo.userName" >
+          </div>
+          <div class="form-group col-md-6">
+            <label for="pwd" class="col-sm-5">Password:</label>
+            <input type="text" class="form-control" id="custName" name="clientName" placeholder="Enter Password" [(ngModel)]="userInfo.userPassword">
+          </div>
+        </div>
+        <div class="row col-md-12" style="margin-top: 2%">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">First Name</label>
+            <input type="text" class="form-control " id="routeName" placeholder="Enter routeName" name="routeName" [(ngModel)]="userInfo.firstName">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">Last Name</label>
+            <input type="text" class="form-control " id="city" placeholder="Enter city" name="city" [(ngModel)]="userInfo.lastName">
+          </div>
+        </div>
+        <div class="row col-md-12" style="margin-top: 2%">
+          <div class="form-group col-md-6">
+            <label for="email" class="col-sm-5">Email:</label>
+            <input type="email" class="form-control " id="emailID" placeholder="Enter email id" name="emailID" [(ngModel)]="userInfo.emailID">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">Contact Number:</label>
+            <input type="number" maxlength="10" class="form-control" id="contactNo" placeholder="Enter contactNo" name="contactNo" [(ngModel)]="userInfo.contactNo" >
+          </div>
+        </div>
+        
+ <!--
+        <div class="row col-md-12" style="margin-top: 2%">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">District</label>
+            <input type="text" class="form-control " id="district" placeholder="Enter district" name="district" [(ngModel)]="userInfo.district">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">State</label>
+            <input type="text" class="form-control " id="state" placeholder="Enter state" name="state" [(ngModel)]="userInfo.state">
+          </div>
+        </div> -->
+
+        <div class="row col-md-12" style="margin-top: 2%">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">Address</label>
+            <input autocomplete="off" type="text" class="form-control " id="address" placeholder="Enter address" name="district" [(ngModel)]="userInfo.address">
+          </div>
+          <!-- <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">GST No.</label>
+            <input type="text" class="form-control " id="gstNo" placeholder="Enter gstNo" name="gstNo" [(ngModel)]="userInfo.state">
+          </div> -->
+        </div>
+        <!-- <div class="row col-md-12" style="margin-top: 2%">
+        
+          <div class="form-group col-md-6">
+            <label><h4>Order Days   <hr class="orddayhr"></h4></label>
+         
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="userInfo.sun" name="sun"> Sunday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="userInfo.mon" name="mon"> Monday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="userInfo.tue" name="tue"> Tuesday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="userInfo.thu" name="thu"> Thursday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="userInfo.fri" name="fri"> Friday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="userInfo.sat" name="sat"> Saturday
+            </label>
+          </div>
+        </div> -->
+<!--       
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember"> Remember me
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button> -->
+      </form>
+    </div>
+    
+  </div>
+  <div class="modal-footer" >
+      <button type="button" class="btn btn-primary" (click)="c('Close click')">Save</button>
+    
+  </div>
+</ng-template>
+
+<button  class="btn btn-primary" (click)="open(content)">Add</button>

@@ -1,0 +1,143 @@
+
+<ng-template  #content2 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Worker Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container ">
+
+<div class="pay">
+  <table id="tbl" class="table table-striped table-bordered no-margin">
+
+    <colgroup>
+      <col width="1%">
+      <col width="15%">
+      <col width="15%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Name</th>
+        <th>Job Code</th>
+        <th>Is Present</th>
+        <th>Quantity</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let workerDetail of workDayDetailArray let i=index">
+        <td>{{i+1}}</td>
+        <td>
+
+          <ngx-select-dropdown [ngModelOptions]="{standalone: true}" style="width:200px" (change)="selectedWorker($event)"
+          [(ngModel)]="workerDetail.staffPK" [config]="{search:true,searchPlaceholder:'Searh here',displayKey:'firstName',placeholder:'Select woker name' }"
+          [options]="staffArray">
+           </ngx-select-dropdown>
+        </td>
+
+        <td>
+          <ngx-select-dropdown #refEL [ngModelOptions]="{standalone: true}" style="width:200px" (change)="selectedJobCode($event,refEL)"
+          [(ngModel)]="workerDetail.jobCodePK" [config]="{search:true,searchPlaceholder:'Searh here',displayKey:'jobName',placeholder:'Select jobcode' }"
+          [options]="jobCodeArray">
+           </ngx-select-dropdown>
+
+        </td>
+      
+        <td>
+          <input type="checkbox" class="form-control chkBox"  id="isPresent"  name="isPresent"  [(ngModel)]="workerDetail.isPresent">
+         </td>
+        <td>
+            <input type="number" class="form-control " [disabled]="!workerDetail.isPresent" id="quantity"  name="quantity" [(ngModel)]="workerDetail.quantity">
+        </td>
+        <td (click)="deleteRow(i)">    
+          <i class="fa fa-trash fa-2x"></i>    
+        </td> 
+        <!-- <td>
+          <button style="height:1.5rem;    padding: 0.1rem;" class="btn btn-info" (click)="delete(itemSold)">Del</button>
+        </td> -->
+      </tr>
+      <tr>  
+        <td></td>  
+        <td></td>  
+        <td></td>  
+        <td></td>  
+        <td></td>  
+        <td (click)="addNewRow(i)">    
+          <i class="fa fa-plus fa-2x"></i>    
+        </td>    
+      </tr>    
+    </tbody>
+  </table>
+</div>
+  </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Close click')">Save</button>
+  </div>
+
+</ng-template>
+
+
+<!-- /////////////////////////////////////// view ///////////////////////////// -->
+
+
+<ng-template  #content1 let-c="close" let-d="dismiss">
+
+  
+  <div class="modal-header">
+    <h4 class="modal-title">Daily Work Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container ">
+
+  <div >
+    <table class="table table-striped table-bordered no-margin">
+      <colgroup>
+       
+        <col width="10%">
+        <col width="20%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="8%">
+        <col width="8%">
+        <col width="10%">
+        <col width="10%">
+      </colgroup>
+    <thead>
+      <tr  style="text-align: center;">
+        <th>Name</th>
+        <th>Make(Kg)</th> 
+        <th>Dry (Kg)</th> 
+        <th>Bundle(Kg)</th> 
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let lbr of lbrWorkDetailsArray | orderBy:'name'" style="text-align: center;" >
+        <td>{{lbr.name}}</td>
+        <td>{{lbr.ttMade}}</td>
+        <td>{{lbr.ttDried}}</td>
+        <td>{{lbr.ttBundled}}</td>
+  
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+</div>
+</ng-template>
+
+<button class="btn btn-primary btn-view" (click)="open(content2,false)" >add</button>
+<button class="btn btn-primary btn-view" (click)="open(content1,true)" >View</button>

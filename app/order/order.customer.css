@@ -1,0 +1,33 @@
+.actions{
+    margin: 5px;
+    border-width: 2px;
+    background-color: #c4cbd6;
+    height: 72px;
+    border-radius: 12px;
+    position: relative;
+  }
+  .btnActions{
+    top: 24px;
+    margin-left: 975px;
+    position: absolute;
+    
+  }
+    
+
+ 
+    
+  
+    
+
+  .ss{
+      background-color: red;
+  }
+
+    
+   
+
+    @media (min-width: 1200px){
+      .container {
+          max-width: 1300px;
+      }
+  }

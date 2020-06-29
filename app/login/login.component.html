@@ -1,0 +1,64 @@
+<!-- <div class="signin-content">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <p>Please login to continue</p>
+          <mat-input-container class="full-width-input">
+            <input matInput placeholder="User" 
+                   formControlName="userName" required>
+            <mat-error *ngIf="isFieldInvalid('userName')">
+              Please inform your user name
+            </mat-error>
+          </mat-input-container>
+          <mat-input-container class="full-width-input">
+            <input matInput type="password" placeholder="Password" 
+                   formControlName="password" required>
+            <mat-error *ngIf="isFieldInvalid('userName')">
+              Please inform your password
+            </mat-error>
+          </mat-input-container>
+          <button mat-raised-button color="primary" type="submit">Login</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div> -->
+
+
+  <div class="container">
+    <!-- <div ng-include="'spareparts/wireframe/appHeader.html'"></div>  -->
+         <div class="row" >
+            <div class="col-md-offset-5 col-md-3">
+                <div class="form-login">
+                <h4>Welcome back.</h4>
+                <table>
+                    <tr>
+                        <td> User Name:&nbsp;&nbsp;</td> 
+                        <td><input type="text" id="userName" [(ngModel)]="user.userName" class="form-control input-sm chat-input" placeholder="username" /></td>
+                    </tr>
+                    <tr>
+                        <td>Passwordss:&nbsp;&nbsp;</td>
+                         <td><input type="text" id="userPassword"  [(ngModel)]="user.password" class="form-control input-sm chat-input" placeholder="password" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="wrapper">
+                                <span class="group-btn">     
+                                     <button type = "submit" class = "btn btn-info btn-block" (click)="login(user)">Login</button>
+                                </span>
+                                </div>
+
+                        </td>
+                    </tr>
+                </table>
+               
+                <br>
+                
+                
+                </div>
+            
+            </div>
+        </div>
+        
+    </div>
+    
+    

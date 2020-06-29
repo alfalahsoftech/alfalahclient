@@ -1,0 +1,53 @@
+<div class="container">
+  <p class="row" style="margin-top: 20px;">
+    <addUserMdl  (messageEvent)="receiveMessage($event)"></addUserMdl>
+    <span class="tableHeading">List of Users</span>
+  </p>
+  
+  <table class="table table-striped table-bordered no-margin">
+      <colgroup>
+        <col width="6%">
+        <col width="8%">
+        <col width="8%">
+        <col width="8%">
+         <col width="8%">
+        <col width="20%">
+        <col width="10%">
+        <col width="6%">
+        <col width="8%">
+      </colgroup>
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Password</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Contact No</th>
+        <th>Address</th>
+        <th>Email ID</th>
+        <th>Is Active</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userDetails">
+        <td>{{user.userName}}</td>
+        <td>{{user.userPassword}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.contactNo}}</td>
+        <td>{{user.address}}</td>
+        <td>{{user.emailID}}</td>
+        <td>
+          <input type="checkbox" class="form-control chkBox" disabled id="isActive"  name="isActive" [ngModel]="user.isActive">
+        </td>
+        <td>
+            <editUserInfo [userDetails]="user"></editUserInfo>  &nbsp;
+            <a  (click)="actions(user.primaryKey,'update')" routerLink="/UserService/removeuser/{{user.primaryKey}}">Delete</a>
+        </td>
+          
+      </tr>
+    </tbody>
+  </table>
+
+</div>

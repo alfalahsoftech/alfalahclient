@@ -1,0 +1,26 @@
+<div class="container">
+    <table class="table table-striped table-bordered no-margin">
+        <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Item Decscritpion</th>
+                <th>Price</th>
+                <th>Unite</th>
+                <th>Last Updated On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of itemArray">
+                <td>{{item.itemId}}</td>
+                <td>{{item.itemName}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.UOM}}</td>
+                <td>{{item.lastUpdatedOn}}</td>
+                <td>
+                    <a class="fa fa-eye" aria-hidden="true" (click)="customerDetail()"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

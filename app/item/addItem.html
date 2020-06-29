@@ -1,0 +1,99 @@
+<ng-template  #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Fill Item Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container ">
+      <form class="form-inline" action="/action_page.php">
+        <div class="row col-md-12">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">Item ID:</label>
+            <input type="text" class="form-control " id="custID" name="custID" placeholder="Enter ID" [(ngModel)]="dummyItem.itemID">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="pwd" class="col-sm-3">Item Name:</label>
+            <input type="text" class="form-control" id="custName" name="clientName" placeholder="Enter name"
+              [(ngModel)]="dummyItem.name">
+          </div>
+        </div>
+        <div class="row col-md-12" style="margin-top: 2%">
+          <div class="form-group col-md-6">
+            <label for="email" class="col-sm-3">Weight:</label>
+            <input type="number" class="form-control " id="emailID" placeholder="Enter weight" name="weight"
+              [(ngModel)]="dummyItem.weight">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">Base Unit:</label>
+            <ngx-select-dropdown [ngModelOptions]="{standalone: true}" style="width:220px" (change)="selectionChanged($event)"
+              [(ngModel)]="dummyItem.baseUnit" [config]="{search:true,searchPlaceholder:'Select Unit',displayKey:'Kg',placeholder:'Select Unit' }"
+              [options]="dropdownOptions">
+            </ngx-select-dropdown>
+
+          </div>
+        </div>
+        <!-- <div class="row col-md-12" style="margin-top: 2%">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">Unit Cost</label>
+            <input type="number" class="form-control " id="unitCost" placeholder="Enter unit cost" name="unitCost"
+              [(ngModel)]="dummyItem.unitCost">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">GST%</label>
+            <input type="number" class="form-control " id="gstPerc" placeholder="Enter gstPerc" name="gstPerc"
+              [(ngModel)]="dummyItem.gstPerc">
+          </div>
+        </div> -->
+
+        <div class="row col-md-12" style="margin-top: 2%">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">Unit Cost</label>
+            <input type="number" class="form-control " id="unitCost" placeholder="Enter unit cost" name="unitCost"
+              [(ngModel)]="dummyItem.unitCost">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">GST%</label>
+            <input type="number" class="form-control " id="gstPerc" placeholder="Enter gstPerc" name="gstPerc"
+              [(ngModel)]="dummyItem.gstPerc">
+          </div>
+        </div>
+
+        <div class="row col-md-12" style="margin-top: 2%">
+      
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">Saling Price</label>
+            <input type="number" class="form-control " id="salingPrice" placeholder="Enter salingPrice" name="salingPrice"
+              [(ngModel)]="dummyItem.salingPrice">
+          </div>
+        
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">Any Notes</label>
+            <input type="text" class="form-control " id="notes" placeholder="Enter notes" name="notes" [(ngModel)]="dummyItem.notes">
+          </div>
+
+        </div>
+
+        <div class="row col-md-12" style="margin-top: 2%">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-3">Is Active</label>
+            <input type="checkbox" class="form-control  " style="width: 20px;
+              height: 20px;" id="isActive"
+              name="isActive" [(ngModel)]="dummyItem.isActive">
+          </div>
+
+        </div>
+
+
+      </form>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Close click')">Save Item</button>
+
+  </div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="open(content)">Add</button>

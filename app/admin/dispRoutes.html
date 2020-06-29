@@ -1,0 +1,35 @@
+<div class="container">
+  <p class="row" style="margin-top: 20px;">
+    <addRouteMdl (messageEvent)="receiveMessage($event)"></addRouteMdl>
+    <span class="tableHeading"> Routes Lookup</span>
+  </p>
+
+  <table class="table table-striped table-bordered no-margin">
+    <!-- <colgroup>
+      <col width="6%">
+      <col width="8%">
+      <col width="8%">
+      <col width="8%">
+     
+    </colgroup> -->
+    <thead>
+      <tr>
+        <th>Routes Name</th>
+        <th>Order Days</th>
+        <th>No of Customers</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let route of routesArray; let i=index">
+        <td>
+          <a [routerLink]="['/route',route.primaryKey]">{{route.routeName}}</a>
+        </td>
+        <td>{{route.orderDays}}</td>
+        <td>{{route.stateName}}</td>
+        <td>{{route.notes}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

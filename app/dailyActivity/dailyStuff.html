@@ -1,0 +1,79 @@
+
+
+<div class="container">
+  <div class="form-inline" style="margin-top: 20px;">
+   
+    <input type="date" class="form-control" [ngModel] ="uiDailyStuff.createdDate | date:'yyyy-MM-dd'" (ngModelChange)="uiDailyStuff.createdDate = $event">
+      <!-- <input class="form-control" type="date" [(ngModel)]="createdDate"> -->
+    &nbsp;  &nbsp;  &nbsp;
+    <label for="text" >Store </label>&nbsp;
+    <ngx-select-dropdown [ngModelOptions]="{standalone: true}" style="width:272px" (change)="selectionChanged($event)"
+      [(ngModel)]="uiDailyStuff.eoStore" [config]="{displayKey:'storeName',placeholder:'Select store' }"
+      [options]="storeArray">
+    </ngx-select-dropdown>
+    &nbsp;  &nbsp;  &nbsp;
+    <input  type="checkbox" class=" chkBox"  id="isCloseDay"  name="isCloseDay" [(ngModel)]="uiDailyStuff.isCloseDay">
+    &nbsp;  &nbsp;  &nbsp;
+    <label>Is Close Day</label>
+    &nbsp;  &nbsp;  &nbsp;
+    <input type="text" class="form-control"  [disabled]="!uiDailyStuff.isCloseDay" id="closeDayReason"  name="closeDayReason" [(ngModel)]="uiDailyStuff.closeDayReason">
+    &nbsp;  &nbsp;  &nbsp; 
+    <button class="btn btn-primary" (click)="addDailyStuff()">Add</button>
+  
+  </div>
+<p>
+  <span  style=" margin-left: 500px;font-size: x-large;">Daily Agarbatti Made Details</span>
+</p>
+  
+  <table class="table table-striped table-bordered no-margin">
+      <colgroup>
+       
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+        <col width="5%">
+        <col width="5%">
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
+      </colgroup>
+    <thead>
+      <tr  style="text-align: center;">
+        <th>Date</th>
+        <th>Karkhana</th>
+        <th>Make(Kg)</th> 
+        <th>Dry (Kg)</th> 
+        <th>Bundle(Kg)</th> 
+        <th>Labours</th>
+        <th>Present</th>
+        <th>Absent</th>
+        <th>Is Close Day</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let stuff of dailyStuffs | orderBy:'busiDate'" style="text-align: center;" >
+        <td>{{stuff.busiDate |date:'dd-MMM-yyyy'}}</td>
+        <td>{{stuff.storeName}}</td>
+        <td>{{stuff.ttMade}}</td>
+        <td>{{stuff.ttDried}}</td>
+        <td>{{stuff.ttBundled}}</td>
+        <td>{{ttLabour}}</td>
+        <td>{{stuff.workersPresent}}</td>
+        <td>{{ttLabour-stuff.workersPresent}}</td>
+        <td *ngIf="stuff.isCloseDay" style="background-color:red"  title="{{stuff.closeDayReason}}" >{{stuff.isCloseDay?'Yes':'No'}}</td>
+        <td *ngIf="!stuff.isCloseDay"   title="{{stuff.closeDayReason}}" >{{stuff.isCloseDay?'Yes':'No'}}</td>   
+    
+         <td>
+            <viewDailyStuff [dailyStuffObj]="stuff"  ></viewDailyStuff>
+            
+            
+         </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

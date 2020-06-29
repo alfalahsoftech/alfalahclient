@@ -1,0 +1,57 @@
+<ng-template style="width:1100px"  #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{modalHeader}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <form class="form-inline" >
+        <div class="row col-md-12">
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">Route Name</label>
+            <input type="text" class="form-control " id="routeName" name="routeName" placeholder="Enter route name" [(ngModel)]="route.routeName" >
+          </div>
+          <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">State Name</label>
+            <input type="text" class="form-control " id="stateName" name="stateName" placeholder="Enter state name" [(ngModel)]="route.stateName" >
+          </div>
+        </div>
+        <div class="row col-md-12">
+          <!-- <div class="form-group col-md-6">
+            <label for="text" class="col-sm-5">State Name</label>
+            <input type="text" class="form-control " id="custID" name="custID" placeholder="Enter state name" [(ngModel)]="route.stateName" >
+          </div> -->
+          <div class="form-group col-md-6">
+            <label for="pwd" class="col-sm-5">Notes:</label>
+            <input type="text" class="form-control" id="notes" name="notes" placeholder="Enter some notes" [(ngModel)]="route.notes">
+          </div>
+        </div>
+       
+        <div class="row col-md-12" style="margin-top: 2%">
+        
+          <div class="form-group col-md-6">
+            <label><h4>Order Days   <hr class="orddayhr"></h4></label>
+         
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="route.sun" name="sun"> Sunday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="route.mon" name="mon"> Monday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="route.tue" name="tue"> Tuesday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="route.thu" name="thu"> Thursday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="route.fri" name="fri"> Friday
+              <input class="form-check-input" type="checkbox" [(ngModel)]="route.sat" name="sat"> Saturday
+            </label>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+  <div class="modal-footer" >
+      <button type="button" class="btn btn-primary" (click)="c('Close click')">Save</button>
+    
+  </div>
+</ng-template>
+
+<button  class="btn btn-primary" (click)="open(content)">Add</button>

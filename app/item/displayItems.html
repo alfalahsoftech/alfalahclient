@@ -1,0 +1,82 @@
+  
+  <div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div *ngIf="!isClientItem">
+          <addItem (messageEvent)="receiveMessage($event)"></addItem>
+        </div>
+       <div *ngIf="isClientItem" style="width:250px">
+          <ngx-select-dropdown [ngModelOptions]="{standalone: true}"   (change)="selectionChanged($event)"
+          [(ngModel)]="eoClientPK" [config]="{search:true,searchPlaceholder:'Search client name',displayKey:'clientName',placeholder:'Select Client Name' }"
+          [options]="clientsArray">
+          </ngx-select-dropdown>
+       </div>
+        
+        <span style="margin-left: 600px;">
+           <input class="form-control" style="margin-left: 400px;width: 300px;" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by any name">
+        </span>
+    </div> 
+    <table class="table table-striped table-bordered no-margin">
+        <colgroup  *ngIf="!isClientItem">
+         
+          <col width="4%">
+          <col width="10%">
+          <col width="10%">
+          <col width="8%">
+          <col width="8%">
+          <col width="2%">
+           <col width="7%">
+          <col width="7%">
+          <col width="10%">
+        </colgroup>
+        <colgroup  *ngIf="isClientItem">
+       
+          <col width="4%">
+          <col width="10%">
+          <col width="10%">
+          <col width="8%">
+          <col width="8%">
+          <col width="2%">
+           <col width="7%">
+          <col width="8%">
+          <col width="7%">
+          <col width="10%">
+        </colgroup>
+    
+        <thead>
+          <tr>
+            
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th *ngIf="isClientItem">Client Name</th>
+            <th>Base Unit</th>
+            <th>Cost/Unit</th>
+            <th>GST(%)</th>
+            <th>Saling Price</th>
+            <th>Notes</th>
+            <th>Is Active</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemsArray | filter:searchText">
+          
+           <td>{{item.itemID}}</td>
+           <td class="choppOff">{{item.name}}</td>
+           <td *ngIf="isClientItem"><b>{{item.clientName}} </b></td>
+           <td>{{item.baseUnit}}</td>
+           <td>{{item.unitCost}}</td>
+           <td>{{item.gstPerc}}</td>
+           <!-- <td>{{item.costPrice}}</td> -->
+           <td>{{item.salingPrice}}</td>
+           <td>{{item.notes}}</td>
+           <td>
+            <input type="checkbox" class="form-control chkBox" disabled id="isActive"  name="isActive" [ngModel]="item.isActive">
+           </td>
+           <td>
+                <a  (click)="actions(item.primaryKey,'edit')"  routerLink="/food/item/{{item.primaryKey}}">Edit</a> &nbsp; 
+                <a  (click)="actions(item.primaryKey,'update')" routerLink="/food/item/{{item.primaryKey}}">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

@@ -1,0 +1,42 @@
+<div class="container">
+  <p class="row" style="margin-top: 20px;">
+    <addStoreMdl  (messageEvent)="receiveMessage($event)"></addStoreMdl>
+    <span class="tableHeading">List of Stores</span>
+  </p>
+  
+  <table class="table table-striped table-bordered no-margin card">
+      <colgroup>
+        <col width="6%">
+        <col width="8%">
+        <col width="8%">
+        <col width="6%">
+        <!-- <col width="6%"> -->
+      </colgroup>
+    <thead>
+      <tr>
+        <th>Store ID</th>
+        <th>Store Name</th>
+         <th>Address</th>
+        <th>Is Active</th>
+        <!-- <th>Action</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let store of storeDetails">
+        <td>{{store.storeNo}}</td>
+        <!-- <td>{{store.storePassword}}</td> -->
+        <td>{{store.storeName}}</td>
+        <td>{{store.storeLocation}}</td>
+        <td>
+          <input type="checkbox" class="form-control chkBox" disabled id="isActive"  name="isActive" [ngModel]="store.isActive">
+         </td>
+         <!-- <td>
+          
+              <button class="delBtn" (click)="actions(store.primaryKey)">Delete</button>
+          </td> -->
+          
+      </tr>
+    </tbody>
+  </table>
+
+</div>

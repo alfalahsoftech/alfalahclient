@@ -1,0 +1,39 @@
+<div class="container">
+    <!-- <div ng-include="'spareparts/wireframe/appHeader.html'"></div>  -->
+    <div id="failmsg" >{{credentialMsg}}</div>
+         <div class="row" >
+            <div class=" col-md-4">
+                <div class="form-login">
+                <h4>Welcome back.</h4>
+                <table>
+                    <tr>
+                        <td style="width: 150px"> User Name:&nbsp;&nbsp;</td> 
+                        <td style="width: 290px"><input type="text" id="userName" [(ngModel)]="user.userName" class="form-control input-sm chat-input" placeholder="username" /></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 150px">Password:mmm&nbsp;&nbsp;</td>
+                         <td style="width: 290px"><input type="text" id="userPassword"  [(ngModel)]="user.password" class="form-control input-sm chat-input" placeholder="password" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="wrapper">
+                                <span class="group-btn" style="float: right;">     
+                                     <button type = "submit" class = "btn btn-info btn-block"  style="margin-top: 15px;" (click)="login(user)">Login</button>
+                                </span>
+                                </div>
+
+                        </td>
+                    </tr>
+                </table>
+               
+                <br>
+                
+                
+                </div>
+            
+            </div>
+        </div>
+        
+    </div>
+    
+    

@@ -1,0 +1,54 @@
+<nav class="navbar navbar-fixed-top navbar-expand-md navbar-dark bg-primary headerMenuHeight">
+    <div class="d-flex w-100">
+        <a class="navbar-brand mr-0" href="#">DnD Application</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse justify-content-center" id="collapsingNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Dashboard
+                    <span class="sr-only">Home</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="order">Order</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="cust">Customer</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="food">Food</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="admin">Admin</a>
+            </li>
+           
+            <li class="nav-item dropdown">
+                <a class="nav-link active" href="#" id="navbardrop" data-toggle="dropdown"> <!-- dropdown-toggle removed -->
+                    Settings<span></span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Customer</a>
+                    <a class="dropdown-item" href="#">Staff</a>
+                    <a class="dropdown-item" href="#">Items</a>
+                </div>
+            </li>
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="logout">Logout</a>
+            </li> -->
+        </ul>
+    </div>
+    <!-- <ul class="navbar-nav  navbar-text mt-1 w-100 text-right  small text-truncate ">
+        <li class="nav-item active  ">
+            <a class="nav-link" href="#">Dashboard
+                <span class="sr-only">Home</span>
+            </a>
+        </li>
+        <li class="nav-item active  ">
+            <a class="nav-link" routerLink="order">Order</a>
+        </li>
+    </ul> -->
+    <span class="navbar-text small text-truncate mt-1 w-100 text-right active">Logout</span>
+</nav>

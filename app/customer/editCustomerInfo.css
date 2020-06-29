@@ -1,0 +1,60 @@
+
+/* 
+Found solution from:-------Samdani Alam
+https://stackoverflow.com/questions/46977398/ng-bootstrap-modal-size
+
+ng-deep=>> “shadow-piercing” descendant combinator can be used to force a style down 
+through the child component tree into all the child component views.
+ In this case modal-dialog class.
+*/
+::ng-deep .my-class .modal-dialog { 
+  max-width: 90%;
+  width: 70%;  /* change size from here --> Samdani Alam*/
+}
+.modal-header {
+    background-color:#8693ad;
+    color: white;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+}
+.modal-footer {
+    height: 45px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.ss{
+    background-color: red;
+}
+
+
+@media (min-width: 576px){
+  .form-inline .form-check-input {
+      position: relative;
+      margin-top: 0;
+      margin-right: 17px;
+      margin-left: 0;
+      width: 45px;
+      height: 24px;
+  }
+  }
+  
+  .orddayhr{
+      border-width: 5px;
+      border-color: blue;
+  }
+  

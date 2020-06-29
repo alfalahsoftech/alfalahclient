@@ -1,0 +1,106 @@
+.daily{   
+     background-color: #88c999;
+    width: 255px;
+    height: 100px;
+    border-radius: 15px;
+    margin: 100px;
+    display: inline-block;
+}
+
+
+h3{
+    color: rgb(183, 192, 54);
+}
+.cash{
+  font-size: 24px;
+  font-weight: bold;
+}
+.todayPrev{
+  font-size: 20px;
+  font-weight: bold;
+}
+/* DashboardComponent's private CSS styles */
+[class*='col-'] {
+    float: left;
+    padding-right: 20px;
+    padding-bottom: 20px;
+  }
+  [class*='col-']:last-of-type {
+    padding-right: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  *, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  h3 {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  h4 {
+    position: relative;
+  }
+  .grid {
+    margin: 0;
+  }
+  /* .col-1-4 {
+    width: 33%;
+  } */
+  .module {
+    padding: 20px;
+    text-align: center;
+    color: #eee;
+    max-height: 160px;
+    min-width: 382px;
+    background-color: #607d8b;
+    border-radius: 20px;
+  }
+  /* .module:hover {
+    background-color: #eee;
+    cursor: pointer;
+    color: #607d8b;
+  } */
+  .grid-pad {
+    padding: 10px 0;
+    position: absolute;
+  }
+  .grid-pad > [class*='col-']:last-of-type {
+    padding-right: 20px;
+  }
+  @media (max-width: 600px) {
+    .module {
+      font-size: 10px;
+      max-height: 75px; }
+  }
+  @media (max-width: 1024px) {
+    .grid {
+      margin: 0;
+    }
+    .module {
+      min-width: 60px;
+    }
+  }
+
+
+  /* tables */
+
+  .pay{
+    width: 40%;
+    height: 390px;
+    display: inline-block !important;
+    vertical-align: top;
+    margin: 160px 2px 2px 12px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* overflow: scroll; */
+}
+
+hr {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: 0;
+  border-top: 4px solid #bd2130;
+}
