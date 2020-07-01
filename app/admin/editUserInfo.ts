@@ -47,7 +47,7 @@ export class EditUserInfo implements OnInit, AfterViewInit, OnChanges {
     var v = confirm('Are you sure,you want to save data?');
     console.log(this.userInfo)
     delete this.userInfo['lastPassChgDate'];
-    this.restSrvc.reqRespAjax(this.restSrvc.baseUrl + '/updUser/', this.userInfo).subscribe(data => {
+    this.restSrvc.reqRespAjax('/updUser/', this.userInfo).subscribe(data => {
       console.log(data);
     });
   }

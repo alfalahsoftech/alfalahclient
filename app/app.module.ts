@@ -69,6 +69,9 @@ import { AddStoreMdl } from './store/addStoreMdl';
 import { DisplayStoreInfo } from './store/displayStoreInfo';
 import { EditStoreMdl } from './store/editStoreMdl';
 import { DispJobCode } from "./admin/dispJobCode";
+import { AddMedicine } from './medi/addMedicine';
+import { DispMedicine } from './medi/dispMedicine';
+import { EditMedicine } from './medi/editMedicine';
 
 
 @NgModule({
@@ -129,7 +132,11 @@ import { DispJobCode } from "./admin/dispJobCode";
         AddStoreMdl,
         DisplayStoreInfo,
         EditStoreMdl,
-        DispJobCode
+        DispJobCode,
+        AddMedicine,
+        DispMedicine,
+        EditMedicine
+    
     
 
     ],

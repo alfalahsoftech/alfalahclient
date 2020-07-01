@@ -16,7 +16,7 @@ export class AddItem implements OnInit {
     open(content: any) {
         this.ngOnInit();
         console.log(content)
-        const modalRef = this.modalService.open(content, { size:'lg', backdrop: 'static' ,windowClass:'div.addItem'}).result.then((result) => {
+        const modalRef = this.modalService.open(content, { size:'lg', backdrop: 'static' ,windowClass:'my-class'}).result.then((result) => {
             this.sendData();
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {

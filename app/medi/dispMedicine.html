@@ -1,0 +1,70 @@
+  
+  <div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div *ngIf="!isClientItem">
+          <addMedicine (messageEvent)="receiveMessage($event)"></addMedicine>
+        </div>
+       <div *ngIf="isClientItem" style="width:250px">
+          <ngx-select-dropdown [ngModelOptions]="{standalone: true}"   (change)="selectionChanged($event)"
+          [(ngModel)]="eoClientPK" [config]="{search:true,searchPlaceholder:'Search client name',displayKey:'clientName',placeholder:'Select Client Name' }"
+          [options]="clientsArray">
+          </ngx-select-dropdown>
+       </div>
+        
+        <span style="margin-left: 600px;">
+           <input class="form-control" style="margin-left: 400px;width: 300px;" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by any name">
+        </span>
+    </div> 
+    <table class="table table-striped table-bordered no-margin">
+      
+        <colgroup >
+       
+          <col width="4%">
+          <col width="10%">
+          <col width="10%">
+          <col width="8%">
+          <col width="8%">
+          <col width="2%">
+           <col width="7%">
+          <col width="8%">
+          <col width="7%">
+          <col width="10%">
+        </colgroup>
+    
+        <thead>
+          <tr style="text-align: center;">
+            
+            <th>ID</th>
+            <th>Medicine Name</th>
+            <th>M.R.P</th>
+            <th>Net Rate</th>
+            <th>Exp. Date</th>
+            <th>Discount</th>
+            <th>Scheme</th>
+            <th>Notes</th>
+            <th>Is Active</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemsArray | filter:searchText">
+          
+           <td>{{item.itemID}}</td>
+           <td class="choppOff">{{item.mediName}}</td>
+           <td style="text-align: right;" ><b>{{item.mrp}} </b></td>
+           <td style="text-align: right;" >{{item.netRate}}</td>
+           <td>{{item.expDate | date:'dd-MM-yyy'}}</td>
+           <td style="text-align: right;" >{{item.discount}}</td>
+           <td>{{item.scheme}}</td>
+           <td>{{item.notes}}</td>
+           <td>
+            <input type="checkbox" class="form-control chkBox" disabled id="isActive"  name="isActive" [ngModel]="item.isActive">
+           </td>
+           <td>
+                <a  (click)="actions(item.primaryKey,'edit')"  routerLink="/medi/editMedi/{{item.primaryKey}}">Edit</a> &nbsp; 
+                <a  (click)="actions(item.primaryKey,'delete')" routerLink="/medi/editMedi/{{item.primaryKey}}">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

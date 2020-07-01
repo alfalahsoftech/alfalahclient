@@ -29,6 +29,8 @@ import { OrderHistory } from '../order/orderHistory';
 import { AddClientItem } from '../item/addClientItem';
 import { DisplayStoreInfo } from '../store/displayStoreInfo';
 import { DispJobCode } from '../admin/dispJobCode';
+import { DispMedicine } from '../medi/dispMedicine';
+import { EditMedicine } from '../medi/editMedicine';
 
 
 // import { LoginComponent } from '../security/LoginComponent';
@@ -153,6 +155,14 @@ const routes: Routes = [
       {
         path: 'dispJobCode',
         component: DispJobCode
+      },
+      {
+        path: 'dispMedi',
+        component: DispMedicine
+      },
+      {
+        path:'medi/editMedi/:pk',
+        component: EditMedicine
       }
     ]
   },
