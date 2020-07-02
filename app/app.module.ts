@@ -82,7 +82,9 @@ import { EditMedicine } from './medi/editMedicine';
         appRouterModule,
         HttpClientModule,
         SelectDropDownModule,
-        Ng2SearchPipeModule
+        Ng2SearchPipeModule,
+        
+        
         
         // ReactiveFormsModule,
         // MatButtonModule,

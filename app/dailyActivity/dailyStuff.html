@@ -55,7 +55,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let stuff of dailyStuffs | orderBy:'busiDate'" style="text-align: center;" >
+      <tr *ngFor="let stuff of arrayOfData | orderBy:'busiDate'" style="text-align: center;" >
         <td>{{stuff.busiDate |date:'dd-MMM-yyyy'}}</td>
         <td>{{stuff.storeName}}</td>
         <td>{{stuff.ttMade}}</td>
@@ -75,5 +75,10 @@
       </tr>
     </tbody>
   </table>
-
+  <ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+    <option [ngValue]="10">10 items per page</option>
+    <option [ngValue]="15">15 items per page</option>
+    <option [ngValue]="20">20 items per page</option>
+  </select>
 </div>

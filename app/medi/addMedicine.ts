@@ -56,7 +56,7 @@ export class AddMedicine implements OnInit {
     ngOnInit() {
         this.dummyItem = new DummyItem();
     }
-    dropdownOptions =['Kg','Pc',"gm","Litter","Bora","Ton","Kartoon"];
+    dropdownOptions =['Kg','Pc',"gm","Litter","TAB","Syrup",,"Kartoon"];
     selectionChanged(ev){
         console.log(ev.value);
         this.dummyItem.UOM = ev.value;
@@ -67,15 +67,15 @@ export class AddMedicine implements OnInit {
 
 
 export class DummyItem {
-    itemID: string;
-    discount: number;
-    mediName : string;
-    UOM: string;
-    mrp: number;
-    scheme: string;
-    netRate: number;
-    batchNo: string;
-    expDate:string;
-    notes:string;
-    isActive:string;
+    itemID: string='';
+    discount: number=0.0;
+    mediName : string='';
+    UOM: string='';
+    mrp: number=0.0;
+    scheme: string='';
+    netRate: number=0.0;
+    batchNo: string='';
+    expDate:string='';
+    notes:string='';
+    isActive:string='0';
 }
