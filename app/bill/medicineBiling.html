@@ -1,0 +1,255 @@
+
+
+<div class="container">
+ <table style=" margin-left: -333px;">
+  <tr> 
+   <td> 
+     <label for="email">Buyer Name:</label>
+   </td>
+   <td>
+     <input type="text" class="form-control" style="height:33px" id="buyerName" placeholder="Enter buyer name"
+      name="buyername" [(ngModel)]="custInfo.clientName">
+   </td>
+    
+    <td> 
+     <label style="margin-left:15px" for="email">Address:</label>
+   </td>
+   <td>
+     <input type="text" class="form-control" style="height:33px" id="address" placeholder="Enter buyer address"
+      name="address" [(ngModel)]="custInfo.address">
+   </td>
+ </tr>
+ 
+ 
+ <tr > 
+   <td> 
+     <label fstyle="margin-top:6px" or="email">GSTIN:</label>
+   </td>
+   <td>
+     <input type="text" class="form-control" style="height:33px; margin-top:6px;"  id="gstin" placeholder="Enter buyer gstin"
+      name="gstin" [(ngModel)]="custInfo.gstin">
+   </td>
+   
+   <td> 
+     <label style="margin-top:6px; margin-left:15px;" or="email">Mob #:</label>
+   </td>
+   <td>
+     <input type="text" pattern="\d*" maxlength="10"  class="form-control" style="height:33px; margin-top:6px;"  id="contactNo" placeholder="Enter  contactNo"
+      name="contactNo" [(ngModel)]="custInfo.contactNo">
+   </td>
+  
+ </tr>
+ 
+</table>  
+  
+  <!-- Pay Details -->
+
+  <div class="billGen">
+    <fieldset>
+      <!-- <legend>Pay Detail:</legend> -->
+      <table>
+        <tr>
+          <td><label for="pwd">Total:</label></td>
+          <td> <input type="number" disabled class="form-control"
+              style="height:33px; width: 115px;margin: 1px 0px 0px -310px" id="scode" name="scode"
+              [(ngModel)]=" ttPrice"></td>
+
+          <td><label for="pwd" style="margin-left: -175px;">Paid Amt:</label></td>
+          <td><input type="number" class="form-control" style="height:33px; width: 115px;margin: 1px 0px 0px -80px"
+              id="scode" (keyup)="calcDue()" name="scode" [(ngModel)]="paidAmount"></td>
+        </tr>
+        <tr>
+          <td><label for="pwd">Due:</label></td>
+          <td>
+            <input type="text" disabled class="form-control"
+              style="height:33px; width: 115px;margin: 1px 0px 0px -310px" id="scode" name="scode"
+              [(ngModel)]="balance"></td>
+          <td> <label for="pwd" style="margin-left: -175px;">Due Date:</label> </td>
+          <td>
+            <input type="date" class="form-control" style="height:33px; width: 115px;margin: 1px 0px 0px -80px"
+              [ngModel]="dueDate | date:'yyyy-MM-dd'" (ngModelChange)="dueDate = $event">
+          </td>
+        </tr>
+        <tr>
+
+          <div class="form-group" style="margin-left:270px">
+            <input type="button" class="btn btn-info genBtn" id="checkout" value="Generate Bill" name="checkout"
+              (click)="generateBill()" />
+          </div>
+        </tr>
+      </table>
+
+    </fieldset>
+  </div>
+</div>
+<div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<!-- </div> -->
+
+<div *ngIf="isWithoutOrderBilling">
+
+ 
+<span style="color: red; margin-left: 30px;">{{alrt}}</span>  <span style="color: slateblue;">{{selectedMediName}}</span>
+  <span style="margin-left: 600px;">
+    <input class="form-control" style="margin-left: 400px;width: 300px;" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by any name">
+ </span>
+ <div class="item">
+  <table class="table table-striped table-bordered no-margin">
+      
+    <colgroup >
+   
+     
+      <col width="10%">
+      <col width="5%">
+      <col width="8%">
+      <col width="12%">
+      <col width="2%">
+       <col width="6%">
+      <col width="6%">
+      <col width="7%">
+      <col width="4%">
+    </colgroup>
+
+    <thead>
+      <tr style="text-align: center;">
+        
+      
+        <th>Medicine Name</th>
+        <th>M.R.P</th>
+        <th>Net Rate</th>
+        <th>Exp.Date</th>
+        <th>Discount</th>
+        <th>Scheme</th>
+        <th>Notes</th>
+        <th>Qntity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listOfMedicines | filter:searchText">
+
+       <td class="choppOff">{{item.mediName}}</td>
+       <td style="text-align: right;" ><b>{{item.mrp}} </b></td>
+       <td style="text-align: right;" >{{item.netRate}}</td>
+       <td style="text-align: center;" >{{item.expDate | date:'dd-MM-yyy'}}</td>
+       <td style="text-align: right;" >{{item.discount}}</td>
+       <td  style="text-align: center;"  class="choppOff">{{item.scheme}}</td>
+       <td   style="text-align: center;" class="choppOff">{{item.notes}}</td>
+       <td  style="text-align: center;" >
+        <input  style="width: 100px; height: 30px;" type="number" class="form-control"  id="item.qnt"  name="item.qnt" [(ngModel)]="item.qnt">
+       </td>
+       <td style="text-align: center;" >
+        <button style="height:1.5rem;  padding: 0.1rem;" class="btn btn-info" (click)="addMedi(item)">Add</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  &nbsp; &nbsp;&nbsp;
+
+
+  <div class="pay">
+    <table id="tbl" class="table table-striped table-bordered no-margin">
+
+      <colgroup>
+        <col width="1%">
+        <col width="20%">
+        <col width="3%">
+        <col width="15%">
+        <col width="1%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Item Name</th>
+          <th>Qnty</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let itemSold of  selectedMediList ; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{itemSold.name}}</td>
+          <td style="text-align: right;" >{{itemSold.quantity}}</td>
+          <!-- <td>
+               <input type="number" class="form-control " id="quantity" placeholder="0" name="itemSold.quantity"
+              [(ngModel)]="quantity">
+            </td> -->
+          <td style="text-align: right;" >{{itemSold.subTotal | number}}</td>
+          <td style="text-align: center;" >
+            <button style="height:1.5rem;    padding: 0.1rem;" class="btn btn-info"
+              (click)="delete(itemSold)">Del</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="total">
+    <table class="table table-striped table-bordered no-margin">
+      <tbody>
+        <tr>
+          <td>Total Item: {{ttNoOfItems}}</td>
+          <td>Total Qnty: {{ttQnt}}</td>
+          <td>Total Price: {{ttPrice | number}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<!--        ##################################################################################### -->
+<div *ngIf="isOrderBilling">
+
+  <div class="pay">
+    <table id="tbl" class="table table-striped table-bordered no-margin">
+
+      <colgroup>
+        <col width="1%">
+        <col width="20%">
+        <col width="3%">
+        <col width="15%">
+        <col width="1%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Total Price Per Item</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      
+        <tr *ngFor="let itemSold of oderedItemsArray; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{itemSold.name}}</td>
+          <td>{{itemSold.quantity}}</td>
+          <!-- <td>
+             <input type="number" class="form-control " id="quantity" placeholder="0" name="itemSold.quantity"
+            [(ngModel)]="quantity">
+          </td> -->
+          <td>{{itemSold.totalPrice | number}}</td>
+          <td>
+            <button style="height:1.5rem;    padding: 0.1rem;" class="btn btn-info"
+              (click)="delete(itemSold)">Del</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="total">
+    <table class="table table-striped table-bordered no-margin">
+      <tbody>
+        <tr>
+          <td>Total Item: {{ttNoOfItems}}</td>
+          <td>Total Qnty: {{ttQnt}}</td>
+          <td>Total Price: {{ttPrice | number}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

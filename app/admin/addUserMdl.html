@@ -35,7 +35,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="text" class="col-sm-5">Contact Number:</label>
-            <input type="number" maxlength="10" class="form-control" id="contactNo" placeholder="Enter contactNo" name="contactNo" [(ngModel)]="userInfo.contactNo" >
+            <input type="text" pattern="\d*" maxlength="10" class="form-control" id="contactNo" placeholder="Enter contactNo" name="contactNo" [(ngModel)]="userInfo.contactNo" >
           </div>
         </div>
         

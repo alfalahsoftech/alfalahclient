@@ -20,7 +20,7 @@ registerLocaleData(localeIN, 'en-IN');
 @Component(
     {
         selector: 'paymentPage',
-        templateUrl: 'paymentpage.html',
+        templateUrl: 'medicineBiling.html',
         styleUrls: ['paymentpage.css'],
         providers: [DecimalPipe,DatePipe]
     }
@@ -105,6 +105,7 @@ export class PaymentPage implements OnInit {
     }
 
     ngOnInit() {
+        this.getAllMedicine();
         const extraparam =this.restSrvc.getExtraParam();
         console.log('extraparam=================='+extraparam);
        this.extraParam=extraparam;
@@ -244,6 +245,46 @@ export class PaymentPage implements OnInit {
            this.ngOnInit();
         })
     }
+    ///////////////////////////////////////////////Biling of Medicine /////////////////////////////////////
+    selectedMediList:MediSold[] = [];
+    
+    listOfMedicines = [];
+    selectedMedi:any;
+    selectedMediName:string;
+    
+    medi:MediSold;
+    // totalPrice:number=0.0;
+    alrt:string;
+    getAllMedicine(){
+    this.restSrvc.reqRespAjax('rest/medi/dispMedi','').subscribe((resp:any[])=>{
+        this.listOfMedicines = resp;
+    console.log(this.itemsArray);
+    })
+}
+    selectionChanged(ev){
+        console.log(ev.value);
+        this.selectedMediName =ev.value != undefined?ev.value.mediName:'';
+    }
+    addMedi(selectedMedi){
+       
+        this.selectedMediName = selectedMedi.mediName ;
+      if(selectedMedi.mrp==0){
+         this.alrt="Please add M.R.P for medicine =>: ";
+          return;
+      }
+    
+       
+        this.medi = new MediSold();
+        this.medi.name = selectedMedi.mediName;
+        this.medi.quantity =     selectedMedi.qnt;
+        this.medi.subTotal = selectedMedi.qnt * (selectedMedi.mrp==0?1:selectedMedi.mrp);
+        this.ttPrice += this.medi.subTotal;
+        this.ttQnt +=selectedMedi.qnt;
+        this.ttNoOfItems++;
+        
+        this.selectedMediList.push(this.medi);
+
+    }
 
 }
 
@@ -284,3 +325,23 @@ export class CustDetails {
     dueDate:string='';
     dueAmt:string;
 }
+
+export class MediSold {
+    name: string;
+    quantity: number;
+    subTotal: number;
+}
+/*
+
+  <div class="container ">
+  <div class="row col-md-12">
+    <div class="form-group col-md-6">
+  <ngx-select-dropdown [ngModelOptions]="{standalone: true}" style="width:220px" (change)="selectionChanged($event)"
+  [(ngModel)]="selectedMedi" [config]="{search:true,searchPlaceholder:'Choose name',displayKey:'mediName',placeholder:'Select medicine' }"
+  [options]="listOfMedicines">
+</ngx-select-dropdown>
+    </div>
+  </div>
+ 
+  </div>
+*/
