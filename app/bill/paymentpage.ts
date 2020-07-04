@@ -45,8 +45,8 @@ export class PaymentPage implements OnInit {
     paidAmount:number;
     custInfo: CustDetails = new CustDetails();
     oderedItemsArray: any[];
-
-
+    query:string = '';
+    
     constructor(
         private restSrvc: RestSrvc,
         private router: Router,
@@ -106,6 +106,7 @@ export class PaymentPage implements OnInit {
 
     ngOnInit() {
         this.getAllMedicine();
+        
         const extraparam =this.restSrvc.getExtraParam();
         console.log('extraparam=================='+extraparam);
        this.extraParam=extraparam;
@@ -116,7 +117,7 @@ export class PaymentPage implements OnInit {
             }
             console.log('routePK==>' + this.isOrderBilling)
         
-        this.fetchData();
+       // this.fetchData();
         this.custInfo = new CustDetails();
         this.itemToBeSoldArray = [];
         this.ttNoOfItems = 0;
@@ -249,18 +250,35 @@ export class PaymentPage implements OnInit {
     selectedMediList:MediSold[] = [];
     
     listOfMedicines = [];
+    medicinesArray2 = [{'id':123},{'id':123}];
+    medicinesArray = [];
     selectedMedi:any;
     selectedMediName:string;
     
     medi:MediSold;
     // totalPrice:number=0.0;
     alrt:string;
+
     getAllMedicine(){
     this.restSrvc.reqRespAjax('rest/medi/dispMedi','').subscribe((resp:any[])=>{
-        this.listOfMedicines = resp;
-    console.log(this.itemsArray);
-    })
-}
+       this.medicinesArray = resp;
+        console.log(this.medicinesArray)
+        //this.pushData();
+        });
+    }
+
+    pushData(){
+        for (let index = 0; index <10; index++) {
+            let obj = this.listOfMedicines[index];
+            if(obj!=undefined){
+                this.medicinesArray.push(  obj);
+            }
+              
+          }
+        
+        console.log( this.medicinesArray);
+    }
+    
     selectionChanged(ev){
         console.log(ev.value);
         this.selectedMediName =ev.value != undefined?ev.value.mediName:'';
@@ -331,17 +349,3 @@ export class MediSold {
     quantity: number;
     subTotal: number;
 }
-/*
-
-  <div class="container ">
-  <div class="row col-md-12">
-    <div class="form-group col-md-6">
-  <ngx-select-dropdown [ngModelOptions]="{standalone: true}" style="width:220px" (change)="selectionChanged($event)"
-  [(ngModel)]="selectedMedi" [config]="{search:true,searchPlaceholder:'Choose name',displayKey:'mediName',placeholder:'Select medicine' }"
-  [options]="listOfMedicines">
-</ngx-select-dropdown>
-    </div>
-  </div>
- 
-  </div>
-*/

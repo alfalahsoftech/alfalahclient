@@ -12,6 +12,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 //     MatInputModule,
 //     MatRippleModule
 //   } from '@angular/material';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 // import {HeaderComponent} from './header/header.component';
 // import {LoginComponent} from './loginlogout/login.component';
@@ -45,6 +46,7 @@ import { AddItem } from './item/addItem';
 import {DisplayItems} from './item/displayItems';
 import {EditItem} from './item/editItem'
 import {PaymentPage} from './bill/paymentpage';
+import { startsWithPipe } from "./bill/startsWithPipe";
 import { EditCustomerInfo } from './customer/editCustomerInfo';
 import { UserInfoDisplay } from './admin/userInfoDisplay';
 import { AddUserMdl } from './admin/addUserMdl';
@@ -83,7 +85,7 @@ import { EditMedicine } from './medi/editMedicine';
         HttpClientModule,
         SelectDropDownModule,
         Ng2SearchPipeModule,
-        
+      
         
         
         // ReactiveFormsModule,
@@ -137,7 +139,8 @@ import { EditMedicine } from './medi/editMedicine';
         DispJobCode,
         AddMedicine,
         DispMedicine,
-        EditMedicine
+        EditMedicine,
+        startsWithPipe
     
     
 

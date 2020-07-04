@@ -15,7 +15,9 @@ export class RestSrvc {
 
   showHeader = false;
   //////////////////////////////////////////////////////////////////  
-  appBaseUrl='http://localhost:8080/alfalahsoftech/'
+  
+  
+  appBaseUrl=   window.location.host ==='https://alfalahtech.herokuapp.com/'?'https://alfalahtech.herokuapp.com/':  'http://localhost:8080/alfalahsoftech/'
   /////////////////////////////////////////////////////////
     
   baseUrl:string =this.appBaseUrl+"rest/UserService";
@@ -23,6 +25,7 @@ export class RestSrvc {
 
 
   getAllData(url:string,extraData:any):any {
+    
     this.reqRespAjax(url,extraData).subscribe((res:any[]) => {
       return res;
     }, error => {

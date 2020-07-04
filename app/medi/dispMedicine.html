@@ -14,21 +14,24 @@
         <span style="margin-left: 600px;">
            <input class="form-control" style="margin-left: 400px;width: 300px;" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by any name">
         </span>
-    </div> 
+    
     <table class="table table-striped table-bordered no-margin">
       
         <colgroup >
        
           <col width="4%">
           <col width="10%">
-          <col width="10%">
-          <col width="8%">
+          <col width="2%">
+          <col width="6%">
           <col width="8%">
           <col width="2%">
-           <col width="7%">
+          <col width="8%">
+          <col width="6%">
           <col width="8%">
           <col width="7%">
-          <col width="10%">
+          <col width="8%">
+          <col width="5%">
+          <col width="2%">
         </colgroup>
     
         <thead>
@@ -40,6 +43,9 @@
             <th>Net Rate</th>
             <th>Exp. Date</th>
             <th>Discount</th>
+            <th>Mfg. By</th>
+            <th>On Hand</th>
+            <th>Pur. Price</th>
             <th>Scheme</th>
             <th>Notes</th>
             <th>Is Active</th>
@@ -53,18 +59,22 @@
            <td class="choppOff">{{item.mediName}}</td>
            <td style="text-align: right;" ><b>{{item.mrp}} </b></td>
            <td style="text-align: right;" >{{item.netRate}}</td>
-           <td>{{item.expDate | date:'dd-MM-yyy'}}</td>
+           <td style="text-align: center;">{{item.expDate | date:'dd-MM-yyy'}}</td>
            <td style="text-align: right;" >{{item.discount}}</td>
-           <td>{{item.scheme}}</td>
-           <td>{{item.notes}}</td>
+           <td class="choppOff">{{item.mfgBy}}</td>
+           <td style="text-align: right;" >{{item.onHand}}</td>
+           <td style="text-align: right;" >{{item.purchasePrice}}</td>
+           <td class="choppOff">{{item.scheme}}</td>
+           <td class="choppOff">{{item.notes}}</td>
            <td>
             <input type="checkbox" class="form-control chkBox" disabled id="isActive"  name="isActive" [ngModel]="item.isActive">
            </td>
            <td>
                 <a  (click)="actions(item.primaryKey,'edit')"  routerLink="/medi/editMedi/{{item.primaryKey}}">Edit</a> &nbsp; 
-                <a  (click)="actions(item.primaryKey,'delete')" routerLink="/medi/editMedi/{{item.primaryKey}}">Delete</a>
+                <!-- <a  (click)="actions(item.primaryKey,'delete')" routerLink="/medi/editMedi/{{item.primaryKey}}">Delete</a> -->
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div> 

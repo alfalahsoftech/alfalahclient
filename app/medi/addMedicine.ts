@@ -76,6 +76,9 @@ export class DummyItem {
     netRate: number=0.0;
     batchNo: string='';
     expDate:string='';
+    onHand:number;
+    mfgBy:string=''
+    purchasePrice:string;
     notes:string='';
     isActive:string='0';
 }
