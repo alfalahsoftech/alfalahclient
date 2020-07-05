@@ -45,7 +45,7 @@ import { LoginComponent } from './login/login.component';
 import { AddItem } from './item/addItem';
 import {DisplayItems} from './item/displayItems';
 import {EditItem} from './item/editItem'
-import {PaymentPage} from './bill/paymentpage';
+import { MedicineBiling} from './bill/medicineBiling';
 import { startsWithPipe } from "./bill/startsWithPipe";
 import { EditCustomerInfo } from './customer/editCustomerInfo';
 import { UserInfoDisplay } from './admin/userInfoDisplay';
@@ -74,6 +74,7 @@ import { DispJobCode } from "./admin/dispJobCode";
 import { AddMedicine } from './medi/addMedicine';
 import { DispMedicine } from './medi/dispMedicine';
 import { EditMedicine } from './medi/editMedicine';
+import { AgarbattiBilling } from './bill/agarbattiBilling';
 
 
 @NgModule({
@@ -115,7 +116,6 @@ import { EditMedicine } from './medi/editMedicine';
         AddItem,
         DisplayItems,
         EditItem,
-        PaymentPage,
         EditCustomerInfo,
         UserInfoDisplay,
         AddUserMdl,
@@ -140,7 +140,9 @@ import { EditMedicine } from './medi/editMedicine';
         AddMedicine,
         DispMedicine,
         EditMedicine,
-        startsWithPipe
+        startsWithPipe,
+        AgarbattiBilling,
+        MedicineBiling
     
     
 

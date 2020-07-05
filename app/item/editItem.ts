@@ -3,6 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { RestSrvc } from '../srvc/srvc.service';
 import { Observable } from 'rxjs';
 import {Router,ActivatedRoute} from '@angular/router'
+import { Location } from '@angular/common';
 
 @Component(
     {
@@ -14,7 +15,7 @@ import {Router,ActivatedRoute} from '@angular/router'
 export class EditItem implements OnInit {
 
     @Output() messageEvent = new EventEmitter();
-    constructor(private route: ActivatedRoute,private router:Router, private modalService: NgbModal, private restSrvc: RestSrvc) { }
+    constructor(private route: ActivatedRoute,private router:Router, private modalService: NgbModal, private restSrvc: RestSrvc,private location:Location) { }
     closeResult: string;
 
  
@@ -65,10 +66,8 @@ export class EditItem implements OnInit {
     }
    //Actions
    back(){
-      
-    this.router.navigate(['/item'], {
-       
-      });
+      this.location.back();
+ 
    }
 }
 

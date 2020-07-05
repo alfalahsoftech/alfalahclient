@@ -111,16 +111,16 @@ function printPage(items,custInfo,ttPrice) {
     '		    				<td rowSpan="8">'+
     '		    					<table>'+
     '									<tr>'+
-    '										<td> <b>ASHRAF AGARBATTI</b> </td>'+
+    '										<td> <b>The Hindustan Medi. Hall</b> </td>'+
     '									</tr>'+
     '									<tr>'+
-    '										<td>Auth. Dealer Bihar and Jharkhand </td>'+
+    '										<td>Auth.Medical Store and Supplier </td>'+
     '									</tr>'+
     '									<tr>'+
-    '										<td>House No.89, PANCHITYA AKHARA </td>'+
+    '										<td>Near Sabji Mandi,Bela Bazar </td>'+
     '									</tr>'+
     '									<tr>'+
-    '										<td>GAYA-823001(BIHAR) </td>'+
+    '										<td>BELAGANJ-804403(BIHAR) </td>'+
     '									</tr>'+
     '									<tr>'+
     '										<td>GSTIN:-10AMIPA6881B1Z</td>'+
@@ -129,18 +129,18 @@ function printPage(items,custInfo,ttPrice) {
     '										<td>STATE CODE:-10</td>'+
     '									</tr>'+
     '									<tr>'+
-    '										<td>Mob.No.9693581311,8862855686,7070173595</td>'+
+    '										<td>Mob.No.9934846940</td>'+
     '									</tr>'+
     '									<tr>'+
-    '										<td><b>E-mail:</b>asharafagarbati@gmail.com</td>'+
+    '										<td><b>E-mail:</b>quamerquasid@gmail.com</td>'+
     '									</tr>'+
     '								</table>'+
     '							</td>'+
     '		    				<td colspan="2">'+
-    '		    					<p><b>Deals In: </b> Agarbatti, Agarbatti Made Machine,</p>'+
-    '								<p>Machine Parts, Machine Made Agarbatti,</p>'+
-    '								<p>Chinese Bamboo Stick,Machine Raw Material,</p>'+
-    '								<p>S.Steel Material,Pipe Fitting etc </p>	'+
+    '		    					<p><b>Deals In: </b> Retailer as well as Supplier,</p>'+
+    '								<p>of Medicine at all over in Gaya area.</p>'+
+    '								<p>For more details, please contact by email or phone.</p>'+
+    
     '							</td>'+
     '		    			</tr>'+
     '		    			<tr>'+
@@ -157,9 +157,9 @@ function printPage(items,custInfo,ttPrice) {
     '					    								'+
     '					    				</td>'+
     '					    				<td>'+
-    '				    						| Billing Date'+
+    '				    						| <b>Billing Date </b>'+
     '				    					</td>'+
-    '				    					<td>'+
+    '				    					<td >'+
                                                     custInfo.billingDate+
     '				    					</td>'+
     '				    				</tr>'+
@@ -189,7 +189,7 @@ function printPage(items,custInfo,ttPrice) {
     '	    				<td colspan="2" align="left">'+custInfo.address+'</td>'+
     '	    			</tr>'+
     '	    			<tr>'+
-    '	    				<td colspan="1" align="left">GSTIN:</td><td colspan="1" align="left">'+custInfo.gstNo+'</td><td colspan="1" align="left">Pan No.:</td><td colspan="1" align="left">10AMIPA6881B1Z</td>'+
+    '	    				<td colspan="1" align="left">GSTIN:</td><td colspan="1" align="left">'+(custInfo.gstNo==undefined?'':custInfo.gstNo)+'</td><td colspan="1" align="left">Pan No.:</td><td colspan="1" align="left">10AMIPA6881B1Z</td>'+
     '	    			</tr>'+
     '	    			<tr>'+
     '	    				<td colspan="1" align="left">State Code:</td><td colspan="1" align="left">'+custInfo.stateCode+'</td><td colspan="1" align="left">Mobile No.:</td><td colspan="1" align="left">'+(custInfo.contactNo==undefined?'':custInfo.contactNo)+'</td>'+
@@ -202,10 +202,10 @@ function printPage(items,custInfo,ttPrice) {
     '		    		<tr>'+
     '			    		<th width="1%">Sl.No.</th>'+
     '			    		<th width="24%">Particulars </th>'+
+    '			    		<th width="5%">Pack</th>'+
     '			    		<th width="8%">Rate</th>'+
     '			    		<th width="7%">Quantity</th>'+
-    '			    		<th width="5%">GST%</th>'+
-    '			    		<th width="5%">Total(Rs)</th>'+
+    '			    		<th width="5%">Sub-Total(Rs)</th>'+
     '			    	</tr>'+
     '		    	</thead>'+
     '		    	<tbody>';
@@ -214,7 +214,8 @@ function printPage(items,custInfo,ttPrice) {
                     console.log(i)
                     item = items[i];
                     console.log(item)
-                    myvar += '<tr class="bdr"><td align="center">'+(i+1)+'</td><td align="center">'+item.name+'</td><td align="center">'+item.unitCost+'</td><td align="center">'+item.quantity+'</td><td align="center">'+item.gstPerc+'%='+item.gstAmount+' </td><td align="center">'+item.totalPrice+'</td></tr>';
+                    //myvar += '<tr class="bdr"><td align="center">'+(i+1)+'</td><td align="center">'+item.name+'</td><td align="center">'+item.unitCost+'</td><td align="center">'+item.quantity+'</td><td align="center">'+item.gstPerc+'%='+item.gstAmount+' </td><td align="center">'+item.totalPrice+'</td></tr>';
+                    myvar += '<tr class="bdr"><td align="center">'+(i+1)+'</td><td align="center">'+item.name+'</td><td align="center">'+item.pack+' </td><td align="center">'+item.unitCost+'</td><td align="center">'+item.quantity+'</td><td align="center">'+item.subTotal+'</td></tr>';
                 }
     
     myvar+='</tbody>'+

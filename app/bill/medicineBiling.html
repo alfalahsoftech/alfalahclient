@@ -26,8 +26,8 @@
      <label fstyle="margin-top:6px" or="email">GSTIN:</label>
    </td>
    <td>
-     <input type="text" class="form-control" style="height:33px; margin-top:6px;"  id="gstin" placeholder="Enter buyer gstin"
-      name="gstin" [(ngModel)]="custInfo.gstin">
+     <input type="text" class="form-control" style="height:33px; margin-top:6px;"  id="gstNo" placeholder="Enter buyer gstNo"
+      name="gstNo" [(ngModel)]="custInfo.gstNo">
    </td>
    
    <td> 
@@ -56,7 +56,7 @@
 
           <td><label for="pwd" style="margin-left: -175px;">Paid Amt:</label></td>
           <td><input type="number" class="form-control" style="height:33px; width: 115px;margin: 1px 0px 0px -80px"
-              id="scode" (keyup)="calcDue()" name="scode" [(ngModel)]="paidAmount"></td>
+              id="scode" (keyup)="calcDueOnKeyUp()" name="scode" [(ngModel)]="paidAmount"></td>
         </tr>
         <tr>
           <td><label for="pwd">Due:</label></td>

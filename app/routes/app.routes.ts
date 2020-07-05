@@ -16,7 +16,7 @@ import { LoginComponent } from '../login/login.component';
 import { LoginLayoutComponent } from '../layouts/LoginLayoutComponent';
 import { DisplayItems } from '../item/displayItems';
 import { EditItem } from '../item/editItem';
-import { PaymentPage } from '../bill/paymentpage';
+import { MedicineBiling } from '../bill/medicineBiling';
 // import { CustDetailsComponent } from '../customer/CustDetailsComponent';
 import { UserInfoDisplay } from '../admin/userInfoDisplay';
 import { DisplaySoldItems } from '../item/displaySoldItems';
@@ -31,6 +31,7 @@ import { DisplayStoreInfo } from '../store/displayStoreInfo';
 import { DispJobCode } from '../admin/dispJobCode';
 import { DispMedicine } from '../medi/dispMedicine';
 import { EditMedicine } from '../medi/editMedicine';
+import { AgarbattiBilling } from '../bill/agarbattiBilling';
 
 
 // import { LoginComponent } from '../security/LoginComponent';
@@ -113,11 +114,19 @@ const routes: Routes = [
       },
       {
         path: 'bill',
-        component: PaymentPage
+        component: AgarbattiBilling
       },
       {
         path: 'file/pdf',
-        component: PaymentPage
+        component: AgarbattiBilling
+      },
+      {
+        path: 'mediBill',
+        component: MedicineBiling
+      },
+      {
+        path: 'medifile/pdf',
+        component: MedicineBiling
       },
       {
         path:'user',
