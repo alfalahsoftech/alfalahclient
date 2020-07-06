@@ -22,17 +22,29 @@
     <div class="row col-md-12" style="margin-top: 2%">
       <div class="form-group col-md-6">
         <label for="email" class="col-sm-3">M.R.P:</label>
-        <input type="number" class="form-control " id="emailID" placeholder="Enter weight" name="weight"
+        <input type="number" class="form-control " id="emailID" placeholder="Enter MRP" name="weight"
           [(ngModel)]="dummyItem.mrp">
       </div>
 
       <div class="form-group col-md-6">
-        <label for="text" class="col-sm-3">Net Rate</label>
+        <label for="text" class="col-sm-3">Pack </label>
+        <input type="text" class="form-control " id="pack" placeholder="Enter pack" name="pack"
+          [(ngModel)]="dummyItem.pack">
+      </div>
+    </div>
+
+    <div class="row col-md-12" style="margin-top: 2%">
+      <div class="form-group col-md-6">
+        <label for="email" class="col-sm-3">Net Rate %:</label>
+        <input type="number" class="form-control " (keyup)="calcDueOnKeyUp()" id="emailID" placeholder="Enter netRate%" name="netRatePerc"
+          [(ngModel)]="dummyItem.netRatePerc">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="text" class="col-sm-3">Net Rate </label>
         <input type="number" class="form-control " id="unitCost" placeholder="Enter unit cost" name="unitCost"
           [(ngModel)]="dummyItem.netRate">
       </div>
-
- 
     </div>
 
     <div class="row col-md-12" style="margin-top: 2%">
@@ -81,7 +93,7 @@
   
       <div class="form-group col-md-6">
         <label for="text" class="col-sm-3">Batch No.</label>
-        <input type="text" class="form-control " id="salingPrice" placeholder="Enter salingPrice" name="salingPrice"
+        <input type="text" class="form-control " id="batchNo" placeholder="Enter batch No" name="batchNo"
           [(ngModel)]="dummyItem.batchNo">
       </div>
     

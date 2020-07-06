@@ -62,7 +62,10 @@ export class AddMedicine implements OnInit {
         this.dummyItem.UOM = ev.value;
         console.log(this.dummyItem.UOM);
     }
-   
+    
+    calcDueOnKeyUp(){
+           this.dummyItem.netRate =this.dummyItem.mrp - (this.dummyItem.mrp * this.dummyItem.netRatePerc)/100
+     }
 }
 
 
@@ -81,4 +84,5 @@ export class DummyItem {
     purchasePrice:string;
     notes:string='';
     isActive:string='0';
+    netRatePerc:number;
 }

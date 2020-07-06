@@ -69,6 +69,10 @@ export class EditMedicine implements OnInit {
       
    this.location.back();
    }
+
+   calcDueOnKeyUp(){
+    this.dummyItem.netRate =this.dummyItem.mrp - (this.dummyItem.mrp * this.dummyItem.netRatePerc)/100
+    }
 }
 
 
@@ -83,4 +87,5 @@ export class DummyItem {
     salingPrice: string;
     notes:string;
     isActive:string;
+    netRatePerc:number;
 }

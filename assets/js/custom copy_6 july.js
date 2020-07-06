@@ -61,7 +61,7 @@ function printPage(items,custInfo,ttPrice) {
     '	}'+
     '	td {'+
     '		font-size: 9;'+
-    '		align: center;'+
+    '		align: right;'+
     '		padding:4px 2px;'+
     '	}'+
     '	.tableDivTop {'+
@@ -73,9 +73,6 @@ function printPage(items,custInfo,ttPrice) {
     '	border-style:solid;'+
     '	padding-bottom: 30px;'+
     '	}'+
-    ' .billHeader {'+
-    '             margin-right: 25px;  '+
-    '   }'+
     '	.total{'+
     '		background-color: #E2EFDA;'+
     '	}'+
@@ -108,20 +105,78 @@ function printPage(items,custInfo,ttPrice) {
     '	<body >'+
     ''+
     '	<div class = "tableDiv" style="page-break-before: always">'+
-    '    <div class="billHeader">'+
-    '       <table height = "60%" width="100%" >'+
+    '	<table height = "60%" width="100%">'+
     '		    	<tbody>'+
     '		    			<tr>'+
-    '		    				<td >'+
-    '                          <b> The Hindustan Medical Hall </b>'+
-    '                        <p>   Belaganj Near Sabji Mandi, 804403 ,BIHAR  </p>'+
-    '                           <p>	Mob.No.  7296003266, 7870799688, 8002983707</p>'+
-    '                       <p>	E-mail: hindustan.bela@gmail.com</p>'+
+    '		    				<td rowSpan="8">'+
+    '		    					<table>'+
+    '									<tr>'+
+    '										<td> <b>The Hindustan Medi. Hall</b> </td>'+
+    '									</tr>'+
+    '									<tr>'+
+    '										<td>Auth.Medical Store and Supplier </td>'+
+    '									</tr>'+
+    '									<tr>'+
+    '										<td>Near Sabji Mandi,Bela Bazar </td>'+
+    '									</tr>'+
+    '									<tr>'+
+    '										<td>BELAGANJ-804403(BIHAR) </td>'+
+    '									</tr>'+
+    '									<tr>'+
+    '										<td>GSTIN:-10AMIPA6881B1Z</td>'+
+    '									</tr>'+
+    '									<tr>'+
+    '										<td>STATE CODE:-10</td>'+
+    '									</tr>'+
+    '									<tr>'+
+    '										<td>Mob.No.9934846940</td>'+
+    '									</tr>'+
+    '									<tr>'+
+    '										<td><b>E-mail:</b>quamerquasid@gmail.com</td>'+
+    '									</tr>'+
+    '								</table>'+
     '							</td>'+
+    '		    				<td colspan="2">'+
+    '		    					<p><b>Deals In: </b> Retailer as well as Supplier,</p>'+
+    '								<p>of Medicine at all over in Gaya area.</p>'+
+    '								<p>For more details, please contact by email or phone.</p>'+
+    
+    '							</td>'+
+    '		    			</tr>'+
+    '		    			<tr>'+
+    '		    				<td colspan="2">'+
+    '			    				<table>'+
+    '				    				<tr>'+
+    '				    					<td>'+
+    '					    					SI No.'+
+    '					    				</td>'+
+    '					    				<td>'+
+    '					    					2872'+
+    '					    				</td>'+
+    '					    				<td>'+
+    '					    								'+
+    '					    				</td>'+
+    '					    				<td>'+
+    '				    						| <b>Billing Date </b>'+
+    '				    					</td>'+
+    '				    					<td >'+
+                                                    custInfo.billingDate+
+    '				    					</td>'+
+    '				    				</tr>'+
+    '				    				<tr>'+
+    '				    					<td>'+
+    '				    						Lorry'+
+    '				    					</td>'+
+    '				    					<td>'+
+    '				    						---------'+
+    '				    					</td>'+
+    '				    				</tr>'+
+    '				    			</table>'+
+    '		    				</td>'+
     '		    			</tr>'+
     '		    	</tbody>'+
     ''+
-    '		    </table> </div>'+
+    '		    </table>'+
     '	<div class = "tableDivTop">'+
     '			<table width="100%" >'+
     '		    	<tbody>'+
@@ -134,19 +189,11 @@ function printPage(items,custInfo,ttPrice) {
     '	    				<td colspan="2" align="left">'+custInfo.address+'</td>'+
     '	    			</tr>'+
     '	    			<tr>'+
-    '	    				<td colspan="1" align="left">Refered By:</td>'+
-                            '<td colspan="1" align="left">'+(custInfo.referedBy==undefined?'':custInfo.referedBy)+'</td>'+
-                            '<td colspan="1" align="left">Mobile No.:</td>'+
-                            '<td colspan="1" align="left">'+(custInfo.contactNo==undefined?'':custInfo.contactNo)+'</td>'+
-                            // '<td colspan="1" align="left">Pan No.:</td>'+
-                            // '<td colspan="1" align="left">10AMIPA6881B1Z</td>'+
+    '	    				<td colspan="1" align="left">Refered By:</td><td colspan="1" align="left">'+(custInfo.gstNo==undefined?'':custInfo.gstNo)+'</td><td colspan="1" align="left">Pan No.:</td><td colspan="1" align="left">10AMIPA6881B1Z</td>'+
     '	    			</tr>'+
-    
-    // '	    			<tr>'+
-    // '	    				<td colspan="1" align="left">State Code:</td><td colspan="1" align="left">'+custInfo.stateCode+'</td>'+
-                        
-    // '	    			</tr>'+
-
+    '	    			<tr>'+
+    '	    				<td colspan="1" align="left">State Code:</td><td colspan="1" align="left">'+custInfo.stateCode+'</td><td colspan="1" align="left">Mobile No.:</td><td colspan="1" align="left">'+(custInfo.contactNo==undefined?'':custInfo.contactNo)+'</td>'+
+    '	    			</tr>'+
     '		    	</tbody>'+
     '		    </table>'+
     '	<div class = "tableDivTop">'+
@@ -154,12 +201,10 @@ function printPage(items,custInfo,ttPrice) {
     '		    	<thead>'+
     '		    		<tr>'+
     '			    		<th width="1%">Sl.No.</th>'+
-    '			    		<th width="5%">Qnty.</th>'+
     '			    		<th width="24%">Particulars </th>'+
-    '			    		<th width="5%">Mfg.By</th>'+
-    '			    		<th width="8%">Exp.Date</th>'+
-    '			    		<th width="7%">MRP</th>'+
-    '			    		<th width="7%">Disc.%</th>'+
+    '			    		<th width="5%">Pack</th>'+
+    '			    		<th width="8%">Rate</th>'+
+    '			    		<th width="7%">Quantity</th>'+
     '			    		<th width="5%">Sub-Total(Rs)</th>'+
     '			    	</tr>'+
     '		    	</thead>'+
@@ -170,44 +215,34 @@ function printPage(items,custInfo,ttPrice) {
                     item = items[i];
                     console.log(item)
                     //myvar += '<tr class="bdr"><td align="center">'+(i+1)+'</td><td align="center">'+item.name+'</td><td align="center">'+item.unitCost+'</td><td align="center">'+item.quantity+'</td><td align="center">'+item.gstPerc+'%='+item.gstAmount+' </td><td align="center">'+item.totalPrice+'</td></tr>';
-                    myvar += '<tr class="bdr">'+
-                                    '<td align="center">'+(i+1)+'</td>'+
-                                    '<td align="center">'+item.quantity+'</td>'+
-                                    '<td align="center">'+item.name+'</td>'+
-                                    '<td align="center">'+(item.mfgBy==undefined?'':item.mfgBy)+' </td>'+
-                                    '<td align="center">'+item.expDate+' </td>'+
-                                    '<td align="center">'+item.unitCost+'</td>'+
-                                    '<td align="center">'+item.discount+'</td>'+
-                                    // '<td align="center">'+item.pack+' </td>'+
-                                    '<td align="center">'+item.subTotal+'</td>'+
-                             '</tr>';
+                    myvar += '<tr class="bdr"><td align="center">'+(i+1)+'</td><td align="center">'+item.name+'</td><td align="center">'+item.pack+' </td><td align="center">'+item.unitCost+'</td><td align="center">'+item.quantity+'</td><td align="center">'+item.subTotal+'</td></tr>';
                 }
     
     myvar+='</tbody>'+
     '		    </table>'+
-    // '			<table width="100%">'+
-    // '				<tbody>'+
-    // '					<tr>'+
-    // '		    			<td  width="10%">'+
-    // '			    				<table>'+
-    // '			    					<tr>'+
-    // '			    						<td colspan="1" align="left">Bank Name</td><td colspan="2" align="left">  HSBC </td>'+
-    // '			    					</tr>'+
-    // '			    					<tr>'+
-    // '			    						<td colspan="1" align="left">Bank A/c No.</td><td colspan="2" align="left"> 7389328432</td>'+
-    // '			    					</tr>'+
-    // '			    					<tr>'+
-    // '			    						<td colspan="1" align="left">Branch Name: </td><td colspan="2" align="left"> New York</td>'+
-    // '			    					</tr>'+
-    // '			    					<tr>'+
-    // '			    						<td colspan="1" align="left">IFSC CODE: </td><td colspan="2" align="left">HSC20098 </td><td  colspan="6"></td>'+
-    // '			    					</tr>'+
-    // '			    				</table>'+
-    // '		    			</td>'+
-    // '		    			<td width="40%"></td>'+
-    // '		    		</tr>'+
-    // '				</tbody>'+
-    // '			</table>'+
+    '			<table width="100%">'+
+    '				<tbody>'+
+    '					<tr>'+
+    '		    			<td  width="10%">'+
+    '			    				<table>'+
+    '			    					<tr>'+
+    '			    						<td colspan="1" align="left">Bank Name</td><td colspan="2" align="left">  HSBC </td>'+
+    '			    					</tr>'+
+    '			    					<tr>'+
+    '			    						<td colspan="1" align="left">Bank A/c No.</td><td colspan="2" align="left"> 7389328432</td>'+
+    '			    					</tr>'+
+    '			    					<tr>'+
+    '			    						<td colspan="1" align="left">Branch Name: </td><td colspan="2" align="left"> New York</td>'+
+    '			    					</tr>'+
+    '			    					<tr>'+
+    '			    						<td colspan="1" align="left">IFSC CODE: </td><td colspan="2" align="left">HSC20098 </td><td  colspan="6"></td>'+
+    '			    					</tr>'+
+    '			    				</table>'+
+    '		    			</td>'+
+    '		    			<td width="40%"></td>'+
+    '		    		</tr>'+
+    '				</tbody>'+
+    '			</table>'+
     '			<table width="45%" align="right">'+
     '				<tr>'+
     '					<td ><b>Grand Total Rs </b></td><td style="margin-right: 8%;">'+ttPrice+'</td>'+

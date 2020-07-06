@@ -173,7 +173,8 @@ export class MedicineBiling implements OnInit {
 
     delete(itemSold: any) {
         console.log(itemSold);
-        this.itemToBeSoldArray.splice(this.itemToBeSoldArray.indexOf(itemSold), 1);
+        // this.itemToBeSoldArray.splice(this.itemToBeSoldArray.indexOf(itemSold), 1);
+        this.selectedMediList.splice(this.selectedMediList.indexOf(itemSold), 1);
         this.calculateTotal(itemSold, true);
     }
 
@@ -196,7 +197,7 @@ export class MedicineBiling implements OnInit {
             this.ttQnt += localItem.quantity;
             this.ttPrice += localItem.subTotal;
         }
-        this.ttNoOfItems = Object.keys(this.itemToBeSoldArray).length;
+        this.ttNoOfItems = Object.keys(this.selectedMediList).length;
     }
     downloadPDF(): any {
        
@@ -284,18 +285,82 @@ export class MedicineBiling implements OnInit {
     }
     addMedi(selectedMedi){
        
-        this.selectedMediName = selectedMedi.mediName ;
+       
       if(selectedMedi.mrp==0){
          this.alrt="Please add M.R.P for medicine =>: ";
           return;
       }
+      if(selectedMedi.qnt == 0 || selectedMedi.qnt == undefined){
+        this.alrt = "Please enter quantity!";
+        return;
+      }
+      this.selectedMediName = selectedMedi.mediName ;
     
        
         this.medi = new MediSold();
+        this.medi.scheme = selectedMedi.scheme;
         this.medi.name = selectedMedi.mediName;
         this.medi.quantity =     selectedMedi.qnt;
+        this.medi.discount = selectedMedi.discount;
+        this.medi.expDate = selectedMedi.expDate;
+        this.medi.mfgBy = selectedMedi.mfgBy;
         this.medi.unitCost = selectedMedi.mrp
-        this.medi.subTotal = selectedMedi.qnt * (selectedMedi.mrp==0?1:selectedMedi.mrp);
+    
+    
+    var radioValue = $("input[name='calOn']:checked").val();
+    
+            console.log('radioValue==== '+radioValue);
+            
+    if(selectedMedi.discount != 0 ){
+
+        if(radioValue=='1'){
+            var discAmt = (selectedMedi.mrp * selectedMedi.discount)/100
+            console.log('discAmt=> '+discAmt);
+                var actAmt = selectedMedi.mrp-discAmt;
+                console.log('actual price==> '+actAmt);
+                
+            this.medi.subTotal = selectedMedi.qnt *actAmt;
+        }else{
+            var discAmt = (selectedMedi.netRate * selectedMedi.discount)/100
+            console.log('discAmt=> '+discAmt);
+
+                var actAmt = selectedMedi.netRate-discAmt;
+                
+                if(selectedMedi.scheme != undefined && selectedMedi.scheme.length !=0){
+                    console.log(selectedMedi.scheme.split("+"));
+                    
+                    var first = selectedMedi.scheme.split("+")[0]
+                    console.log('first=>' +first);
+                    var i1 = parseInt(first, 10);
+                    var secnd = selectedMedi.scheme.split("+")[1]
+                    var i2 = parseInt(secnd, 10);
+
+                    var total = (actAmt * i1)
+                    console.log('totoal= '+ total);
+                    var noOfItem =(i1+i2);
+                    console.log('noOfItem== '+noOfItem);
+                    
+                   var  perItem = total/noOfItem;
+                    console.log('perItem-- '+perItem);
+                    
+
+                    console.log('secnd==>'+secnd);
+                    this.medi.subTotal = selectedMedi.qnt * perItem;
+                    
+                }else{
+                    this.medi.subTotal = selectedMedi.qnt *actAmt;
+                }            
+        }
+        
+      }else{
+        if(radioValue=='1'){
+             this.medi.subTotal = selectedMedi.qnt * (selectedMedi.mrp==0?1:selectedMedi.mrp);
+        }else{
+            this.medi.subTotal = selectedMedi.qnt * (selectedMedi.netRate==0?1:selectedMedi.netRate);
+        }
+      }
+
+        
         this.ttPrice += this.medi.subTotal;
         this.ttQnt +=selectedMedi.qnt;
         this.ttNoOfItems++;
@@ -353,4 +418,8 @@ export class MediSold {
     subTotal: number;
     pack:string='1X15';
     unitCost:number;
+    expDate:string;
+    mfgBy:string;
+    discount:number;
+    scheme:string
 }
