@@ -31,7 +31,10 @@ export class DsdDivComponent implements OnInit {
 credentialMsg ='';
 
     login() {
-console.log('Login button clicked')
+        var x = location.origin;
+        console.log(" Request from origin: "+x);
+        
+            console.log('Login button clicked')
         this.restSrvc.reqRespAjax('rest/login', this.user).subscribe((res: User) => {
             console.log(JSON.stringify(res))
             if (res.isValidUser === 'Yes') {

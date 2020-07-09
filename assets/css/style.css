@@ -60,9 +60,12 @@ through the child component tree into all the child component views.
 
 /* To unwrap row and show in one line */
 .choppOff {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: inline-block;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+    
   }
   /* to resize row height */
   .table th, .table td {

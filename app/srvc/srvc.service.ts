@@ -15,9 +15,9 @@ export class RestSrvc {
 
   showHeader = false;
   //////////////////////////////////////////////////////////////////  
-  
-  
-  appBaseUrl=   window.location.host ==='https://alfalahtech.herokuapp.com/'?'https://alfalahtech.herokuapp.com/':  'http://localhost:8080/alfalahsoftech/'
+  // appBaseUrl='https://alfalahtech.herokuapp.com/';
+  appBaseUrl= 'http://localhost:8080/alfalahsoftech/';
+  //appBaseUrl=   window.location.host =='https://alfalahtech.herokuapp.com//'?'https://alfalahtech.herokuapp.com/':  'http://192.168.43.36:8080/alfalahsoftech/'
   /////////////////////////////////////////////////////////
     
   baseUrl:string =this.appBaseUrl+"rest/UserService";

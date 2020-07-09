@@ -75,6 +75,7 @@ import { AddMedicine } from './medi/addMedicine';
 import { DispMedicine } from './medi/dispMedicine';
 import { EditMedicine } from './medi/editMedicine';
 import { AgarbattiBilling } from './bill/agarbattiBilling';
+import { SearchComponent } from './srvc/search.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { AgarbattiBilling } from './bill/agarbattiBilling';
         HttpClientModule,
         SelectDropDownModule,
         Ng2SearchPipeModule,
+        ReactiveFormsModule
       
         
         
@@ -142,7 +144,8 @@ import { AgarbattiBilling } from './bill/agarbattiBilling';
         EditMedicine,
         startsWithPipe,
         AgarbattiBilling,
-        MedicineBiling
+        MedicineBiling,
+        SearchComponent
     
     
 

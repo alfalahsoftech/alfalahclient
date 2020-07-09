@@ -26,6 +26,23 @@
 }
 }
 */
+
+/* remove up down arrow of input type number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-control {
+    padding: 2px 8px;
+}
 .item{
     width: 57%;
     height: 400px;
@@ -108,15 +125,23 @@ tbody {
     
   }
 
+  .custInfo {
+    background-color: floralwhite;
+    width: 737px;
+    margin-left: -250px;
+    margin-top: 27px;
+    
+  }
   .billGen {
     background-color: #34e2d4;
-    width: 450px;
-    margin-left: 750px;
+    width: 530px;
+    margin-left: 650px;
     margin-top: -75px;
-}
-
+    
+  }
 .genBtn{
     height: 26px;
     margin: 0px 0px -15px 10px;
     padding: 1px 5px 0px 7px;
+    line-height: initial;
 }
