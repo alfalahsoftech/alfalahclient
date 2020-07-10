@@ -207,7 +207,7 @@ export class MedicineBiling implements OnInit {
         this.showDummyDataArray=[];
         this.selectedMediList=[];
         this.selectedMediName='';
-        $('#myInput').focus();
+      
         // this.itemsArray = new DisplayItemsArray();
     }
     actions(pk: number, type: string) {
@@ -373,6 +373,8 @@ export class MedicineBiling implements OnInit {
         this.alrt = '';
 
         console.log("window.location.host-->>> " + window.location.host);
+        console.log("window.location.hostname-->>> " + window.location.hostname);
+        console.log("window.location.port-->>> " + window.location.port);
 
         if (selectedMedi.mrp == 0) {
             this.alrt = "Please add M.R.P for medicine =>: ";
