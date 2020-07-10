@@ -181,6 +181,20 @@ getDeleteJson(clsName:string,pk:string){
   return JSON.stringify({'clsName':clsName,'pk':pk+''});
 }
 
+dummyArray=[
+{name:'India'},
+{name:'Pakistan'},
+{name:'Aferica'},
+{name:'Afghanistan'},
+{name:'Kajakistan'},
+{name:'America'},
+{name:'Lebnan'},
+{name:'Syria'},
+{name:'Denmark'},
+{name:'Rusia'},
+{name:'Saudi Arabiya'}
+]
+
 }
 
 export class DeleteObj{

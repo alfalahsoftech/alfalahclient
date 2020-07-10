@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
-import { FormControl,ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RestSrvc } from '../srvc/srvc.service';
 import { log } from 'util';
 // import { WindowRefService } from '../service/WindowRefService';
@@ -48,7 +48,7 @@ export class MedicineBiling implements OnInit {
     custInfo: CustDetails = new CustDetails();
     oderedItemsArray: any[];
     query: string = '';
-    returnAmt:number;
+    returnAmt: number;
 
     constructor(
         private restSrvc: RestSrvc,
@@ -66,75 +66,75 @@ export class MedicineBiling implements OnInit {
     showDataum: number;
     calculate() {
         console.log(this.inputVal);
-        var inArr =[];
-        var isMultiply=false;
-        var isDivide=false;
+        var inArr = [];
+        var isMultiply = false;
+        var isDivide = false;
         if (this.inputVal != undefined && this.inputVal.length > 0) {
-            console.log('this.inputVal.indexOf("/")=== >'+this.inputVal.includes("/"));
-            
-            if(this.inputVal.includes("*")){
+            console.log('this.inputVal.indexOf("/")=== >' + this.inputVal.includes("/"));
+
+            if (this.inputVal.includes("*")) {
                 console.log("Multiply");
-                
+
                 inArr = this.inputVal.split("*");
                 isMultiply = true;
-            }else if(this.inputVal.includes("-")){
+            } else if (this.inputVal.includes("-")) {
                 console.log("Minus or %");
                 inArr = this.inputVal.split("-");
-            }else if(this.inputVal.includes("/")){
+            } else if (this.inputVal.includes("/")) {
                 console.log("Devide----");
                 inArr = this.inputVal.split("/");
-                isDivide=true;
+                isDivide = true;
             }
             var in1 = inArr[0];
             var in2 = inArr[1];
-   
+
             console.log('in1 = ' + in1);
             console.log('in2=' + in2);
 
             if (in1 != undefined && in1.length > 0) {
                 this.showDataum = this.getNum(in1);
                 if (in2 != undefined && in2.length > 0) {
-                    if(isMultiply){
+                    if (isMultiply) {
                         this.showDataum = this.getNum(in1) * this.getNum(in2);
-                       // console.log('muliddddddddd '+this.showDataum);
-                       // this.showDataum =  this.getNum(this.decimalPipe.transform( this.showDataum, '.2-2'));
-                       // console.log('222222 '+this.showDataum);
-                        return ;
-                    }else if(isDivide){
-                        console.log('sssssssssddddddd'); 
+                        // console.log('muliddddddddd '+this.showDataum);
+                        // this.showDataum =  this.getNum(this.decimalPipe.transform( this.showDataum, '.2-2'));
+                        // console.log('222222 '+this.showDataum);
+                        return;
+                    } else if (isDivide) {
+                        console.log('sssssssssddddddd');
                         this.showDataum = this.getNum(in1) / this.getNum(in2);
-                       // console.log('111111111'+ this.showDataum);
-                       // this.showDataum =  this.getNum(this.decimalPipe.transform( this.showDataum, '.2-2'));
+                        // console.log('111111111'+ this.showDataum);
+                        // this.showDataum =  this.getNum(this.decimalPipe.transform( this.showDataum, '.2-2'));
                         //console.log('3333333333333'+ this.showDataum);
-                        return ;
+                        return;
                     }
 
                     if (in2.endsWith("%")) {
                         var i = in2.indexOf("%");
                         var num = in2.substring(0, i);
                         console.log('iiii = ' + i);
-    
-                        console.log('nummm=' + num);
-                        var ttPerc = ( this.getNum(in1) * this.getNum(num))/100
-                        console.log(ttPerc);
-                        
-                        this.showDataum =  this.getNum(in1)-ttPerc;
-                        console.log(this.showDataum);
-                        this.showDataum =  this.getNum(this.decimalPipe.transform( this.showDataum, '.2-2'));
 
-    
-                    }else{
+                        console.log('nummm=' + num);
+                        var ttPerc = (this.getNum(in1) * this.getNum(num)) / 100
+                        console.log(ttPerc);
+
+                        this.showDataum = this.getNum(in1) - ttPerc;
+                        console.log(this.showDataum);
+                        this.showDataum = this.getNum(this.decimalPipe.transform(this.showDataum, '.2-2'));
+
+
+                    } else {
                         var mins = this.getNum(in1) - this.getNum(in2);
                         this.showDataum = mins;
-                        this.showDataum =  this.getNum(this.decimalPipe.transform( this.showDataum, '.2-2'));
+                        this.showDataum = this.getNum(this.decimalPipe.transform(this.showDataum, '.2-2'));
                     }
-                   
+
                 }
-               
+
 
             }
-        }else{
-            this.showDataum=null;
+        } else {
+            this.showDataum = null;
         }
     }
     numb: number = 0;
@@ -156,27 +156,34 @@ export class MedicineBiling implements OnInit {
 
         console.log('this.ttPrice ' + this.ttPrice);
         console.log('this.paidAmount= ' + this.paidAmount)
-        this.balance ='';
+        this.balance = '';
         this.returnAmt = null;
-        if(this.paidAmount > this.ttPrice){
-             this.returnAmt =  (this.paidAmount == null ? 0 : this.paidAmount)-this.ttPrice;
-        }else{
+        if (this.paidAmount > this.ttPrice) {
+            this.returnAmt = (this.paidAmount == null ? 0 : this.paidAmount) - this.ttPrice;
+        } else {
             var due = this.ttPrice - (this.paidAmount == null ? 0 : this.paidAmount);
             console.log(due);
             this.balance = this.decimalPipe.transform(due);
             this.numb = +this.balance;
-          
+
             console.log(this.balance);
         }
-       
+
+    }
+    private custDetails = [];
+    clientDetails() {
+        this.restSrvc.getClientDetails().subscribe((res: any[]) => {
+            this.custDetails = res;
+            // this.custDetails.push()
+            console.log(this.custDetails)
+        });
     }
 
-    results: any[] = [];
-    queryField: FormControl = new FormControl();
+
     ngOnInit() {
-        this.queryField.valueChanges
- .subscribe( result => console.log(result));
+
         this.getAllMedicine();
+        this.clientDetails();
         const extraparam = this.restSrvc.getExtraParam();
         console.log('extraparam==================' + extraparam);
         this.extraParam = extraparam;
@@ -196,6 +203,11 @@ export class MedicineBiling implements OnInit {
         this.dueDate = '';
         this.balance = '';
         this.paidAmount = 0;
+        //Array
+        this.showDummyDataArray=[];
+        this.selectedMediList=[];
+        this.selectedMediName='';
+        $('#myInput').focus();
         // this.itemsArray = new DisplayItemsArray();
     }
     actions(pk: number, type: string) {
@@ -305,7 +317,7 @@ export class MedicineBiling implements OnInit {
                 tab.location.href = fileUrl;
                 printPDF(tab);
             });
-            //this.saveData();
+            this.saveData();
         }
 
     }
@@ -355,9 +367,11 @@ export class MedicineBiling implements OnInit {
         console.log(ev.value);
         this.selectedMediName = ev.value != undefined ? ev.value.mediName : '';
     }
+
     addMedi(selectedMedi) {
 
         this.alrt = '';
+
         console.log("window.location.host-->>> " + window.location.host);
 
         if (selectedMedi.mrp == 0) {
@@ -388,7 +402,7 @@ export class MedicineBiling implements OnInit {
         console.log("selectedMedi--->> ");
         console.log(selectedMedi);
 
-        this.selectedMediName = selectedMedi.mediName;
+       // this.selectedMediName = selectedMedi.mediName;
 
         if (isNew) {
             //    this.medi=selectedMedi;
@@ -483,6 +497,129 @@ export class MedicineBiling implements OnInit {
     doNullAfterAdd(selectedMedi) {
         this.selectedMedi.qnt = 0;
         this.selectedMedi.discount = 0;
+    }
+    myInput:string;
+    myCustInput:string;
+    showMediArray = [];
+    showDummyDataArray = [];
+    dummyArray = this.restSrvc.dummyArray;
+
+    cust_clickTheSelectedItem(obj) {
+        console.log("selected customer name");
+      
+        console.log(obj);
+        //var selVal = obj.mediName;
+        //console.log(selVal);
+        this.custInfo=obj;
+      //  $("#myInput").val(obj.name);
+        $("#myCustDropdown").removeClass("show").addClass("hideItems");
+       // document.getElementById("myDropdown").classList.toggle("hideItems");
+        this.isCustShowed = true;
+       
+
+    }
+    isCustShowed: boolean = true;
+    cust_filterFunction(e) {
+        console.log("Keyup callled====>this.isShowed=>"+this.isCustShowed);
+        console.log(e);
+       
+        this.myCustInput=$('#myCustInput').val()+'';
+        console.log(this.myCustInput);
+        if(this.myCustInput == undefined || (this.myCustInput != undefined && this.myCustInput.length==0)){
+            $("#myCustDropdown").removeClass("show").addClass("hideItems");
+            this.isCustShowed = true; //Jehan remove wahan true kar k rakho so that next time koi key input kre toh data show hojae
+            this.custInfo=new CustDetails();
+            return;
+        }
+        if (this.isCustShowed) {
+            console.log('111111111');
+            $("#myCustDropdown").removeClass("hideItems").addClass("show");
+           // document.getElementById("myDropdown").classList.toggle("show");
+            if (e.keyCode == 38) {
+                console.log('222222');
+                
+                this.isCustShowed = true;
+            } else {
+                console.log('333333333');
+                this.isCustShowed = false;
+            }
+
+        }
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myCustInput");
+        filter = input.value.toLowerCase();
+        var div = document.getElementById("myCustDropdown");
+        a = div.getElementsByTagName("a");
+        console.log('anchor myCustDropdown len. '+a.length);
+        for (i = 0; i < a.length; i++) {
+            var txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+                console.log("index greater===>");
+                
+            } else {
+                a[i].style.display = "none";
+                console.log("No data found!");
+                
+                //$('#myCustDropdown').css("height: 0px;");
+            }
+        }
+    }
+
+    clickTheSelectedItem(obj) {
+        console.log("selected customer name");
+
+        console.log(obj);
+        var selVal = obj.mediName;
+        console.log(selVal);
+        this.showDummyDataArray.push(obj);
+        $("#myInput").val(obj.name);
+        $("#myDropdown").removeClass("show").addClass("hideItems");
+       // document.getElementById("myDropdown").classList.toggle("hideItems");
+        this.isShowed = true;
+        console.log(this.showDummyDataArray);
+
+    }
+    
+    isShowed: boolean = true;
+    filterFunction(e) {
+        console.log("Keyup callled====>this.isShowed=>"+this.isShowed);
+        console.log(e);
+        console.log(this.myInput);
+        
+        if(this.myInput == undefined || (this.myInput != undefined && this.myInput.length==0)){
+            $("#myDropdown").removeClass("show").addClass("hideItems");
+            this.isShowed = true; //Jehan remove wahan true kar k rakho so that next time koi key input kre toh data show hojae
+            return;
+        }
+        if (this.isShowed) {
+            console.log('111111111');
+            $("#myDropdown").removeClass("hideItems").addClass("show");
+           // document.getElementById("myDropdown").classList.toggle("show");
+            if (e.keyCode == 38) {
+                console.log('222222');
+                
+                this.isShowed = true;
+            } else {
+                console.log('333333333');
+                this.isShowed = false;
+            }
+
+        }
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toLowerCase();
+        var div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        console.log('anchor len. '+a.length);
+        for (i = 0; i < a.length; i++) {
+            var txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
     }
 
 }
