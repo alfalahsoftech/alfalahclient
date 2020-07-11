@@ -17,9 +17,11 @@ export class RestSrvc {
   //////////////////////////////////////////////////////////////////  
 
   // appBaseUrl=   window.location.host =='clientdemoapp.herokuapp.com'?'https://clientdemoapp.herokuapp.com/':  'http://192.168.43.36:8080/alfalahsoftech/'
-  appBaseUrl=   window.location.host =='alfalahtech.herokuapp.com'?'https://alfalahtech.herokuapp.com/':  'http://192.168.43.36:8080/alfalahsoftech/'
+  appBaseUrl=   window.location.host =='alfalahtech.herokuapp.com'?'https://alfalahtech.herokuapp.com/': 'http://192.168.43.36:8080/alfalahsoftech/'
   /////////////////////////////////////////////////////////
-    
+    //////local
+    //http://localhost:3000  if no internet connection then no IP address
+// appBaseUrl='http:/localhost:8080/alfalahsoftech/'
   baseUrl:string =this.appBaseUrl+"rest/UserService";
   
 

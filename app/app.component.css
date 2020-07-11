@@ -55,8 +55,8 @@ body {
 
 .data{
     margin: 2px;
-    width: 127 0px;
-    height: 590px;
+    /* width: 1270px; */
+    height: 706px;
     border: 1px solid black;
     overflow: scroll;
 }

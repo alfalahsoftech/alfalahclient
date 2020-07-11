@@ -112,8 +112,8 @@
 
 <div *ngIf="isWithoutOrderBilling"> 
 <span style="color: red; margin-left: 30px;">{{alrt}}</span>  <span style="color: slateblue;">{{selectedMediName}}</span>
-<div class="container">
-  <table style="margin-left: -250px;">
+<div class="container" >
+  <table style="margin-left: -80px; margin-bottom: -16px;">
     <tr>
       <td>
         <input type="text" class="form-control" style="height:33px; width: 150px;margin-left:-80px"
@@ -134,7 +134,7 @@
       </td>
       <td>  
           <div class="dropdown" style="margin-left: 100px;">
-            <input type="text" class="form-control" tabindex="1" placeholder="Search medicine.." id="myInput" [(ngModel)]="myInput"  autocomplete="off" (keyup)="filterFunction($event)">
+            <input type="text" class="form-control"  tabindex="1" placeholder="Search medicine.." id="myInput" [(ngModel)]="myInput"  autocomplete="off" (keyup)="filterFunction($event)">
             <div id="myDropdown" class="dropdown-content" style="height: 250px;">
               <!-- list of all items -->
               <a  *ngFor="let item of medicinesArray"  (click)="clickTheSelectedItem(item);">{{item.mediName}}</a>
