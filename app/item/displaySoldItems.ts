@@ -17,7 +17,7 @@ export class DisplaySoldItems implements OnInit {
 
 
     fetchData(){
-        this._httpClient.get('rest/food/allSoldItems').subscribe((resp:any[])=>{
+        this._httpClient.get(this.restSrvc.appBaseUrl+'rest/food/allSoldItems').subscribe((resp:any[])=>{
             this.itemsArray = resp;
         console.log(this.itemsArray);
         })

@@ -67,7 +67,7 @@
          <label style="margin-left:15px" for="email">Pay Amt  :</label>
        </td>
        <td>
-         <input type="text"  (keyup)="calcDueOnKeyUp()" class="form-control" style="height:33px; margin-left:10px; width: 180px;"   name="paidAmount" [(ngModel)]="paidAmount">
+         <input type="text"  (keyup)="calcDueOnKeyUp()" (mouseenter)="removeZero()" id="paidAmount" class="form-control" style="height:33px; margin-left:10px; width: 180px;"   name="paidAmount" [(ngModel)]="paidAmount">
        </td>
      </tr>
      
@@ -224,7 +224,7 @@
       <tbody>
         <tr *ngFor="let itemSold of  selectedMediList ; let i=index">
           <td style="text-align: center;"> {{i+1}}</td>
-          <td style="text-align: center;" class="choppOff" title="{{itemSold.name}}">{{itemSold.name}}</td>
+          <td style="text-align: center;" class="choppOff" title="{{itemSold.name}}">{{itemSold.mediName}}</td>
           <td style="text-align: right;" >{{itemSold.quantity}}</td>
           <td style="text-align: right;" >{{itemSold.discount}}</td>
           <td style="text-align: center;">{{itemSold.scheme}}</td>

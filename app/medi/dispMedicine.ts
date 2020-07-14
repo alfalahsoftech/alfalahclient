@@ -63,6 +63,8 @@ export class DispMedicine implements OnInit {
         this.itemsArray = this.originalArray.filter(item=> item.clientName==ev.value.clientName)
         console.log(this.eoClient);
     }
+
+    
 }
 
 export class DisplayItemsArray {

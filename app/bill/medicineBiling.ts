@@ -35,8 +35,6 @@ export class MedicineBiling implements OnInit {
     dueDate: string = '';
     itemsArray: any[];
     itemShow: DisplayItemsArray;
-    itemToBeSoldArray: any[] = [];
-    it: ItemsSold;
     isPrinting: boolean;
 
     localArray: DisplayItemsArray[];
@@ -49,6 +47,7 @@ export class MedicineBiling implements OnInit {
     oderedItemsArray: any[];
     query: string = '';
     returnAmt: number;
+    lastSoldMediArray = [];
 
     constructor(
         private restSrvc: RestSrvc,
@@ -196,7 +195,7 @@ export class MedicineBiling implements OnInit {
 
         //    this.fetchData();
         this.custInfo = new CustDetails();
-        this.itemToBeSoldArray = [];
+
         this.ttNoOfItems = 0;
         this.ttPrice = 0;
         this.ttQnt = 0;
@@ -204,11 +203,20 @@ export class MedicineBiling implements OnInit {
         this.balance = '';
         this.paidAmount = 0;
         //Array
-        this.showDummyDataArray=[];
-        this.selectedMediList=[];
-        this.selectedMediName='';
-      
+        this.showDummyDataArray = [];
+        this.selectedMediList = [];
+        this.selectedMediName = '';
+
         // this.itemsArray = new DisplayItemsArray();
+    }
+    lastSoldMedi(clientID:string) {
+        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/lastSoldMedi/'+clientID).subscribe((resp: any[]) => {
+            this.lastSoldMediArray = resp;
+            console.log("====lastSoldMediArray======");
+
+            console.log(this.lastSoldMediArray);
+        })
+        // throw new Error("Method not implemented.");
     }
     actions(pk: number, type: string) {
         console.log("primaryKey= " + pk + ' type =' + type);
@@ -220,56 +228,23 @@ export class MedicineBiling implements OnInit {
         console.log(this.itemsArray);
     }
 
-    add(item: any) {
-        console.log('unitCost=' + item.unitCost)
-        this.it = new ItemsSold();
-        this.it.name = item.name;
-        this.it.quantity = item.quantity;
-        this.it.unitCost = item.unitCost;
-        this.it.gstPerc = item.gstPerc;
-
-        if (item.quantity != undefined && item.unitCost != undefined) {
-            this.it.subTotal = item.quantity * item.unitCost
-            console.log(item.quantity)
-            console.log(this.it.subTotal);
-            if (item.gstPerc != undefined) {
-                const gstAmount = (this.it.subTotal * item.gstPerc) / 100;
-                console.log(gstAmount);
-                const formatedGstAmt = this.decimalPipe.transform(gstAmount, '.2-2');
-                console.log(formatedGstAmt)
-
-                this.it.gstAmount = Number.parseFloat(formatedGstAmt);
-            }
-            console.log('gstAmount=' + this.it.gstAmount)
-            this.it.subTotal += this.it.gstAmount;
-            this.it.subTotal = this.getFormattedNumber(this.it.subTotal);
-            console.log(' this.it.subTotal==' + this.it.subTotal + ' item' + this.it.name);
-
-        } else {
-            alert("Unit cost is not defined!")
-            return;
-        }
-
-        this.itemToBeSoldArray.push(this.it)
-        this.calculateTotal(this.it, false);
-    }
-
     delete(itemSold: any) {
         console.log(itemSold);
-        // this.itemToBeSoldArray.splice(this.itemToBeSoldArray.indexOf(itemSold), 1);
         this.selectedMediList.splice(this.selectedMediList.indexOf(itemSold), 1);
         this.calculateTotal(itemSold, true);
     }
 
     //customer detail for eache item in SoldItem
     addCustInfo() {
-        this.itemToBeSoldArray.forEach(it => {
+        this.selectedMediList.forEach(it => {
             it.clientName = this.custInfo.clientName;
             it.address = this.custInfo.address;
             it.gstNo = this.custInfo.gstNo;
             it.contactNo = this.custInfo.contactNo;
             it.stateCode = this.custInfo.stateCode;
+            it.clientID = this.custInfo.clientID;
         })
+
     }
 
     calculateTotal(localItem: any, isDelete: boolean) {
@@ -284,7 +259,7 @@ export class MedicineBiling implements OnInit {
     }
     downloadPDF(): any {
 
-        const v = printPage(this.itemToBeSoldArray, this.custInfo, this.decimalPipe.transform(this.ttPrice));
+        const v = printPage(this.selectedMediList, this.custInfo, this.decimalPipe.transform(this.ttPrice));
         var pk = this.extraParam['clientPK'] == undefined ? 0 : this.extraParam['clientPK'];
         const data = { 'pdfDetails': v, 'clientPK': pk };
         return this.http.post(this.restSrvc.appBaseUrl + 'rest/pdf/genPDF', data, { responseType: 'blob' })
@@ -300,12 +275,12 @@ export class MedicineBiling implements OnInit {
         this.custInfo.dueAmt = this.balance;
         this.custInfo.dueDate = this.dateObj.transform(this.dueDate, 'dd-MM-yyyy');
         this.custInfo.dueDate = this.custInfo.dueDate == null ? '' : this.custInfo.dueDate;
-        if (Object.keys(this.itemToBeSoldArray).length == 0) {
+        if (Object.keys(this.selectedMediList).length == 0) {
             alert("No Items to generate bill!!")
             return;
         }
         console.log('Generating Bill for customer....')
-        //  this.addCustInfo();
+        this.addCustInfo();
         if (confirm('Are you sure you want to generate bill?')) {
             let tab = window.open();
             this.downloadPDF().subscribe(data => {
@@ -323,12 +298,12 @@ export class MedicineBiling implements OnInit {
     }
 
     saveData() {
-        // this.restSrvc.reqRespAjax('rest/food/soldItems', this.itemToBeSoldArray).subscribe((resp: any[]) => {
-        //    var msg = resp;
-        //   // alert(msg);
-        //   this.ngOnInit(); 
-        // })
-        this.ngOnInit(); //Comment when u uncomment above
+        this.restSrvc.reqRespAjax('rest/medi/soldMedi', this.selectedMediList).subscribe((resp: any[]) => {
+            var msg = resp;
+            // alert(msg);
+            this.ngOnInit();
+        })
+        //this.ngOnInit(); //Comment when u uncomment above
     }
     ///////////////////////////////////////////////Biling of Medicine /////////////////////////////////////
     selectedMediList: MediSold[] = [];
@@ -404,20 +379,21 @@ export class MedicineBiling implements OnInit {
         console.log("selectedMedi--->> ");
         console.log(selectedMedi);
 
-       // this.selectedMediName = selectedMedi.mediName;
+        // this.selectedMediName = selectedMedi.mediName;
 
         if (isNew) {
             //    this.medi=selectedMedi;
             this.medi = new MediSold();
-            this.medi.primaryKey = selectedMedi.primaryKey;
+            //this.medi.primaryKey = selectedMedi.primaryKey;
             this.medi.itemID = selectedMedi.itemID;
             this.medi.scheme = selectedMedi.scheme;
-            this.medi.name = selectedMedi.mediName;
+            this.medi.mediName = selectedMedi.mediName;
             this.medi.quantity = selectedMedi.qnt;
             this.medi.discount = selectedMedi.discount;
             this.medi.expDate = selectedMedi.expDate;
             this.medi.mfgBy = selectedMedi.mfgBy;
             this.medi.unitCost = selectedMedi.mrp
+            //Select itemID,mediName,unitCost,qunatity from EOMedicine where
         } else {
             this.medi.quantity += selectedMedi.qnt;
         }
@@ -480,12 +456,12 @@ export class MedicineBiling implements OnInit {
             this.medi.subTotal = localSubTotal;
             this.ttNoOfItems++;
             this.selectedMediList.push(this.medi);
-            this.itemToBeSoldArray.push(this.medi)
+
 
         } else {
             this.medi.subTotal += localSubTotal;
             this.selectedMediList[objIndex] = (this.medi);
-            this.itemToBeSoldArray[objIndex] = (this.medi)
+
         }
 
         this.ttPrice += localSubTotal;
@@ -500,46 +476,46 @@ export class MedicineBiling implements OnInit {
         this.selectedMedi.qnt = 0;
         this.selectedMedi.discount = 0;
     }
-    myInput:string;
-    myCustInput:string;
+    myInput: string;
+    myCustInput: string;
     showMediArray = [];
     showDummyDataArray = [];
     dummyArray = this.restSrvc.dummyArray;
 
     cust_clickTheSelectedItem(obj) {
         console.log("selected customer name");
-      
+
         console.log(obj);
         //var selVal = obj.mediName;
         //console.log(selVal);
-        this.custInfo=obj;
-      //  $("#myInput").val(obj.name);
+        this.custInfo = obj;
+        //  $("#myInput").val(obj.name);
         $("#myCustDropdown").removeClass("show").addClass("hideItems");
-       // document.getElementById("myDropdown").classList.toggle("hideItems");
+        // document.getElementById("myDropdown").classList.toggle("hideItems");
         this.isCustShowed = true;
-       
+this.lastSoldMedi(this.custInfo.clientID);
 
     }
     isCustShowed: boolean = true;
     cust_filterFunction(e) {
-        console.log("Keyup callled====>this.isShowed=>"+this.isCustShowed);
+        console.log("Keyup callled====>this.isShowed=>" + this.isCustShowed);
         console.log(e);
-       
-        this.myCustInput=$('#myCustInput').val()+'';
+
+        this.myCustInput = $('#myCustInput').val() + '';
         console.log(this.myCustInput);
-        if(this.myCustInput == undefined || (this.myCustInput != undefined && this.myCustInput.length==0)){
+        if (this.myCustInput == undefined || (this.myCustInput != undefined && this.myCustInput.length == 0)) {
             $("#myCustDropdown").removeClass("show").addClass("hideItems");
             this.isCustShowed = true; //Jehan remove wahan true kar k rakho so that next time koi key input kre toh data show hojae
-            this.custInfo=new CustDetails();
+            this.custInfo = new CustDetails();
             return;
         }
         if (this.isCustShowed) {
             console.log('111111111');
             $("#myCustDropdown").removeClass("hideItems").addClass("show");
-           // document.getElementById("myDropdown").classList.toggle("show");
+            // document.getElementById("myDropdown").classList.toggle("show");
             if (e.keyCode == 38) {
                 console.log('222222');
-                
+
                 this.isCustShowed = true;
             } else {
                 console.log('333333333');
@@ -552,17 +528,17 @@ export class MedicineBiling implements OnInit {
         filter = input.value.toLowerCase();
         var div = document.getElementById("myCustDropdown");
         a = div.getElementsByTagName("a");
-        console.log('anchor myCustDropdown len. '+a.length);
+        console.log('anchor myCustDropdown len. ' + a.length);
         for (i = 0; i < a.length; i++) {
             var txtValue = a[i].textContent || a[i].innerText;
             if (txtValue.toLowerCase().indexOf(filter) > -1) {
                 a[i].style.display = "";
                 console.log("index greater===>");
-                
+
             } else {
                 a[i].style.display = "none";
                 console.log("No data found!");
-                
+
                 //$('#myCustDropdown').css("height: 0px;");
             }
         }
@@ -577,19 +553,19 @@ export class MedicineBiling implements OnInit {
         this.showDummyDataArray.push(obj);
         $("#myInput").val(obj.name);
         $("#myDropdown").removeClass("show").addClass("hideItems");
-       // document.getElementById("myDropdown").classList.toggle("hideItems");
+        // document.getElementById("myDropdown").classList.toggle("hideItems");
         this.isShowed = true;
         console.log(this.showDummyDataArray);
 
     }
-    
+
     isShowed: boolean = true;
     filterFunction(e) {
-        console.log("Keyup callled====>this.isShowed=>"+this.isShowed);
+        console.log("Keyup callled====>this.isShowed=>" + this.isShowed);
         console.log(e);
         console.log(this.myInput);
-        
-        if(this.myInput == undefined || (this.myInput != undefined && this.myInput.length==0)){
+
+        if (this.myInput == undefined || (this.myInput != undefined && this.myInput.length == 0)) {
             $("#myDropdown").removeClass("show").addClass("hideItems");
             this.isShowed = true; //Jehan remove wahan true kar k rakho so that next time koi key input kre toh data show hojae
             return;
@@ -597,10 +573,10 @@ export class MedicineBiling implements OnInit {
         if (this.isShowed) {
             console.log('111111111');
             $("#myDropdown").removeClass("hideItems").addClass("show");
-           // document.getElementById("myDropdown").classList.toggle("show");
+            // document.getElementById("myDropdown").classList.toggle("show");
             if (e.keyCode == 38) {
                 console.log('222222');
-                
+
                 this.isShowed = true;
             } else {
                 console.log('333333333');
@@ -613,7 +589,7 @@ export class MedicineBiling implements OnInit {
         filter = input.value.toLowerCase();
         var div = document.getElementById("myDropdown");
         a = div.getElementsByTagName("a");
-        console.log('anchor len. '+a.length);
+        console.log('anchor len. ' + a.length);
         for (i = 0; i < a.length; i++) {
             var txtValue = a[i].textContent || a[i].innerText;
             if (txtValue.toLowerCase().indexOf(filter) > -1) {
@@ -621,6 +597,12 @@ export class MedicineBiling implements OnInit {
             } else {
                 a[i].style.display = "none";
             }
+        }
+    }
+
+    removeZero(id: any) {
+        if ($("#" + id).val() == 0) {
+            $("#" + id).val('');
         }
     }
 
@@ -641,21 +623,9 @@ export class DisplayItemsArray {
     isActive: string;
     quantity: string;
 }
-export class ItemsSold {
-    name: string;
-    quantity: number;
-    subTotal: number;
-    contactNo: number;
-    clientName: string;
-    address: string;
-    stateCode: number;
-    gstNo: string;
-    gstPerc: string;
-    unitCost: string;
-    gstAmount: number;
-}
 
 export class CustDetails {
+    clientID: string;
     contactNo: number;
     clientName: string = '';
     address: string = '';
@@ -668,8 +638,8 @@ export class CustDetails {
 
 export class MediSold {
     itemID: string;
-    primaryKey: number;
-    name: string;
+    //primaryKey: number;
+    mediName: string;
     quantity: number;
     subTotal: number;
     pack: string = '1X15';
@@ -678,5 +648,13 @@ export class MediSold {
     mfgBy: string;
     discount: number;
     scheme: string
+    contactNo: number;
+    clientName: string;
+    address: string;
+    stateCode: number;
+    gstNo: string;
+    gstPerc: string;
+    clientID: string;
+    gstAmount: number;
 
 }

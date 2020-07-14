@@ -76,6 +76,7 @@ import { DispMedicine } from './medi/dispMedicine';
 import { EditMedicine } from './medi/editMedicine';
 import { AgarbattiBilling } from './bill/agarbattiBilling';
 import { SearchComponent } from './srvc/search.component';
+import { SearchByNamePipe } from './helper/search-by-name.pipe';
 
 
 @NgModule({
@@ -145,7 +146,8 @@ import { SearchComponent } from './srvc/search.component';
         startsWithPipe,
         AgarbattiBilling,
         MedicineBiling,
-        SearchComponent
+        SearchComponent,
+        SearchByNamePipe
     
     
 
