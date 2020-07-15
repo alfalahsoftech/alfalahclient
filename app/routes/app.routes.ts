@@ -32,6 +32,7 @@ import { DispJobCode } from '../admin/dispJobCode';
 import { DispMedicine } from '../medi/dispMedicine';
 import { EditMedicine } from '../medi/editMedicine';
 import { AgarbattiBilling } from '../bill/agarbattiBilling';
+import { DispSoldMedi } from '../medi/dispSoldMedi';
 
 
 // import { LoginComponent } from '../security/LoginComponent';
@@ -172,6 +173,10 @@ const routes: Routes = [
       {
         path:'medi/editMedi/:pk',
         component: EditMedicine
+      } ,
+      {
+        path: 'dispSoldMedi',
+        component: DispSoldMedi
       }
     ]
   },

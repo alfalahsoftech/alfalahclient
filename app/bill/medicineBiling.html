@@ -109,9 +109,23 @@
 </div>
 
 <!-- </div> -->
-
+<div class="lastSold">
+  <table>
+    <tr>
+      <th style="width: 410px;"  >Name</th>
+      <th style="width: 79px;">MRP</th>
+      <th>Qnt.</th>
+    </tr>
+    <tr>
+      <td>{{lastSoldMediDtls.mediName}}</td>
+      <td>{{lastSoldMediDtls.unitCost}}</td>
+      <td>{{lastSoldMediDtls.quantity}}</td>
+    </tr>
+  </table>
+  
+</div>
 <div *ngIf="isWithoutOrderBilling"> 
-<span style="color: red; margin-left: 30px;">{{alrt}}</span>  <span style="color: slateblue;">{{selectedMediName}}</span>
+<!-- <span style="color: red; margin-left: 30px;">{{alrt}}</span>  <span style="color: slateblue;">{{selectedMediName}}</span> -->
 <div class="container" >
   <table style="margin-left: -80px; margin-bottom: -16px;">
     <tr>
@@ -174,7 +188,7 @@
        <td style="text-align: right;" >{{item.netRate}}</td>
        <td style="text-align: center;" >{{item.expDate | date:'MM/yy'}}</td>
        <td>
-        <b>{{item.purchPrec}} 23</b>
+        <b>{{item.purchPerc}}</b>
       </td>
        <td>
         <input tabindex="2" style="width: 60px; height: 30px;" type="number" class="form-control"  id="item.discount"  name="item.discount" [(ngModel)]="item.discount">

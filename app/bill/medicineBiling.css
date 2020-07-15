@@ -52,7 +52,11 @@ input[type=number] {
   vertical-align: top;
   margin: 10px 2px 2px 2px;
 }
-
+.lastSold{
+  margin-left: 200px;
+    margin-top: -28px;
+    margin-bottom: 24px;
+}
 
 .item{
     width: 57%;

@@ -77,6 +77,8 @@ import { EditMedicine } from './medi/editMedicine';
 import { AgarbattiBilling } from './bill/agarbattiBilling';
 import { SearchComponent } from './srvc/search.component';
 import { SearchByNamePipe } from './helper/search-by-name.pipe';
+import { AFUtil } from './helper/util';
+import { DispSoldMedi } from './medi/dispSoldMedi';
 
 
 @NgModule({
@@ -147,12 +149,14 @@ import { SearchByNamePipe } from './helper/search-by-name.pipe';
         AgarbattiBilling,
         MedicineBiling,
         SearchComponent,
-        SearchByNamePipe
+        SearchByNamePipe,
+        DispSoldMedi
+        
     
     
 
     ],
-    providers: [PeopleService,AuthService,RestSrvc,AuthGuardService,UserService,CompService],
+    providers: [PeopleService,AuthService,RestSrvc,AuthGuardService,UserService,CompService,AFUtil],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

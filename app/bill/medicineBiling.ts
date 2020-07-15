@@ -13,6 +13,7 @@ import { DecimalPipe, DatePipe, registerLocaleData } from '@angular/common';
 import localeIN from '@angular/common/locales/en-IN';
 
 import { stringify } from 'querystring';
+import { AFUtil } from '../helper/util';
 declare const myTest: any; //Solved by https://www.truecodex.com/course/angular-6/how-to-use-external-js-files-and-javascript-code-in-angular
 declare const printPage: any;
 declare const printPDF: any;
@@ -55,7 +56,8 @@ export class MedicineBiling implements OnInit {
         private http: HttpClient,
         private decimalPipe: DecimalPipe,
         private dateObj: DatePipe,
-        private activatedtRoute: ActivatedRoute
+        private activatedtRoute: ActivatedRoute,
+        private util: AFUtil
     ) {
         // wind.print();
     }
@@ -209,8 +211,8 @@ export class MedicineBiling implements OnInit {
 
         // this.itemsArray = new DisplayItemsArray();
     }
-    lastSoldMedi(clientID:string) {
-        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/lastSoldMedi/'+clientID).subscribe((resp: any[]) => {
+    fetchLastSoldMedi(clientID: string) {
+        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/lastSoldMedi/' + clientID).subscribe((resp: any[]) => {
             this.lastSoldMediArray = resp;
             console.log("====lastSoldMediArray======");
 
@@ -230,7 +232,12 @@ export class MedicineBiling implements OnInit {
 
     delete(itemSold: any) {
         console.log(itemSold);
+        console.log(this.selectedMediList);
+
         this.selectedMediList.splice(this.selectedMediList.indexOf(itemSold), 1);
+        console.log('After delete');
+        console.log(this.selectedMediList);
+        
         this.calculateTotal(itemSold, true);
     }
 
@@ -338,18 +345,26 @@ export class MedicineBiling implements OnInit {
         console.log(this.medicinesArray);
     }
 
-    selectionChanged(ev) {
+    selectionChanged(ev: any) {
         console.log(ev.value);
         this.selectedMediName = ev.value != undefined ? ev.value.mediName : '';
     }
 
-    addMedi(selectedMedi) {
+    lastSoldMediDtls: MediSold = new MediSold();
+    showLastSold(selectedMedi: any) {
+        this.lastSoldMediDtls = new MediSold();
+        for (let i = 0; i < this.lastSoldMediArray.length; i++) {
+            var medi = this.lastSoldMediArray[i];
+            if (selectedMedi.itemID == medi.itemID) {
+                this.lastSoldMediDtls = medi;
+                console.log("Medicine Matched=>");
+                break;
+            }
+        }
+    }
 
+    addMedi(selectedMedi: any) {
         this.alrt = '';
-
-        console.log("window.location.host-->>> " + window.location.host);
-        console.log("window.location.hostname-->>> " + window.location.hostname);
-        console.log("window.location.port-->>> " + window.location.port);
 
         if (selectedMedi.mrp == 0) {
             this.alrt = "Please add M.R.P for medicine =>: ";
@@ -357,7 +372,6 @@ export class MedicineBiling implements OnInit {
         }
         if (selectedMedi.qnt == 0 || selectedMedi.qnt == undefined) {
             this.alrt = "Please enter quantity!";
-
             return;
         }
 
@@ -365,8 +379,6 @@ export class MedicineBiling implements OnInit {
         var objIndex;
         for (let i = 0; i < this.selectedMediList.length; i++) {
             var medi = this.selectedMediList[i];
-            console.log(selectedMedi.itemID + '     ' + medi.itemID);
-
             if (selectedMedi.itemID == medi.itemID) {
                 this.medi = medi;
                 objIndex = i;
@@ -493,7 +505,7 @@ export class MedicineBiling implements OnInit {
         $("#myCustDropdown").removeClass("show").addClass("hideItems");
         // document.getElementById("myDropdown").classList.toggle("hideItems");
         this.isCustShowed = true;
-this.lastSoldMedi(this.custInfo.clientID);
+        this.fetchLastSoldMedi(this.custInfo.clientID);
 
     }
     isCustShowed: boolean = true;
@@ -545,11 +557,8 @@ this.lastSoldMedi(this.custInfo.clientID);
     }
 
     clickTheSelectedItem(obj) {
-        console.log("selected customer name");
-
-        console.log(obj);
         var selVal = obj.mediName;
-        console.log(selVal);
+        this.showLastSold(obj);
         this.showDummyDataArray.push(obj);
         $("#myInput").val(obj.name);
         $("#myDropdown").removeClass("show").addClass("hideItems");
@@ -582,7 +591,6 @@ this.lastSoldMedi(this.custInfo.clientID);
                 console.log('333333333');
                 this.isShowed = false;
             }
-
         }
         var input, filter, ul, li, a, i;
         input = document.getElementById("myInput");
