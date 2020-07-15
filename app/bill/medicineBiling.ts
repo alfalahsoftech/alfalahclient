@@ -352,7 +352,7 @@ export class MedicineBiling implements OnInit {
 
     lastSoldMediDtls: MediSold = new MediSold();
     showLastSold(selectedMedi: any) {
-        this.lastSoldMediDtls = new MediSold();
+        
         for (let i = 0; i < this.lastSoldMediArray.length; i++) {
             var medi = this.lastSoldMediArray[i];
             if (selectedMedi.itemID == medi.itemID) {
@@ -558,6 +558,7 @@ export class MedicineBiling implements OnInit {
 
     clickTheSelectedItem(obj) {
         var selVal = obj.mediName;
+        this.lastSoldMediDtls = new MediSold();
         this.showLastSold(obj);
         this.showDummyDataArray.push(obj);
         $("#myInput").val(obj.name);

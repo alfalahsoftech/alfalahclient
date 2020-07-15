@@ -173,7 +173,7 @@ function printPage(items,custInfo,ttPrice) {
                     myvar += '<tr class="bdr">'+
                                     '<td align="center">'+(i+1)+'</td>'+
                                     '<td align="center">'+item.quantity+'</td>'+
-                                    '<td align="center">'+item.name+'</td>'+
+                                    '<td align="center">'+item.mediName+'</td>'+
                                     '<td align="center">'+(item.mfgBy==undefined?'':item.mfgBy)+' </td>'+
                                     '<td align="center">'+item.expDate+' </td>'+
                                     '<td align="center">'+item.unitCost+'</td>'+

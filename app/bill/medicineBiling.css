@@ -54,8 +54,21 @@ input[type=number] {
 }
 .lastSold{
   margin-left: 200px;
-    margin-top: -28px;
-    margin-bottom: 24px;
+  margin-top: -28px;
+  margin-bottom: 24px;
+  background-color: cadetblue;
+  width: 700px;
+  height: 85px;
+}
+
+.lastSoldHdr {
+  text-align: center;
+  /* margin-left: 92px; */
+  margin-top: -36px;
+  margin-bottom: -37px;
+  /* background-color: cadetblue; */
+  width: 700px;
+  height: 57px;
 }
 
 .item{
