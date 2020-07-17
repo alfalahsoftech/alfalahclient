@@ -175,6 +175,10 @@ const routes: Routes = [
         component: EditMedicine
       } ,
       {
+        path:'medi/editMedi/:pk',
+        component: EditMedicine
+      },
+      {
         path: 'dispSoldMedi',
         component: DispSoldMedi
       }

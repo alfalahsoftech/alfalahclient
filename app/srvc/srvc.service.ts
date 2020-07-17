@@ -180,9 +180,9 @@ export class RestSrvc {
 
       return this.reqRespAjax('rest/login',requestMap);
   }
-getDeleteJson(clsName:string,pk:string){
-  return JSON.stringify({'clsName':clsName,'pk':pk+''});
-}
+  getDeleteJson(clsName:string,pk:string){
+    return JSON.stringify({'clsName':clsName,'pk':pk+''});
+  }
 
 dummyArray=[
 {name:'India'},

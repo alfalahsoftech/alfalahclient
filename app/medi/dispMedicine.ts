@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, AfterViewInit } from '@angular/core'
 import {RestSrvc} from '../srvc/srvc.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { log } from 'util';
@@ -9,27 +9,40 @@ import { log } from 'util';
         styleUrls: ['dispMedicine.css']
     }
 )
-export class DispMedicine implements OnInit {
+export class DispMedicine implements OnInit ,AfterViewInit{
 
     constructor(private restSrvc:RestSrvc,private router:Router,private activatedRoute:ActivatedRoute) { }
   
 
-    itemsArray: any[];
+    private itemsArray=[];
     clientsArray :any[];
     originalArray:any[];
     eoClient:number;
     url: string = 'rest/medi'+this.router.url;
     isClientItem:boolean=this.router.url == '/allClientItems'?true:false;
-
+    //////pagination
+   private dummyArray=this.restSrvc.dummyArray;
+    page = 1;
+    pageSize = 10;
+    collectionSize = this.itemsArray.length;
+    get arrayOfData(): any[] {
+        console.log(this.itemsArray);
+        
+        return this.itemsArray
+          .map((obj, i) => ({id: i + 1, ...obj}))
+          .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      }
     
     fetchData(){
+        console.log(this.dummyArray);
+        
         console.log(this.router.url);
         // console.log(this.router.onSameUrlNavigation);
-        this.restSrvc.getClientDetails().subscribe((res: any[]) => {
-            this.clientsArray = res;
+        // this.restSrvc.getClientDetails().subscribe((res: any[]) => {
+        //     this.clientsArray = res;
            
-            console.log(this.clientsArray)
-        });
+        //     console.log(this.clientsArray)
+        // });
         
         this.restSrvc.reqRespAjax(this.url,'').subscribe((resp:any[])=>{
             this.itemsArray = resp;
@@ -38,12 +51,24 @@ export class DispMedicine implements OnInit {
         })
     }
     ngOnInit() {
-        this.fetchData();
-       // this.itemsArray = new DisplayItemsArray();
+     //   this.fetchData();
+    //    this.itemsArray = new DisplayItemsArray();
     }
-    actions(pk:number,type:string){
-        console.log("primaryKey= "+pk +' type =' +type);
+    ngAfterViewInit(){
+       this.fetchData();
     }
+
+  actions(pk: any,actionType:string) {
+      if(actionType == 'edit'){
+        this.router.navigate(['/medi/editMedi/'+pk]);
+      }else if(actionType == 'delete'){
+        this.restSrvc.reqRespAjax("rest/medi/delete", this.restSrvc.getDeleteJson('EOMedicine', pk)).subscribe((res: any[]) => {
+            this.fetchData();
+      
+          });
+      }
+ 
+  }
     receiveMessage($event: DisplayItemsArray) {
        
         console.log($event);

@@ -67,7 +67,7 @@
          <label style="margin-left:15px" for="email">Pay Amt  :</label>
        </td>
        <td>
-         <input type="text"  (keyup)="calcDueOnKeyUp()" (mouseenter)="removeZero()" id="paidAmount" class="form-control" style="height:33px; margin-left:10px; width: 180px;"   name="paidAmount" [(ngModel)]="paidAmount">
+         <input type="text"  (keyup)="calcDueOnKeyUp()" (focus)="removeZero('paidAmount')" id="paidAmount" class="form-control" style="height:33px; margin-left:10px; width: 180px;"   name="paidAmount" [(ngModel)]="paidAmount">
        </td>
      </tr>
      

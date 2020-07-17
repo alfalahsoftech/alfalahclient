@@ -35,9 +35,9 @@ export class AddMedicine implements OnInit {
     }
     sendData() {
         console.log("Sending customer info request  to server");
-        if(this.dummyItem.isActive){
-            this.dummyItem.isActive='1';
-        }
+        // if(this.dummyItem.isActive){
+        //     this.dummyItem.isActive='1';
+        // }
         console.log(this.dummyItem)
         this.restSrvc.reqRespAjax("rest/medi/addMedi", JSON.stringify(this.dummyItem)).subscribe(responseData => {
             console.log(responseData)
@@ -55,6 +55,7 @@ export class AddMedicine implements OnInit {
     dummyItem: DummyItem
     ngOnInit() {
         this.dummyItem = new DummyItem();
+        $('input[type=checkbox]').removeAttr('checked');
     }
     dropdownOptions =['Kg','Pc',"gm","Litter","TAB","Syrup",,"Kartoon"];
     selectionChanged(ev){
@@ -83,6 +84,6 @@ export class DummyItem {
     mfgBy:string=''
     purchasePrice:string;
     notes:string='';
-    isActive:string='0';
+    isActive:string;
     netRatePerc:number;
 }

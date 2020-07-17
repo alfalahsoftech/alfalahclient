@@ -24,15 +24,17 @@ export class DailyStuff implements OnInit, AfterViewInit {
   constructor(private router:Router,private peopleService: PeopleService, private restSrvc: RestSrvc) { }
   
 
-page = 1;
-pageSize = 10;
-collectionSize = this.dailyStuffs.length;
+  page = 1;
+  pageSize = 10;
+  collectionSize = this.dailyStuffs.length;
 
-get arrayOfData(): any[] {
-  return this.dailyStuffs
-    .map((obj, i) => ({id: i + 1, ...obj}))
-    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-}
+  get arrayOfData(): any[] {
+    console.log(this.dailyStuffs);
+    
+    return this.dailyStuffs
+      .map((obj, i) => ({id: i + 1, ...obj}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
   addDailyStuff(){
     console.log(this.uiDailyStuff);
 

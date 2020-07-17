@@ -23,9 +23,9 @@ export class EditMedicine implements OnInit {
    
     saveChanges() {
         console.log("Sending updateMedi info request  to server");
-        if(this.dummyItem.isActive){
-            this.dummyItem.isActive='1';
-        }
+        // if(this.dummyItem.isActive){
+        //     this.dummyItem.isActive='1';
+        // }
         console.log(this.dummyItem)
         delete this.dummyItem['addedOn'];
         this.restSrvc.reqRespAjax("rest/medi/updateMedi", JSON.stringify(this.dummyItem)).subscribe(responseData => {

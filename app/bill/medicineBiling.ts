@@ -610,6 +610,10 @@ export class MedicineBiling implements OnInit {
     }
 
     removeZero(id: any) {
+        console.log('removed zero called'+ id);
+
+        console.log('removed zero called 222'+ $("#" + id).val());
+        
         if ($("#" + id).val() == 0) {
             $("#" + id).val('');
         }
