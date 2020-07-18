@@ -1,9 +1,13 @@
 @media (min-width: 1800px){
     .container {
-        max-width: 1600px !important; 
+        max-width: 1900px !important; 
     }
 }
-
+@media (min-width: 1200px){
+.container {
+    max-width: 1350px;
+}
+}
 /* To unwrap row and show in one line */
 .choppOff {
     /* display: inline-block; */
@@ -35,10 +39,34 @@
 }
 
 .mainDiv{
-    max-width: 1800px;
-    height: 700px;
+    /* max-width: 1800px; */
+    height: 560px;
     border-width: 3px;
     border-color: #7a92a9;
     border-style: solid;
     border-radius: 8px;
 }
+.item{
+    width: 57%;
+    height: 353px;
+    display: inline-block !important;
+    vertical-align: top;
+    margin: 48px 2px 2px 2px;
+    /* overflow: scroll; */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+}
+
+
+table.tableBodyScroll tbody {
+    display: block;
+    max-height: 530px;
+    overflow-y: scroll;
+  }
+  
+  table.tableBodyScroll thead, table.tableBodyScroll tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
