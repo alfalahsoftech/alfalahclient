@@ -1,7 +1,7 @@
   
   <div class="container ">
    
-    <div class="row" style="margin-top: 20px;">
+    <div class="row" style="margin: 18px 0px 6px 14px;">
         <div *ngIf="!isClientItem">
           <addMedicine (messageEvent)="receiveMessage($event)"></addMedicine>
         </div>
@@ -13,7 +13,7 @@
        </div>
     </div>
     <div class="mainDiv">
-      <div style="float: left;margin: 8px 8px 8px 8px;">
+       <div style="float: left;margin: 8px 8px 8px 8px;">
         <select class="custom-select"  style="height: 40px;" [(ngModel)]="pageSize">
           <option [ngValue]="10">10 items per page</option>
           <option [ngValue]="15">15 items per page</option>
@@ -56,7 +56,7 @@
             <th>On Hand</th>
             <th>Pur. Price</th>
             <th>Scheme</th>
-            <th>Notes</th>
+            <!-- <th>Notes</th> -->
             <th>Is Active</th>
             <th>Actions</th>
           </tr>
@@ -65,7 +65,7 @@
           <tr *ngFor="let item of arrayOfData | filter:searchText">
           
            <td>{{item.itemID}}</td>
-           <td class="choppOff">{{item.mediName}}</td>
+           <td class="choppOff" title="{{item.mediName}}">{{item.mediName}}</td>
            <td style="text-align: right;" ><b>{{item.mrp}} </b></td>
            <td style="text-align: right;" >{{item.netRate}}</td>
            <td style="text-align: center;">{{item.expDate | date:'dd-MM-yyy'}}</td>
@@ -74,7 +74,7 @@
            <td style="text-align: right;" >{{item.onHand}}</td>
            <td style="text-align: right;" >{{item.purchasePrice}}</td>
            <td >{{item.scheme}}</td>
-           <td >{{item.notes}} no notes</td>
+           <!-- <td >{{item.notes}} no notes</td> -->
            <td>
             {{item.isActive?'Yes':'No'}}
             <!-- below was doing issue when pagination added -->
@@ -83,16 +83,16 @@
            <td>
                 <!-- <a  (click)="actions(item.primaryKey,'edit')"  routerLink="/medi/editMedi/{{item.primaryKey}}">Edit</a> &nbsp; 
                 <a  (click)="actions(item.primaryKey,'delete')" routerLink="/medi/delete/{{item.primaryKey}}">Delete</a> -->
-                <button class="btn btn-primary btn-view" (click)="actions(item.primaryKey,'edit')" >Edit</button>
-                <button class="btn btn-primary btn-view" (click)="actions(item.primaryKey,'delete')" >Delete</button>
+                <button class="btn btn-primary btn-edit-del" (click)="actions(item.primaryKey,'edit')" >Edit</button>
+                <button class="btn btn-primary btn-edit-del" (click)="actions(item.primaryKey,'delete')" >Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="noOfRecords">Showing {{pageSize}} of {{itemsArray.length}} records</div>
+    <div class="noOfRecords">Showing {{recordFrom}} - {{recordTo}} Of {{noOfItems}} records</div>
     <div class="paginate">
-      <ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+      <ngb-pagination [collectionSize]="noOfItems" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
     </div> 
   </div>    
   </div> 

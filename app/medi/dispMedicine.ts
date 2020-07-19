@@ -24,10 +24,19 @@ export class DispMedicine implements OnInit ,AfterViewInit{
    private dummyArray=this.restSrvc.dummyArray;
     page = 1;
     pageSize = 10;
-    collectionSize = this.itemsArray.length;
+    recordFrom=1;
+    recordTo=this.pageSize;
+    noOfItems = this.itemsArray.length;
     get arrayOfData(): any[] {
         console.log(this.itemsArray);
-        
+        if(this.page ==1){
+            this.recordFrom =  this.page ;
+            this.recordTo = this.pageSize;
+        }else{
+            this.recordFrom = this.pageSize * ( this.page-1) + 1;
+            this.recordTo = this.pageSize * this.page > this.noOfItems ? this.noOfItems :  this.pageSize * this.page;
+
+        }
         return this.itemsArray
           .map((obj, i) => ({id: i + 1, ...obj}))
           .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
@@ -46,6 +55,7 @@ export class DispMedicine implements OnInit ,AfterViewInit{
         
         this.restSrvc.reqRespAjax(this.url,'').subscribe((resp:any[])=>{
             this.itemsArray = resp;
+           this. noOfItems = this.itemsArray.length;
             this.originalArray = resp;
         console.log(this.itemsArray);
         })

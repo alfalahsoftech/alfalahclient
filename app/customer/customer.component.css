@@ -1,24 +1,19 @@
-.actions{
-    margin: 5px;
-    border-width: 2px;
-    background-color: #c4cbd6;
-    height: 72px;
-    border-radius: 12px;
-    position: relative;
-  }
-  .btnActions{
-    top: 24px;
-    margin-left: 975px;
-    position: absolute;
-    
-  }
-   
-  .ss{
-      background-color: red;
-  }
 
-  @media (min-width: 1200px){
-      .container {
-          max-width: 1300px;
-      }
-  }
+@media (min-width: 1800px){
+    .container {
+        max-width: 1900px !important; 
+    }
+}
+
+@media (min-width: 1200px){
+    .container {
+        max-width: 1350px;
+    }
+}
+
+.btn-edit-del{
+    margin: -8px 0px -3px 7px;
+    height: 25px;
+    padding: 2px 12px 2px 12px;
+    font-size: 13px
+}
