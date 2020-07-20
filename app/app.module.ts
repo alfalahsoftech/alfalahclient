@@ -79,6 +79,7 @@ import { SearchComponent } from './srvc/search.component';
 import { SearchByNamePipe } from './helper/search-by-name.pipe';
 import { AFUtil } from './helper/util';
 import { DispSoldMedi } from './medi/dispSoldMedi';
+import { DataBody } from './header/data.body';
 
 
 @NgModule({
@@ -150,7 +151,8 @@ import { DispSoldMedi } from './medi/dispSoldMedi';
         MedicineBiling,
         SearchComponent,
         SearchByNamePipe,
-        DispSoldMedi
+        DispSoldMedi,
+        DataBody
         
     
     

@@ -1,5 +1,27 @@
+@media (min-width: 1800px){
+    .container {
+        max-width: 1900px !important; 
+    }
+}
+
 @media (min-width: 1200px){
     .container {
-        max-width: 1300px !important; 
+        max-width: 1350px;
     }
+}
+
+.btn-edit-del{
+    margin: -8px 0px -3px 7px;
+    height: 25px;
+    padding: 2px 12px 2px 12px;
+    font-size: 13px
+}
+
+/* To unwrap row and show in one line */
+.choppOff {
+    /* display: inline-block; */
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }

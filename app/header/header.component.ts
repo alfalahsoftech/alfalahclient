@@ -37,8 +37,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         });
     }
     logout() {
+//cookie  about 40000byte capacit    |data stored using cookie is sent back to the server
+//sessionStorage about 5mb,cleared after browser or tab close           | data stored using local storage isn't sent back to the server. All data stays on the client
+//localStorage about 2MB to 10MB     | data stored using local storage isn't sent back to the server.. All data stays on the client
 
-        localStorage.removeItem('currentUser');
+        // localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('currentUser');
         this.router.navigate(['/login']);
         console.log("User has been logout.");
 

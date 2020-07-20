@@ -67,6 +67,15 @@ export class AddMedicine implements OnInit {
     calcDueOnKeyUp(){
            this.dummyItem.netRate =this.dummyItem.mrp - (this.dummyItem.mrp * this.dummyItem.netRatePerc)/100
      }
+     removeZero(id: any) {
+        console.log('removed zero called' + id);
+
+        console.log('removed zero called 222' + $("#" + id).val());
+
+        if ($("#" + id).val() == 0 || $("#" + id).val() == 0.0) {
+            $("#" + id).val('');
+        }
+    }
 }
 
 

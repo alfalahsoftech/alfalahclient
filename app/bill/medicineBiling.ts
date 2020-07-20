@@ -237,7 +237,7 @@ export class MedicineBiling implements OnInit {
         this.selectedMediList.splice(this.selectedMediList.indexOf(itemSold), 1);
         console.log('After delete');
         console.log(this.selectedMediList);
-        
+
         this.calculateTotal(itemSold, true);
     }
 
@@ -277,11 +277,17 @@ export class MedicineBiling implements OnInit {
     }
 
     generateBill() {
-
+        var recpNo;
+        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/geRecpNo').subscribe(v=>{
+            recpNo = v;
+            console.log('##### Generated Receipt No : '+recpNo);
+            
+        });
         this.custInfo.billingDate = this.dateObj.transform(new Date(), 'dd-MM-yyyy');
         this.custInfo.dueAmt = this.balance;
         this.custInfo.dueDate = this.dateObj.transform(this.dueDate, 'dd-MM-yyyy');
         this.custInfo.dueDate = this.custInfo.dueDate == null ? '' : this.custInfo.dueDate;
+        this.custInfo.recpNo = recpNo;
         if (Object.keys(this.selectedMediList).length == 0) {
             alert("No Items to generate bill!!")
             return;
@@ -352,7 +358,7 @@ export class MedicineBiling implements OnInit {
 
     lastSoldMediDtls: MediSold = new MediSold();
     showLastSold(selectedMedi: any) {
-        
+
         for (let i = 0; i < this.lastSoldMediArray.length; i++) {
             var medi = this.lastSoldMediArray[i];
             if (selectedMedi.itemID == medi.itemID) {
@@ -610,10 +616,10 @@ export class MedicineBiling implements OnInit {
     }
 
     removeZero(id: any) {
-        console.log('removed zero called'+ id);
+        console.log('removed zero called' + id);
 
-        console.log('removed zero called 222'+ $("#" + id).val());
-        
+        console.log('removed zero called 222' + $("#" + id).val());
+
         if ($("#" + id).val() == 0) {
             $("#" + id).val('');
         }
@@ -647,6 +653,7 @@ export class CustDetails {
     billingDate: string = '';
     dueDate: string = '';
     dueAmt: string;
+    recpNo:string;
 }
 
 export class MediSold {

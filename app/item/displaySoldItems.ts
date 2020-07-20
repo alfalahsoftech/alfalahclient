@@ -13,7 +13,9 @@ export class DisplaySoldItems implements OnInit {
 
     itemsArray: any[];
 
-    constructor(private restSrvc:RestSrvc,private _httpClient:HttpClient) { }
+    constructor(private restSrvc:RestSrvc,private _httpClient:HttpClient) {
+                
+     }
 
 
     fetchData(){

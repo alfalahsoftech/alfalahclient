@@ -1,0 +1,75 @@
+ 
+<div class="container">
+
+    <div class="row" style="margin: 18px 0px 6px 14px;">
+      <app-cust-modal [custObj]="" (messageEvent)="receiveMessage($event)"></app-cust-modal>
+    </div>
+        
+    <div class="mainDiv">
+      <div style="float: left;margin: 8px 8px 8px 8px;">
+        <select class="custom-select"  style="height: 40px;" [(ngModel)]="pageSize">
+          <option [ngValue]="10">10 items per page</option>
+          <option [ngValue]="15">15 items per page</option>
+          <option [ngValue]="20">20 items per page</option>
+        </select>
+      </div>
+      <div style="float: right; margin: 8px 8px 8px 8px;">
+        <input class="form-control" style="width: 300px; height: 40px;" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search by any name">
+      </div>
+      
+      <div style="height: 500px;">
+
+        <table class="table table-striped table-bordered no-margin tableBodyScroll" >
+          <colgroup>
+            <col width="1%">
+            <col width="4%">
+            <col width="10%">
+            <col width="2%">
+            <col width="8%">
+            <col width="8%">
+            <col width="8%">
+            <!-- <col width="2%">
+              <col width="7%">
+            <col width="8%">
+            <col width="10%">
+            <col width="7%">
+            <col width="8%"> -->
+          </colgroup>
+      
+          <thead>
+            <tr>
+              <th>Item ID</th>
+              <th>Item Name</th>
+              <th>Quantity</th>
+              <th>Customer Name</th>
+              <th>Address</th>
+              <th>Order Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of arrayOfData |filter:searchText">
+              
+              <td>{{item.itemID}}</td>
+              <td>{{item.mediName}}</td>
+              <td>{{item.quantity}}</td>
+              <td>{{item.clientName}}</td>
+              <td>{{item.address}}</td>
+              <td>{{item.orderDate}}</td>
+              <!-- <td>
+              <input type="checkbox" class="form-control chkBox" disabled id="isActive"  name="isActive" [ngModel]="item.isActive">
+              </td> -->
+              <!-- <td>
+                  <a  (click)="actions(item.primaryKey,'edit')"  routerLink="/food/item/{{item.primaryKey}}">Edit</a> &nbsp; 
+                  <a  (click)="actions(item.primaryKey,'update')" routerLink="/food/item/{{item.primaryKey}}">Delete</a>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="noOfRecords">Showing {{recordFrom}} - {{recordTo}} Of {{noOfItems}} records</div>
+      <div class="paginate">
+        <ngb-pagination [collectionSize]="noOfItems" [(page)]="page" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+      </div>
+    </div>
+  </div>

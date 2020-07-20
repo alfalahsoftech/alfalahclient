@@ -67,7 +67,7 @@
          <label style="margin-left:15px" for="email">Pay Amt  :</label>
        </td>
        <td>
-         <input type="text"  (keyup)="calcDueOnKeyUp()" (focus)="removeZero('paidAmount')" id="paidAmount" class="form-control" style="height:33px; margin-left:10px; width: 180px;"   name="paidAmount" [(ngModel)]="paidAmount">
+         <input type="number"  (keyup)="calcDueOnKeyUp()" (focus)="removeZero('paidAmount')" id="paidAmount" class="form-control" style="height:33px; margin-left:10px; width: 180px;"   name="paidAmount" [(ngModel)]="paidAmount">
        </td>
      </tr>
      
@@ -77,7 +77,7 @@
          <label style="margin-top:6px" for="email">Due Amt:</label>
        </td>
        <td>
-         <input type="number" class="form-control" style="height:33px; margin-top:6px;  width: 150px;" disabled   name="balance" [ngModel]="balance | number">
+         <input type="text" class="form-control" style="height:33px; margin-top:6px;  width: 150px;" disabled   name="balance" [ngModel]="balance">
        </td>
        
        <td> 

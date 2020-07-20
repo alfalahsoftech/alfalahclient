@@ -37,8 +37,14 @@ credentialMsg ='';
             console.log('Login button clicked')
         this.restSrvc.reqRespAjax('rest/login', this.user).subscribe((res: User) => {
             console.log(JSON.stringify(res))
+
+//cookie  about 40000byte capacit    |data stored using cookie is sent back to the server
+//sessionStorage about 5mb,cleared after browser or tab close            | data stored using local storage isn't sent back to the server. All data stays on the client
+//localStorage about 2MB to 10MB     | data stored using local storage isn't sent back to the server.. All data stays on the client
+
             if (res.isValidUser === 'Yes') {
-                localStorage.setItem('currentUser', JSON.stringify(this.user));
+                //localStorage.setItem('currentUser', JSON.stringify(this.user));
+                sessionStorage.setItem('currentUser', JSON.stringify(this.user));
                 this.compSvc.myMethod(this.user);
                 this.router.navigate(['dashboard']);
             } else {

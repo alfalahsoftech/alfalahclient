@@ -29,7 +29,8 @@ export class UserService{
   isUserLoggedIn:boolean;
     isValid(){
 
-       if( localStorage.getItem('currentUser')){
+      //  if( localStorage.getItem('currentUser')){
+        if( sessionStorage.getItem('currentUser')){
             console.log("user exists");
             this.isUserLoggedIn=true;
            return true;

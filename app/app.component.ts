@@ -17,10 +17,15 @@ header ="Start working on this";
 appName = "DnDApp";
 showHeader = false;
     constructor(private restSrvc: RestSrvc){
-
+        console.log('##################location.host######## ='+window.location.host);
         
         this.showHeader = restSrvc.showHeader;
         console.log("AppComponent constructor called");
+        
+        $(window).on('beforeunload', function(){
+            console.log("beforeUnload event!");
+        })
+      
         
         
     }
