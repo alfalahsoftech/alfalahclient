@@ -278,9 +278,9 @@ export class MedicineBiling implements OnInit {
 
     generateBill() {
         var recpNo;
-        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/geRecpNo').subscribe(v=>{
+        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/getRecptNo',{responseType:'text'}).subscribe(v=>{
             recpNo = v;
-            console.log('##### Generated Receipt No : '+recpNo);
+            console.log('##### Generated Receipt No : '+v);
             
         });
         this.custInfo.billingDate = this.dateObj.transform(new Date(), 'dd-MM-yyyy');

@@ -101,6 +101,9 @@ function printPage(items,custInfo,ttPrice) {
     '	.noBorder {'+
     '	margin-top:15px; '+
     '	}'+
+    '.rightDiv {'+    
+      ' margin-left: 900px; align: right;'  +  
+      '}'+
     '	</style>'+
     '			'+
     '	</head>'+
@@ -113,12 +116,12 @@ function printPage(items,custInfo,ttPrice) {
     '		    	<tbody>'+
     '		    			<tr>'+
     '		    				<td >'+
-    '                          <b> The Hindustan Medical Hall </b>'+
+    '                          <b> The Hindustan Medical Store </b>'+
     '                        <p>   Belaganj Near Sabji Mandi, 804403 ,BIHAR  </p>'+
     '                           <p>	Mob.No.  7296003266, 7870799688, 8002983707</p>'+
-    '                       <p>	E-mail: hindustan.bela@gmail.com</p>'+
+    '                       <p>	E-mail: hindustan.bela@gmail.com</p>' +
     '							</td>'+
-    '		    			</tr>'+
+    '		    			</tr>  <tr><td>  <span class="rightDiv"> 12/3/2020</span> </td> </tr>'+
     '		    	</tbody>'+
     ''+
     '		    </table> </div>'+

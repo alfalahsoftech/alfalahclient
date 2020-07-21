@@ -48,7 +48,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of arrayOfData |filter:searchText">
-            <td>000001</td>
+            <td>{{item.rcptNo}}</td>
             <td>{{item.itemID}}</td>
             <td class="choppOff" title="{{item.mediName}}">{{item.mediName}}</td>
             <td>{{item.quantity}}</td>
