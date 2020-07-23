@@ -2,15 +2,17 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core'
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { RestSrvc } from '../srvc/srvc.service';
 import { Observable } from 'rxjs';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
     selector: 'addMedicine',
     templateUrl: 'addMedicine.html',
-    styleUrls: ['addMedicine.css']
+    styleUrls: ['addMedicine.css'],
+    providers: [DecimalPipe]
 })
 export class AddMedicine implements OnInit {
     @Output() messageEvent = new EventEmitter();
-    constructor(private modalService: NgbModal, private restSrvc: RestSrvc) { }
+    constructor(private modalService: NgbModal, private restSrvc: RestSrvc,  private decimalPipe: DecimalPipe) { }
     closeResult: string;
 
     open(content: any) {
@@ -57,7 +59,7 @@ export class AddMedicine implements OnInit {
         this.dummyItem = new DummyItem();
         $('input[type=checkbox]').removeAttr('checked');
     }
-    dropdownOptions =['Kg','Pc',"gm","Litter","TAB","Syrup",,"Kartoon"];
+    dropdownOptions =['Kg','Pc',"gm","Litter","TAB","Syrup","Kartoon"];
     selectionChanged(ev){
         console.log(ev.value);
         this.dummyItem.UOM = ev.value;
@@ -65,7 +67,14 @@ export class AddMedicine implements OnInit {
     }
     
     calcDueOnKeyUp(){
-           this.dummyItem.netRate =this.dummyItem.mrp - (this.dummyItem.mrp * this.dummyItem.netRatePerc)/100
+           
+           var val =this.dummyItem.mrp - (this.dummyItem.mrp * this.dummyItem.netRatePerc)/100
+           var formatedVal = +this.decimalPipe.transform(val, '.2-2');
+           console.log(formatedVal);
+           
+           this.dummyItem.netRate = formatedVal;
+           
+
      }
      removeZero(id: any) {
         console.log('removed zero called' + id);

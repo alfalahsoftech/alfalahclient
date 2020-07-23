@@ -3,19 +3,20 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { RestSrvc } from '../srvc/srvc.service';
 import { Observable } from 'rxjs';
 import {Router,ActivatedRoute} from '@angular/router'
-import { Location } from '@angular/common';
+import { Location, DecimalPipe } from '@angular/common';
 
 @Component(
     {
         selector: 'editItem',
         templateUrl: 'editItem.html',
-        styleUrls: ['editItem.css']
+        styleUrls: ['editItem.css'],
+        providers: [DecimalPipe]
     }
 )
 export class EditItem implements OnInit {
 
     @Output() messageEvent = new EventEmitter();
-    constructor(private route: ActivatedRoute,private router:Router, private modalService: NgbModal, private restSrvc: RestSrvc,private location:Location) { }
+    constructor(private decimalPipe: DecimalPipe, private route: ActivatedRoute,private router:Router, private modalService: NgbModal, private restSrvc: RestSrvc,private location:Location) { }
     closeResult: string;
 
  

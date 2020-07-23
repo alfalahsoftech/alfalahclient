@@ -65,7 +65,7 @@ h3{
   } */
   .grid-pad {
     padding: 10px 0;
-    position: absolute;
+    /* position: absolute; */
   }
   .grid-pad > [class*='col-']:last-of-type {
     padding-right: 20px;
@@ -90,7 +90,7 @@ h3{
   .pay{
     width: 40%;
     height: 390px;
-    display: inline-block !important;
+    /* display: inline-block !important; */
     vertical-align: top;
     margin: 160px 2px 2px 12px;
     overflow-y: scroll;
