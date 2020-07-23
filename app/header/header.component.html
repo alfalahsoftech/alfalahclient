@@ -1,6 +1,6 @@
  <!-- <a class="nav-link" routerLink="order">show</a>  -->
 
-
+<div *ngIf="!isAndroid">
  <nav class="navbar navbar-fixed-top navbar-expand-md navbar-dark bg-primary headerMenuHeight">
     <div class="d-flex w-100">
         <a class="navbar-brand mr-0" href="#">Alfalah-Softech</a>
@@ -92,4 +92,77 @@
     </ul> -->
     <!-- <span class="navbar-text small text-truncate mt-1 w-100 text-right active">Logout</span> -->
 </nav>
+
+</div>
+
+<div *ngIf="isAndroid">
+    <style>
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+      
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+      
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+      
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+      
+      @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+      }
+      </style>
+   
+      
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+        <a  (click)="closeNav()" routerLink="/dispMedi">All Medicines</a> 
+        <a  (click)="closeNav()" routerLink="/mediBill">Bill/Pay</a> 
+        <a  (click)="closeNav()" routerLink="/dispSoldMedi">Sold Medicines</a> 
+        <a  class="nav-link active" href="#" id="navbardrop" data-toggle="dropdown"> 
+            Settings<i class="fa fa-caret-down"></i>
+        </a>
+        <div class="dropdown-menu">
+            <a (click)="closeNav()" class="dropdown-item" routerLink="/cli">Customers</a>
+            <a (click)="closeNav()"  class="dropdown-item" routerLink="/user">User</a>
+            <a (click)="closeNav()"  class="dropdown-item"  routerLink="/allItems">Items</a>
+            <a (click)="closeNav()"  class="dropdown-item"  routerLink="/dispStaff">Staff</a>
+            <a (click)="closeNav()"  class="dropdown-item"  routerLink="/route">Route</a>
+            <a (click)="closeNav()"  class="dropdown-item"  routerLink="/dispStore">Store</a>
+            <a (click)="closeNav()"  class="dropdown-item"  routerLink="/dispJobCode">Job Code</a>
+            <a (click)="closeNav()"  class="dropdown-item"  routerLink="/clientItems">Client Item Setup</a>
+            <a (click)="closeNav()"  class="dropdown-item"  routerLink="/allClientItems">All Client Items</a>
+            
+        </div>
+      </div>
+      
+      
+      <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; Menu</span>
+      
+
+</div>
 

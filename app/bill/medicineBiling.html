@@ -6,7 +6,7 @@
  <table >
   <tr> 
    <td> 
-     <label for="email">Buyer Name:</label>
+     <label for="email">{{custName}}</label>
    </td>
    <td>
      <!-- <input type="text" class="form-control" style="height:33px" id="buyerName" placeholder="Enter buyer name"
@@ -21,7 +21,7 @@
    </td>
     
     <td> 
-     <label style="margin-left:15px" for="email">Address:</label>
+     <label style="margin-left:15px" for="email">{{custAdd}}</label>
    </td>
    <td>
      <input type="text" class="form-control" style="height:33px" id="address" placeholder="Enter buyer address"
@@ -32,7 +32,7 @@
  
  <tr > 
    <td> 
-     <label fstyle="margin-top:6px" or="email">Refered By:</label>
+     <label fstyle="margin-top:6px" or="email">{{custRef}}</label>
    </td>
    <td>
      <input type="text" class="form-control" style="height:33px; margin-top:6px;"  id="gstNo" placeholder="Enter refered By"
@@ -40,7 +40,7 @@
    </td>
    
    <td> 
-     <label style="margin-top:6px; margin-left:15px;" or="email">Mob #:</label>
+     <label style="margin-top:6px; margin-left:15px;" or="email">{{custMob}}</label>
    </td>
    <td>
      <input type="text" pattern="\d*" maxlength="10"  class="form-control" style="height:33px; margin-top:6px;"  id="contactNo" placeholder="Enter  contactNo"
@@ -110,8 +110,8 @@
 
 <!-- </div> -->
 <div class="lastSold">
-  <div class="lastSoldHdr">Previous Order</div>
-  <table style="margin-left: 70px;">
+  <!-- <div class="lastSoldHdr">Previous Order</div> -->
+  <table class="tbl-lastSold">
     <tr style="color: white;">
       <th style="width: 410px;"  >Name</th>
       <th style="width: 79px;">MRP</th>
@@ -128,9 +128,9 @@
 <div *ngIf="isWithoutOrderBilling"> 
 <!-- <span style="color: red; margin-left: 30px;">{{alrt}}</span>  <span style="color: slateblue;">{{selectedMediName}}</span> -->
 <div class="container" >
-  <table style="margin-left: -80px; margin-bottom: -16px;">
+  <table  class="calcSrch">
     <tr>
-      <td>
+      <!-- <td>
         <input type="text" class="form-control" style="height:33px; width: 150px;margin-left:-80px"
         [(ngModel)]="inputVal" (keyup)="calculate()" placeholder="Calculator">
        
@@ -139,16 +139,24 @@
       </td>
       <td style="width: 100px;">
         =  {{showDataum | number}}
+      </td> -->
+      <!-- <td *ngIf="!isAndroid">
+        <input class="chkBoxMrp" type="radio"  id ="calOn"  value="1" name="calOn" checked>{{lblMrp}}
       </td>
+    
+      <td *ngIf="!isAndroid">
+        <input  class="chkBoxRate" type="radio" id= "calOn" value="2" name="calOn">{{lblRate}}
+      </td> -->
       <td>
-        <input style="width: 41px; height: 21px;" type="radio"  id ="calOn"  value="1" name="calOn" checked>On MRP
-      </td>
-      <td></td>
-      <td>
-        <input   style="width: 41px; height: 21px;"  type="radio" id= "calOn" value="2" name="calOn">On NetRate
-      </td>
+          <div class="radio-container">
+            <input checked="checked" id ="calOn" name="calOn" type="radio" value="1">{{lblMrp}}
+            <input                   id ="calOn"  name="calOn" type="radio" value="2"> {{lblRate}}
+            
+          </div>
+        </td>
       <td>  
-          <div class="dropdown" style="margin-left: 100px;">
+       
+          <div class="dropdown" class="srchMedi">
             <input type="text" class="form-control"  tabindex="1" placeholder="Search medicine.." id="myInput" [(ngModel)]="myInput"  autocomplete="off" (keyup)="filterFunction($event)">
             <div id="myDropdown" class="dropdown-content" style="height: 250px;">
               <!-- list of all items -->

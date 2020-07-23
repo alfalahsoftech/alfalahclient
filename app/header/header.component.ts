@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { CompService } from '../service/compservice';
 import { User } from 'app/auth/user';
+import { RestSrvc } from '../srvc/srvc.service';
 
 @Component({
     selector: "header-comp",
@@ -16,11 +17,24 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     isLoggedIn: boolean = false
     isLoggedIn$: Observable<boolean>;
     user: User;
-    constructor(private userService: UserService, private router: Router, private compSvc: CompService) { }
+    isAndroid:boolean;
+    
+    constructor(private userService: UserService, private router: Router, private compSvc: CompService,private restSrvc:RestSrvc) { }
     ngOnInit() {
         console.log("HeaderComponent called");
         this.isLoggedIn$ = this.userService.isLoggedIn;
+        this.isAndroid = this.restSrvc.isAndroid();
+        console.log("Device detected isAndroid: "+this.isAndroid);
+        
     }
+
+     openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+      
+       closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
 
     ngAfterViewInit() {
 

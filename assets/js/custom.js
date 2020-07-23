@@ -102,7 +102,7 @@ function printPage(items,custInfo,ttPrice) {
     '	margin-top:15px; '+
     '	}'+
     '.rightDiv {'+    
-      ' margin-left: 900px; align: right;'  +  
+      ' margin-left: 900px; align: left;'  +  
       '}'+
     '	</style>'+
     '			'+
@@ -121,7 +121,7 @@ function printPage(items,custInfo,ttPrice) {
     '                           <p>	Mob.No.  7296003266, 7870799688, 8002983707</p>'+
     '                       <p>	E-mail: hindustan.bela@gmail.com</p>' +
     '							</td>'+
-    '		    			</tr>  <tr><td>  <span class="rightDiv"> 12/3/2020</span> </td> </tr>'+
+    '		    			</tr>'+
     '		    	</tbody>'+
     ''+
     '		    </table> </div>'+

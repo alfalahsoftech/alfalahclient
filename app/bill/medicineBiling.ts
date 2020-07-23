@@ -49,7 +49,13 @@ export class MedicineBiling implements OnInit {
     query: string = '';
     returnAmt: number;
     lastSoldMediArray = [];
-
+    isAndroid = this.restSrvc.isAndroid();
+    custName = "Buyer Name";
+    custAdd = "Address";
+    custRef = "Refered";
+    custMob = "Mobile #";
+    lblRate = "On Rate";
+    lblMrp = "On MRP";
     constructor(
         private restSrvc: RestSrvc,
         private router: Router,
@@ -59,6 +65,18 @@ export class MedicineBiling implements OnInit {
         private activatedtRoute: ActivatedRoute,
         private util: AFUtil
     ) {
+        if (this.restSrvc.isAndroid()) {
+            this.custName = "Name";
+            this.custAdd = "Add.";
+            this.custRef = "Ref."
+            this.custMob = "#";
+
+            this.lblRate = "Rate"
+            this.lblMrp = "MRP"
+
+
+        }
+
         // wind.print();
     }
 
@@ -278,10 +296,10 @@ export class MedicineBiling implements OnInit {
 
     generateBill() {
         var recpNo;
-        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/getRecptNo',{responseType:'text'}).subscribe(v=>{
+        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/getRecptNo', { responseType: 'text' }).subscribe(v => {
             recpNo = v;
-            console.log('##### Generated Receipt No : '+v);
-            
+            console.log('##### Generated Receipt No : ' + v);
+
         });
         this.custInfo.billingDate = this.dateObj.transform(new Date(), 'dd-MM-yyyy');
         this.custInfo.dueAmt = this.balance;
@@ -653,7 +671,7 @@ export class CustDetails {
     billingDate: string = '';
     dueDate: string = '';
     dueAmt: string;
-    recpNo:string;
+    recpNo: string;
 }
 
 export class MediSold {
