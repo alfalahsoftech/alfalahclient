@@ -37,6 +37,7 @@ export class AddMedicine implements OnInit {
     }
     sendData() {
         console.log("Sending customer info request  to server");
+        this.dummyItem.isActive=true;
         // if(this.dummyItem.isActive){
         //     this.dummyItem.isActive='1';
         // }
@@ -59,7 +60,7 @@ export class AddMedicine implements OnInit {
         this.dummyItem = new DummyItem();
         $('input[type=checkbox]').removeAttr('checked');
     }
-    dropdownOptions =['Kg','Pc',"gm","Litter","TAB","Syrup","Kartoon"];
+    dropdownOptions =['Dabba','Pc',"gm","Litter","Strip","Bottle","Kartoon"];
     selectionChanged(ev){
         console.log(ev.value);
         this.dummyItem.UOM = ev.value;
@@ -102,6 +103,6 @@ export class DummyItem {
     mfgBy:string=''
     purchasePrice:string;
     notes:string='';
-    isActive:string;
+    isActive:boolean;
     netRatePerc:number;
 }

@@ -54,8 +54,10 @@ export class MedicineBiling implements OnInit {
     custAdd = "Address";
     custRef = "Refered";
     custMob = "Mobile #";
-    lblRate = "On Rate";
-    lblMrp = "On MRP";
+    lblRate = "Rate";
+    lblMrp = "MRP";
+    lblPurchase="Purchase"
+    enableNameInBill = false;
     constructor(
         private restSrvc: RestSrvc,
         private router: Router,
@@ -226,6 +228,8 @@ export class MedicineBiling implements OnInit {
         this.showDummyDataArray = [];
         this.selectedMediList = [];
         this.selectedMediName = '';
+        this.enableNameInBill=false;
+        this.disableBtn=false;
 
         // this.itemsArray = new DisplayItemsArray();
     }
@@ -306,6 +310,7 @@ export class MedicineBiling implements OnInit {
         this.custInfo.dueDate = this.dateObj.transform(this.dueDate, 'dd-MM-yyyy');
         this.custInfo.dueDate = this.custInfo.dueDate == null ? '' : this.custInfo.dueDate;
         this.custInfo.recpNo = recpNo;
+        this.custInfo.heading= this.enableNameInBill?this.heading():"";
         if (Object.keys(this.selectedMediList).length == 0) {
             alert("No Items to generate bill!!")
             return;
@@ -386,7 +391,21 @@ export class MedicineBiling implements OnInit {
             }
         }
     }
+    disableBtn=false;
+    onQntChange(item:any){
+        for (let i = 0; i < this.selectedMediList.length; i++) {
+            var medi = this.selectedMediList[i];
+            if (item.itemID == medi.itemID) {
+               
+              var  objIndex = i;
+                console.log("Medicine qntity changed=>"+medi.quantity);
+                this.disableBtn = false;
+                break;
 
+            }
+        } 
+
+    }
     addMedi(selectedMedi: any) {
         this.alrt = '';
 
@@ -503,7 +522,7 @@ export class MedicineBiling implements OnInit {
         this.ttPrice += localSubTotal;
         this.ttQnt += selectedMedi.qnt;
 
-
+        this.disableBtn=true;
         // this.calculateTotal(this.medi, false);
 
     }
@@ -643,6 +662,25 @@ export class MedicineBiling implements OnInit {
         }
     }
 
+    heading(){
+        
+       var head= '    <div class="billHeader">'+
+        '       <table height = "60%" width="100%" >'+
+        '		    	<tbody>'+
+        '		    			<tr>'+
+        '		    				<td >'+
+        '                          <b> The Hindustan Medical Store </b>'+
+        '                        <p>   Belaganj Near Sabji Mandi, 804403 ,BIHAR  </p>'+
+        '                           <p>	Mob.No.  7296003266, 7870799688, 8002983707</p>'+
+        '                       <p>	E-mail: hindustan.bela@gmail.com</p>' +
+        '							</td>'+
+        '		    			</tr>'+
+        '		    	</tbody>'+
+        '		    </table> </div>'
+
+        return head;
+    }
+
 }
 
 
@@ -672,6 +710,7 @@ export class CustDetails {
     dueDate: string = '';
     dueAmt: string;
     recpNo: string;
+    heading:string;
 }
 
 export class MediSold {

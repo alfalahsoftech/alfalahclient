@@ -149,14 +149,17 @@
       </td> -->
       <td>
           <div class="radio-container">
-            <input checked="checked" id ="calOn" name="calOn" type="radio" value="1">{{lblMrp}}
+            <input checked="checked" id ="calOn" name="calOn" type="radio" value="1"> &nbsp;{{lblMrp}}
             <input                   id ="calOn"  name="calOn" type="radio" value="2"> {{lblRate}}
-            
+            <input                   id ="calOn"  name="calOn" type="radio" value="3"> {{lblPurchase}}
+            &nbsp; | &nbsp;&nbsp; Show Name &nbsp;&nbsp; <input type="checkbox" style="display: inline-block; width: 30px; "
+             class="form-control chkBox"  [(ngModel)]="enableNameInBill">
           </div>
+          
         </td>
-      <td>  
+      <td *ngIf="!isAndroid">  
        
-          <div class="dropdown" class="srchMedi">
+          <div class="dropdown" class="srchMedi" >
             <input type="text" class="form-control"  tabindex="1" placeholder="Search medicine.." id="myInput" [(ngModel)]="myInput"  autocomplete="off" (keyup)="filterFunction($event)">
             <div id="myDropdown" class="dropdown-content" style="height: 250px;">
               <!-- list of all items -->
@@ -166,7 +169,19 @@
               <!-- <input class="form-control" style="margin-left: 100px;width: 300px;" type="text" name="search" [(ngModel)]="query" autocomplete="off" placeholder="Search medicine name"> -->
       </td>
     </tr>
-    
+    <tr *ngIf="isAndroid">
+      <td>  
+     
+        <div class="dropdown" class="srchMedi" >
+          <input type="text" class="form-control"  tabindex="1" placeholder="Search medicine.." id="myInput" [(ngModel)]="myInput"  autocomplete="off" (keyup)="filterFunction($event)">
+          <div id="myDropdown" class="dropdown-content" style="height: 250px;">
+            <!-- list of all items -->
+            <a  *ngFor="let item of medicinesArray"  (click)="clickTheSelectedItem(item);">{{item.mediName}}</a>
+          </div>
+        </div>
+            <!-- <input class="form-control" style="margin-left: 100px;width: 300px;" type="text" name="search" [(ngModel)]="query" autocomplete="off" placeholder="Search medicine name"> -->
+    </td>
+    </tr>
    
   </table>
 </div>  
@@ -179,9 +194,10 @@
         <th style="width: 180px;"  >Medicine Name</th>
         <th>M.R.P</th>
         <th>Net Rate</th>
+        <th>Pur.Price</th>
         <th>Exp.Date</th>
         <th colspan="2" >Discount</th>
-        <th>On Hand</th>
+        <th>Stock</th>
         <th colspan="2">Bonus</th>
         <th style="width: 120px;">Mfg. By</th>
         <!-- <th>Notes</th> -->
@@ -195,6 +211,7 @@
        <td class="choppOff" title="{{item.mediName}}">{{item.mediName}}</td>
        <td style="text-align: right;" ><b>{{item.mrp}} </b></td>
        <td style="text-align: right;" >{{item.netRate}}</td>
+       <td style="text-align: right;" >{{item.purchasePrice}}</td>
        <td style="text-align: center;" >{{item.expDate | date:'MM/yy'}}</td>
        <td>
         <b>{{item.purchPerc}}</b>
@@ -209,10 +226,10 @@
       </td>
        <td   style="text-align: center; width: 120px;" class="choppOff" title="{{item.mfgBy}}">{{item.mfgBy}}</td>
        <td  style="text-align: center;" >
-        <input tabindex="4"  style="width: 70px; height: 30px;" type="number" class="form-control"  id="item.qnt"  name="item.qnt" [(ngModel)]="item.qnt">
+        <input tabindex="4"  (change)="onQntChange(item)" style="width: 70px; height: 30px;" type="number" class="form-control"  id="item.qnt"  name="item.qnt" [(ngModel)]="item.qnt">
        </td>
        <td style="text-align: center;" >
-        <button tabindex="5" style="height:1.5rem;  padding: 0.1rem;" class="btn btn-info" (click)="addMedi(item)">Add</button>
+        <button tabindex="5" [(disabled)]="disableBtn" style="height:1.5rem;  padding: 0.1rem;" class="btn btn-info" (click)="addMedi(item)">Add</button>
         </td>
       </tr>
     </tbody>

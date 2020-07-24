@@ -59,7 +59,7 @@ export class EditMedicine implements OnInit {
             console.log(this.dummyItem);
         });
     }
-    dropdownOptions = ['Kg', 'Pc', "gm", "Litter", "Bora", "Ton", "Kartoon"];
+    dropdownOptions =['Dabba','Pc',"gm","Litter","Strip","Bottle","Kartoon"];
     selectionChanged(ev) {
         console.log(ev.value);
         this.dummyItem.baseUnit = ev.value;

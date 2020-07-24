@@ -110,21 +110,7 @@ function printPage(items,custInfo,ttPrice) {
     ''+
     '	<body >'+
     ''+
-    '	<div class = "tableDiv" style="page-break-before: always">'+
-    '    <div class="billHeader">'+
-    '       <table height = "60%" width="100%" >'+
-    '		    	<tbody>'+
-    '		    			<tr>'+
-    '		    				<td >'+
-    '                          <b> The Hindustan Medical Store </b>'+
-    '                        <p>   Belaganj Near Sabji Mandi, 804403 ,BIHAR  </p>'+
-    '                           <p>	Mob.No.  7296003266, 7870799688, 8002983707</p>'+
-    '                       <p>	E-mail: hindustan.bela@gmail.com</p>' +
-    '							</td>'+
-    '		    			</tr>'+
-    '		    	</tbody>'+
-    ''+
-    '		    </table> </div>'+
+    '	<div class = "tableDiv" style="page-break-before: always">'+custInfo.heading+
     '	<div class = "tableDivTop">'+
     '			<table width="100%" >'+
     '		    	<tbody>'+

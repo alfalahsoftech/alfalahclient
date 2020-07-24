@@ -253,7 +253,7 @@ tbody {
      outline: 0;
     overflow: hidden;
     padding: 0;
-    width: 96px;
+    /* width: 96px; */
   }
   .item{
     /* width: 57%; */
@@ -348,11 +348,11 @@ tbody {
     font-family: ‘Open Sans’, sans-serif;
     font-size: 19px;
     line-height: 30px;
-    margin: 0;
+    margin-left: -201px;
     outline: 0;
     overflow: hidden;
     padding: 0;
-    width: 201px;
+    width: 501px;
   }
 
 
