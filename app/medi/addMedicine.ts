@@ -101,7 +101,7 @@ export class DummyItem {
     expDate:string='';
     onHand:number;
     mfgBy:string=''
-    purchasePrice:string;
+    purchPerc:string;
     notes:string='';
     isActive:boolean;
     netRatePerc:number;

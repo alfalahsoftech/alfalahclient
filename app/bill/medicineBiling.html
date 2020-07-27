@@ -211,10 +211,10 @@
        <td class="choppOff" title="{{item.mediName}}">{{item.mediName}}</td>
        <td style="text-align: right;" ><b>{{item.mrp}} </b></td>
        <td style="text-align: right;" >{{item.netRate}}</td>
-       <td style="text-align: right;" >{{item.purchasePrice}}</td>
+       <td style="text-align: right;" >{{item.purchPerc}}</td>
        <td style="text-align: center;" >{{item.expDate | date:'MM/yy'}}</td>
        <td>
-        <b>{{item.purchPerc}}</b>
+        <b>{{item.discount}}</b>
       </td>
        <td>
         <input tabindex="2" style="width: 60px; height: 30px;" type="number" class="form-control" (focus)="removeZero('discount')" id="discount"  name="item.discount" [(ngModel)]="item.discount">

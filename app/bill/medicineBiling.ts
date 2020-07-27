@@ -408,6 +408,7 @@ export class MedicineBiling implements OnInit {
     }
     disableBtn=false;
     onQntChange(item:any,id){
+        $("#"+id).removeAttr("disabled")
         for (let i = 0; i < this.selectedMediList.length; i++) {
             var medi = this.selectedMediList[i];
             if (item.itemID == medi.itemID) {
@@ -415,7 +416,7 @@ export class MedicineBiling implements OnInit {
               var  objIndex = i;
                 console.log("Medicine qntity changed=>"+medi.quantity);
                 // this.disableBtn = false;
-                $("#"+id).removeAttr("disabled");
+               ;
                 // $('#'+item.mediName).prop('disabled', false);
                 break;
 
@@ -500,9 +501,9 @@ export class MedicineBiling implements OnInit {
                 localSubTotal = selectedMedi.qnt * actAmt;
             } else if (radioValue == '3') {
                 
-                var discAmt = (selectedMedi.purchasePrice * (selectedMedi.discount!=undefined?selectedMedi.discount:1)) / 100
+                var discAmt = (selectedMedi.purchPerc * (selectedMedi.discount!=undefined?selectedMedi.discount:1)) / 100
                 console.log('discAmt= 3> ' + discAmt);
-                var actAmt = this.getNum(this.decimalPipe.transform(selectedMedi.purchasePrice + discAmt,'1.2-2'));
+                var actAmt = this.getNum(this.decimalPipe.transform(selectedMedi.purchPerc + discAmt,'1.2-2'));
                 // var actAmt = selectedMedi.mrp - discAmt;
                 console.log('actual price==> ' + actAmt);
 
@@ -562,7 +563,7 @@ export class MedicineBiling implements OnInit {
             } else if (radioValue == '2') {
                 localSubTotal = selectedMedi.qnt * (selectedMedi.netRate == 0 ? 1 : selectedMedi.netRate);
             }else {
-                localSubTotal = selectedMedi.qnt * (selectedMedi.purchasePrice == 0 ? 1 : selectedMedi.purchasePrice);
+                localSubTotal = selectedMedi.qnt * (selectedMedi.purchPerc == 0 ? 1 : selectedMedi.purchPerc);
             }
         }
 
