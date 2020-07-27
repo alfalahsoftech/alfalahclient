@@ -113,7 +113,12 @@ function printPage(items,custInfo,ttPrice) {
     '	<div class = "tableDiv" style="page-break-before: always">'+custInfo.heading+
     '	<div class = "tableDivTop">'+
     '			<table width="100%" >'+
-    '		    	<tbody>'+
+    '		    	<tbody>' +
+    '                   <tr>'+
+    '                       <td  align="left">'+custInfo.recpNo+'</td>'+
+    '                        <td colspan="8" align="right">'+custInfo.billingDate+'</td>'+ 
+    '                   </tr>'+
+                            custInfo.rough+
     '		    		<tr>'+
     '	    				<td colspan="1" align="left">Buyer Name: </td>'+
     '	    				<td colspan="2" align="left">'+custInfo.clientName+'</td>'+
@@ -130,11 +135,6 @@ function printPage(items,custInfo,ttPrice) {
                             // '<td colspan="1" align="left">Pan No.:</td>'+
                             // '<td colspan="1" align="left">10AMIPA6881B1Z</td>'+
     '	    			</tr>'+
-    
-    // '	    			<tr>'+
-    // '	    				<td colspan="1" align="left">State Code:</td><td colspan="1" align="left">'+custInfo.stateCode+'</td>'+
-                        
-    // '	    			</tr>'+
 
     '		    	</tbody>'+
     '		    </table>'+

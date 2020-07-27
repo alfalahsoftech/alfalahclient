@@ -64,10 +64,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
 
 
-    headers = [
-                { name: 'Order', url: '/order' }, 
-                { name: 'Bill/Pay', url: '/mediBill' },
-                { name: 'SoldItems', url: '/allSoldItems' }
+    // headers = [
+    //             { name: 'Order', url: '/order' }, 
+    //             { name: 'Bill/Pay', url: '/mediBill' },
+    //             { name: 'SoldItems', url: '/allSoldItems' }
+    //         ];
+
+            headers = [
+                { name: 'Bill/Pay', url: '/mediBill' }
+                
             ];
     // superUser=[{ name: 'Cash/Sales', url: '/csh' },{ name: 'Reports', url: '/rpt' },{ name: 'Order', url: '/order' }, { name: 'Bill/Pay', url: '/bill' }];
     // staffUser=[{ name: 'Item', url: '/item' }, { name: 'Bill/Pay', url: '/bill' }];

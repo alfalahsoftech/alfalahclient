@@ -35,8 +35,8 @@
      <label fstyle="margin-top:6px" or="email">{{custRef}}</label>
    </td>
    <td>
-     <input type="text" class="form-control" style="height:33px; margin-top:6px;"  id="gstNo" placeholder="Enter refered By"
-      name="gstNo" [(ngModel)]="custInfo.gstNo">
+     <input type="text" class="form-control" style="height:33px; margin-top:6px;"  id="referedBy" placeholder="Enter refered By"
+      name="referedBy" [(ngModel)]="custInfo.referedBy">
    </td>
    
    <td> 
@@ -194,7 +194,7 @@
         <th style="width: 180px;"  >Medicine Name</th>
         <th>M.R.P</th>
         <th>Net Rate</th>
-        <th>Pur.Price</th>
+        <th>L.Price</th>
         <th>Exp.Date</th>
         <th colspan="2" >Discount</th>
         <th>Stock</th>
@@ -206,7 +206,7 @@
       </tr>
     </thead>
     <tbody >
-      <tr *ngFor="let item of showDummyDataArray  ">
+      <tr *ngFor="let item of showDummyDataArray; let i = index  ">
 
        <td class="choppOff" title="{{item.mediName}}">{{item.mediName}}</td>
        <td style="text-align: right;" ><b>{{item.mrp}} </b></td>
@@ -217,19 +217,19 @@
         <b>{{item.purchPerc}}</b>
       </td>
        <td>
-        <input tabindex="2" style="width: 60px; height: 30px;" type="number" class="form-control"  id="item.discount"  name="item.discount" [(ngModel)]="item.discount">
+        <input tabindex="2" style="width: 60px; height: 30px;" type="number" class="form-control" (focus)="removeZero('discount')" id="discount"  name="item.discount" [(ngModel)]="item.discount">
       </td>
        <td style="text-align: right;" >{{item.onHand}}</td>
        <td  style="text-align: center;"><b>{{item.scheme}}</b></td>
        <td>
-        <input  tabindex="3" style="width: 60px; height: 30px; " type="text" class="form-control"  id="item.bonus"  name="item.bonus" [(ngModel)]="item.bonus">
+        <input  tabindex="3" style="width: 60px; height: 30px; " type="number" class="form-control" (focus)="removeZero('bonus')" id="bonus"  name="item.bonus" [(ngModel)]="item.bonus">
       </td>
        <td   style="text-align: center; width: 120px;" class="choppOff" title="{{item.mfgBy}}">{{item.mfgBy}}</td>
        <td  style="text-align: center;" >
-        <input tabindex="4"  (change)="onQntChange(item)" style="width: 70px; height: 30px;" type="number" class="form-control"  id="item.qnt"  name="item.qnt" [(ngModel)]="item.qnt">
+        <input tabindex="4"  (change)="onQntChange(item,i)" style="width: 70px; height: 30px;" type="number" class="form-control"  id="item.qnt"  name="item.qnt" [(ngModel)]="item.qnt">
        </td>
        <td style="text-align: center;" >
-        <button tabindex="5" [(disabled)]="disableBtn" style="height:1.5rem;  padding: 0.1rem;" class="btn btn-info" (click)="addMedi(item)">Add</button>
+        <button tabindex="5"  style="height:1.5rem;  padding: 0.1rem;"  class="btn btn-info" id="{{i}}" (click)="addMedi(item,i)">Add</button>
         </td>
       </tr>
     </tbody>

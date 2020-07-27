@@ -253,6 +253,7 @@ tbody {
      outline: 0;
     overflow: hidden;
     padding: 0;
+    
     /* width: 96px; */
   }
   .item{
@@ -353,6 +354,7 @@ tbody {
     overflow: hidden;
     padding: 0;
     width: 501px;
+    
   }
 
 
@@ -364,7 +366,8 @@ tbody {
     position: relative;
     top: 9px;
     vertical-align: top;
-    
+    height: 20px;
+    width: 20px;
   }
 
 

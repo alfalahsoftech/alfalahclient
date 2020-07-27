@@ -14,6 +14,7 @@ import localeIN from '@angular/common/locales/en-IN';
 
 import { stringify } from 'querystring';
 import { AFUtil } from '../helper/util';
+import { timeout } from 'rxjs/operator/timeout';
 declare const myTest: any; //Solved by https://www.truecodex.com/course/angular-6/how-to-use-external-js-files-and-javascript-code-in-angular
 declare const printPage: any;
 declare const printPDF: any;
@@ -78,7 +79,8 @@ export class MedicineBiling implements OnInit {
 
 
         }
-
+     
+       
         // wind.print();
     }
 
@@ -184,11 +186,13 @@ export class MedicineBiling implements OnInit {
         } else {
             var due = this.ttPrice - (this.paidAmount == null ? 0 : this.paidAmount);
             console.log(due);
-            this.balance = this.decimalPipe.transform(due);
+            this.balance = this.decimalPipe.transform(due,'1.2-2');
             this.numb = +this.balance;
 
             console.log(this.balance);
         }
+
+        this.returnAmt  = this.getNum(this.decimalPipe.transform(  this.returnAmt,'1.2-2'));
 
     }
     private custDetails = [];
@@ -230,7 +234,12 @@ export class MedicineBiling implements OnInit {
         this.selectedMediName = '';
         this.enableNameInBill=false;
         this.disableBtn=false;
-
+        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/getRecptNo', { responseType: 'text' }).subscribe(v => {
+            var  reciept = v;
+             console.log('##### Generated Receipt No : ' + v+   reciept);
+             this.custInfo.recpNo=reciept;
+ 
+         });
         // this.itemsArray = new DisplayItemsArray();
     }
     fetchLastSoldMedi(clientID: string) {
@@ -299,18 +308,22 @@ export class MedicineBiling implements OnInit {
     }
 
     generateBill() {
-        var recpNo;
-        this.http.get(this.restSrvc.appBaseUrl + 'rest/medi/getRecptNo', { responseType: 'text' }).subscribe(v => {
-            recpNo = v;
-            console.log('##### Generated Receipt No : ' + v);
-
-        });
-        this.custInfo.billingDate = this.dateObj.transform(new Date(), 'dd-MM-yyyy');
+       
+        this.custInfo.billingDate = this.dateObj.transform(new Date(), 'dd-MM-yyyy hh:mm');
         this.custInfo.dueAmt = this.balance;
         this.custInfo.dueDate = this.dateObj.transform(this.dueDate, 'dd-MM-yyyy');
         this.custInfo.dueDate = this.custInfo.dueDate == null ? '' : this.custInfo.dueDate;
-        this.custInfo.recpNo = recpNo;
-        this.custInfo.heading= this.enableNameInBill?this.heading():"";
+        // this.custInfo.recpNo = reciept;
+        console.log('Bill No:  '+this.custInfo.recpNo)
+        if(this.enableNameInBill){
+            this.custInfo.heading= this.heading();
+        }else{
+            
+            this.custInfo.rough = this.rough();
+        }
+        
+       
+        
         if (Object.keys(this.selectedMediList).length == 0) {
             alert("No Items to generate bill!!")
             return;
@@ -327,8 +340,10 @@ export class MedicineBiling implements OnInit {
                 // onPrintRequest(data);
                 tab.location.href = fileUrl;
                 printPDF(tab);
+                this.saveData();
             });
-            this.saveData();
+            // setTimeout(this.saveData,3000);
+           
         }
 
     }
@@ -392,22 +407,31 @@ export class MedicineBiling implements OnInit {
         }
     }
     disableBtn=false;
-    onQntChange(item:any){
+    onQntChange(item:any,id){
         for (let i = 0; i < this.selectedMediList.length; i++) {
             var medi = this.selectedMediList[i];
             if (item.itemID == medi.itemID) {
                
               var  objIndex = i;
                 console.log("Medicine qntity changed=>"+medi.quantity);
-                this.disableBtn = false;
+                // this.disableBtn = false;
+                $("#"+id).removeAttr("disabled");
+                // $('#'+item.mediName).prop('disabled', false);
                 break;
 
             }
         } 
 
     }
-    addMedi(selectedMedi: any) {
+    addMedi(selectedMedi: any,tis) {
         this.alrt = '';
+        console.log("addddddd");
+        console.log(tis);
+        // console.log(tis.id);
+        
+        
+        console.log(this);
+        
 
         if (selectedMedi.mrp == 0) {
             this.alrt = "Please add M.R.P for medicine =>: ";
@@ -458,20 +482,53 @@ export class MedicineBiling implements OnInit {
         var radioValue = $("input[name='calOn']:checked").val();
         var localSubTotal = 0;
 
+            console.log('discount:::: '+this.getNum('2.345'));
+            
         if (selectedMedi.discount != 0) {
-
+            console.log(selectedMedi.discount);
+            
+        // var  disc = selectedMedi.discount.subStr(1);
+        // console.log('disc===>'+disc);
+        
             if (radioValue == '1') {
-                var discAmt = (selectedMedi.mrp * selectedMedi.discount) / 100
-                console.log('discAmt=> ' + discAmt);
-                var actAmt = selectedMedi.mrp - discAmt;
+                var discAmt = (selectedMedi.mrp * (selectedMedi.discount!=undefined?selectedMedi.discount:1) ) / 100
+                console.log('discAmt= 1> ' + discAmt);
+                var actAmt = this.getNum(this.decimalPipe.transform(selectedMedi.mrp + discAmt,'1.2-2'));
+                // var actAmt = selectedMedi.mrp - discAmt;
                 console.log('actual price==> ' + actAmt);
 
                 localSubTotal = selectedMedi.qnt * actAmt;
-            } else {
-                var discAmt = (selectedMedi.netRate * selectedMedi.discount) / 100
-                console.log('discAmt=> ' + discAmt);
+            } else if (radioValue == '3') {
+                
+                var discAmt = (selectedMedi.purchasePrice * (selectedMedi.discount!=undefined?selectedMedi.discount:1)) / 100
+                console.log('discAmt= 3> ' + discAmt);
+                var actAmt = this.getNum(this.decimalPipe.transform(selectedMedi.purchasePrice + discAmt,'1.2-2'));
+                // var actAmt = selectedMedi.mrp - discAmt;
+                console.log('actual price==> ' + actAmt);
 
-                var actAmt = selectedMedi.netRate - discAmt;
+                localSubTotal = selectedMedi.qnt * actAmt;
+
+                // if(selectedMedi.discount < 0){
+                //     console.log("discount value is negative");
+                //     var actAmt = this.getNum(this.decimalPipe.transform(selectedMedi.mrp + discAmt,'2-2'));
+                //     // var actAmt = selectedMedi.mrp - discAmt;
+                //     console.log('actual price==> ' + actAmt);
+    
+                //     localSubTotal = selectedMedi.qnt * actAmt;
+                // }else{
+                //     console.log('dddddd '+(selectedMedi.mrp + discAmt));
+                    
+                //    var actAmt = this.getNum(this.decimalPipe.transform(selectedMedi.mrp + discAmt,'2-2'));
+                //     console.log('actual price==> ' + actAmt);
+    
+                //     localSubTotal = selectedMedi.qnt * actAmt;
+                // }
+            
+            } else {
+                var discAmt = (selectedMedi.netRate *(selectedMedi.discount!=undefined?selectedMedi.discount:1) ) / 100
+                console.log('discAmt=> 2 ' + discAmt);
+                var actAmt = this.getNum(this.decimalPipe.transform(selectedMedi.netRate + discAmt,'1.2-2'));
+                // var actAmt = selectedMedi.netRate - discAmt;
 
                 if (selectedMedi.scheme != undefined && selectedMedi.scheme.length != 0) {
                     console.log(selectedMedi.scheme.split("+"));
@@ -502,8 +559,10 @@ export class MedicineBiling implements OnInit {
         } else {
             if (radioValue == '1') {
                 localSubTotal = selectedMedi.qnt * (selectedMedi.mrp == 0 ? 1 : selectedMedi.mrp);
-            } else {
+            } else if (radioValue == '2') {
                 localSubTotal = selectedMedi.qnt * (selectedMedi.netRate == 0 ? 1 : selectedMedi.netRate);
+            }else {
+                localSubTotal = selectedMedi.qnt * (selectedMedi.purchasePrice == 0 ? 1 : selectedMedi.purchasePrice);
             }
         }
 
@@ -521,10 +580,19 @@ export class MedicineBiling implements OnInit {
 
         this.ttPrice += localSubTotal;
         this.ttQnt += selectedMedi.qnt;
+        this.ttPrice = this.getNum(this.decimalPipe.transform(  this.ttPrice,'1.2-2'));
+        // this.disableBtn=true;
+        // console.log('clicked btn: '+$('#'+selectedMedi.mediName).val())
 
-        this.disableBtn=true;
+        // this.medi.subTotal =+ this.decimalPipe.transform( this.medi.subTotal,'2-2')
+        $("#"+tis).attr("disabled", 'true');
+        // $("button").click(function() {
+        //     alert('qwwww'+this.id); // or alert($(this).attr('id'));
+        //     $(this.id).attr('disabled', 'true');
+        // });
+        // $('#'+selectedMedi.mediName).attr('disabled', 'true');
         // this.calculateTotal(this.medi, false);
-
+ 
     }
 
     doNullAfterAdd(selectedMedi) {
@@ -680,6 +748,9 @@ export class MedicineBiling implements OnInit {
 
         return head;
     }
+    rough(){
+        return ' <tr> <td align="center"><b>ROUGH ESTIMATE</b></td></tr>';
+    }
 
 }
 
@@ -709,8 +780,10 @@ export class CustDetails {
     billingDate: string = '';
     dueDate: string = '';
     dueAmt: string;
-    recpNo: string;
-    heading:string;
+    recpNo: string='';
+    heading:string='';
+    referedBy:string;
+    rough:string=''
 }
 
 export class MediSold {
