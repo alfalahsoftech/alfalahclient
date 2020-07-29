@@ -171,8 +171,8 @@ export class MedicineBiling implements OnInit {
     getNum(strVal: string) {
         return Number(strVal);
     }
-    getFormattedNumber(num: number) {
-        const tempVal = this.decimalPipe.transform(num);
+    getFormattedNumber(num: any) {
+        const tempVal = this.decimalPipe.transform(num,'1.2-2');
         return this.strToNum(tempVal);
     }
     calcDueOnKeyUp() {
@@ -409,19 +409,19 @@ export class MedicineBiling implements OnInit {
     disableBtn=false;
     onQntChange(item:any,id){
         $("#"+id).removeAttr("disabled")
-        for (let i = 0; i < this.selectedMediList.length; i++) {
-            var medi = this.selectedMediList[i];
-            if (item.itemID == medi.itemID) {
+        // for (let i = 0; i < this.selectedMediList.length; i++) {
+        //     var medi = this.selectedMediList[i];
+        //     if (item.itemID == medi.itemID) {
                
-              var  objIndex = i;
-                console.log("Medicine qntity changed=>"+medi.quantity);
-                // this.disableBtn = false;
-               ;
-                // $('#'+item.mediName).prop('disabled', false);
-                break;
+        //       var  objIndex = i;
+        //         console.log("Medicine qntity changed=>"+medi.quantity);
+        //         // this.disableBtn = false;
+        //        ;
+        //         // $('#'+item.mediName).prop('disabled', false);
+        //         break;
 
-            }
-        } 
+        //     }
+        // } 
 
     }
     addMedi(selectedMedi: any,tis) {
@@ -431,7 +431,7 @@ export class MedicineBiling implements OnInit {
         // console.log(tis.id);
         
         
-        console.log(this);
+        console.log(selectedMedi);
         
 
         if (selectedMedi.mrp == 0) {
@@ -485,7 +485,12 @@ export class MedicineBiling implements OnInit {
 
             console.log('discount:::: '+this.getNum('2.345'));
             
-        if (selectedMedi.discount != 0) {
+        if ((selectedMedi.discount !=undefined && selectedMedi.discount != 0) ||(selectedMedi.disc !=undefined &&  selectedMedi.disc != 0)) {
+            console.log("#discountttttttttttttttttttttt"+selectedMedi.discount.length+"   disc="+selectedMedi.disc.length);
+            
+            if(selectedMedi.disc != 0){
+                selectedMedi.discount = selectedMedi.disc;
+            }
             console.log(selectedMedi.discount);
             
         // var  disc = selectedMedi.discount.subStr(1);
@@ -560,6 +565,8 @@ export class MedicineBiling implements OnInit {
         } else {
             if (radioValue == '1') {
                 localSubTotal = selectedMedi.qnt * (selectedMedi.mrp == 0 ? 1 : selectedMedi.mrp);
+                console.log('MRP localSubTotal:'+localSubTotal);
+                
             } else if (radioValue == '2') {
                 localSubTotal = selectedMedi.qnt * (selectedMedi.netRate == 0 ? 1 : selectedMedi.netRate);
             }else {
@@ -581,19 +588,20 @@ export class MedicineBiling implements OnInit {
 
         this.ttPrice += localSubTotal;
         this.ttQnt += selectedMedi.qnt;
+        console.log(this.ttPrice);
+        var ttp=this.ttPrice;;
+        console.log(this.decimalPipe.transform(  this.ttPrice,'1.2-2'));       
         this.ttPrice = this.getNum(this.decimalPipe.transform(  this.ttPrice,'1.2-2'));
+        console.log(this.ttPrice);
+        this.ttPrice = this.getFormattedNumber(ttp);
+        console.log(this.ttPrice);
+        
+        
         // this.disableBtn=true;
         // console.log('clicked btn: '+$('#'+selectedMedi.mediName).val())
 
         // this.medi.subTotal =+ this.decimalPipe.transform( this.medi.subTotal,'2-2')
         $("#"+tis).attr("disabled", 'true');
-        // $("button").click(function() {
-        //     alert('qwwww'+this.id); // or alert($(this).attr('id'));
-        //     $(this.id).attr('disabled', 'true');
-        // });
-        // $('#'+selectedMedi.mediName).attr('disabled', 'true');
-        // this.calculateTotal(this.medi, false);
- 
     }
 
     doNullAfterAdd(selectedMedi) {
@@ -605,14 +613,16 @@ export class MedicineBiling implements OnInit {
     showMediArray = [];
     showDummyDataArray = [];
     dummyArray = this.restSrvc.dummyArray;
-
+    clientName:string;
     cust_clickTheSelectedItem(obj) {
         console.log("selected customer name");
 
         console.log(obj);
         //var selVal = obj.mediName;
         //console.log(selVal);
-        this.custInfo = obj;
+       this.custInfo = obj;
+       this.clientName=obj.clientName;
+       
         //  $("#myInput").val(obj.name);
         $("#myCustDropdown").removeClass("show").addClass("hideItems");
         // document.getElementById("myDropdown").classList.toggle("hideItems");
@@ -620,7 +630,15 @@ export class MedicineBiling implements OnInit {
         this.fetchLastSoldMedi(this.custInfo.clientID);
 
     }
+
+
+    
     isCustShowed: boolean = true;
+
+
+
+
+
     cust_filterFunction(e) {
         console.log("Keyup callled====>this.isShowed=>" + this.isCustShowed);
         console.log(e);
@@ -653,18 +671,26 @@ export class MedicineBiling implements OnInit {
         var div = document.getElementById("myCustDropdown");
         a = div.getElementsByTagName("a");
         console.log('anchor myCustDropdown len. ' + a.length);
+
+       var isMatchFound=false;
         for (i = 0; i < a.length; i++) {
             var txtValue = a[i].textContent || a[i].innerText;
+            console.log('textVal:  '+txtValue);
+            
             if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
+                a[i].style.display = "block";
                 console.log("index greater===>");
+                isMatchFound=true;
 
             } else {
                 a[i].style.display = "none";
                 console.log("No data found!");
-
-                //$('#myCustDropdown').css("height: 0px;");
+                isMatchFound=false;              
             }
+        }
+        if(isMatchFound == false){
+            $("#myCustDropdown").removeClass("show").addClass("hideItems");
+            this.isCustShowed = true; //Jehan remove wahan true kar k rakho so that next time koi key input kre toh data show hojae
         }
     }
 
@@ -750,7 +776,7 @@ export class MedicineBiling implements OnInit {
         return head;
     }
     rough(){
-        return ' <tr> <td align="center"><b>ROUGH ESTIMATE</b></td></tr>';
+        return ' <tr> <td colspan="8" align="center"><b>ROUGH ESTIMATE</b></td></tr>';
     }
 
 }

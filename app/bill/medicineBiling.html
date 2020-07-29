@@ -12,7 +12,7 @@
      <!-- <input type="text" class="form-control" style="height:33px" id="buyerName" placeholder="Enter buyer name"
       name="buyername" [(ngModel)]="custInfo.clientName"> -->
       <div class="dropdown" >
-        <input type="text" placeholder="Search customer.." class="form-control" id="myCustInput" [(ngModel)]="custInfo.clientName"  autocomplete="off" (keyup)="cust_filterFunction($event)">
+        <input type="text" placeholder="Search customer.." class="form-control" id="myCustInput" [(ngModel)]="clientName"  autocomplete="off" (keyup)="cust_filterFunction($event)">
         <div id="myCustDropdown" class="dropdown-content" style="height: 150px;">
           <!-- list of all items -->
           <a  *ngFor="let item of custDetails"  (click)="cust_clickTheSelectedItem(item);">{{item.clientName}}</a>
@@ -60,7 +60,7 @@
          <label for="email">Total:</label>
        </td>
        <td>
-         <input type="text" class="form-control" disabled style="height:33px; width: 150px; "  name="ttPrice" [(ngModel)]="ttPrice">
+       <input type="number" class="form-control" disabled style="height:33px; width: 150px; "  name="ttPrice" [(ngModel)]="ttPrice">
        </td>
         
         <td> 
@@ -217,7 +217,7 @@
         <b>{{item.discount}}</b>
       </td>
        <td>
-        <input tabindex="2" style="width: 60px; height: 30px;" type="number" class="form-control" (focus)="removeZero('discount')" id="discount"  name="item.discount" [(ngModel)]="item.discount">
+        <input tabindex="2" style="width: 60px; height: 30px;" type="number" class="form-control" (focus)="removeZero('disc')" id="disc"  name="item.disc" [(ngModel)]="item.disc">
       </td>
        <td style="text-align: right;" >{{item.onHand}}</td>
        <td  style="text-align: center;"><b>{{item.scheme}}</b></td>
@@ -226,7 +226,7 @@
       </td>
        <td   style="text-align: center; width: 120px;" class="choppOff" title="{{item.mfgBy}}">{{item.mfgBy}}</td>
        <td  style="text-align: center;" >
-        <input tabindex="4"  (change)="onQntChange(item,i)" style="width: 70px; height: 30px;" type="number" class="form-control"  id="item.qnt"  name="item.qnt" [(ngModel)]="item.qnt">
+        <input tabindex="4"  (keyup)="onQntChange(item,i)" style="width: 70px; height: 30px;" type="number" class="form-control"  id="item.qnt"  name="item.qnt" [(ngModel)]="item.qnt">
        </td>
        <td style="text-align: center;" >
         <button tabindex="5"  style="height:1.5rem;  padding: 0.1rem;"  class="btn btn-info" id="{{i}}" (click)="addMedi(item,i)">Add</button>
@@ -257,7 +257,7 @@
           <th>Qnty</th>
           <th>Disc%</th>
           <th>Scheme</th>
-          <th>Sub-Total</th>
+          <th>Sub-Total( &#8377;)</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -268,7 +268,7 @@
           <td style="text-align: right;" >{{itemSold.quantity}}</td>
           <td style="text-align: right;" >{{itemSold.discount}}</td>
           <td style="text-align: center;">{{itemSold.scheme}}</td>
-          <td style="text-align: right;" >{{itemSold.subTotal | number}}</td>
+          <td style="text-align: right;" > &#8377; &nbsp;{{itemSold.subTotal | number}}</td>
           <td style="text-align: center;" >
             <button style="height:1.5rem;    padding: 0.1rem;" class="btn btn-info"
               (click)="delete(itemSold)">Del</button>
@@ -284,7 +284,7 @@
         <tr>
           <td>Total Item: {{ttNoOfItems}}</td>
           <td>Total Qnty: {{ttQnt}}</td>
-          <td>Total Price: {{ttPrice | number}}</td>
+          <td>Total Price:  &#8377; &nbsp;{{ttPrice | number}}</td>
         </tr>
       </tbody>
     </table>

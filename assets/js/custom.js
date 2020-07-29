@@ -114,11 +114,12 @@ function printPage(items,custInfo,ttPrice) {
     '	<div class = "tableDivTop">'+
     '			<table width="100%" >'+
     '		    	<tbody>' +
+    custInfo.rough+
     '                   <tr>'+
+                           
     '                       <td  align="left">'+custInfo.recpNo+'</td>'+
     '                        <td colspan="8" align="right">'+custInfo.billingDate+'</td>'+ 
     '                   </tr>'+
-                            custInfo.rough+
     '		    		<tr>'+
     '	    				<td colspan="1" align="left">Buyer Name: </td>'+
     '	    				<td colspan="2" align="left">'+custInfo.clientName+'</td>'+

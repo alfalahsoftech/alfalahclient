@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
@@ -158,7 +158,7 @@ import { DataBody } from './header/data.body';
     
 
     ],
-    providers: [PeopleService,AuthService,RestSrvc,AuthGuardService,UserService,CompService,AFUtil],
+    providers: [ {provide: LOCALE_ID, useValue: 'en-IN' },PeopleService,AuthService,RestSrvc,AuthGuardService,UserService,CompService,AFUtil],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }
