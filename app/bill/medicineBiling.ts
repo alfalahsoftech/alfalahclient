@@ -43,6 +43,7 @@ export class MedicineBiling implements OnInit {
     ttNoOfItems: number = 0;
     ttQnt: number = 0;
     ttPrice: number = 0.0;
+    ttPriceStr = '';
     balance: string;
     paidAmount: number;
     custInfo: CustDetails = new CustDetails();
@@ -224,6 +225,7 @@ export class MedicineBiling implements OnInit {
 
         this.ttNoOfItems = 0;
         this.ttPrice = 0;
+        this.ttPriceStr ='';
         this.ttQnt = 0;
         this.dueDate = '';
         this.balance = '';
@@ -289,9 +291,11 @@ export class MedicineBiling implements OnInit {
         if (isDelete) {
             this.ttQnt -= localItem.quantity;
             this.ttPrice -= localItem.subTotal;
+            this.ttPriceStr= this.ttPrice+'';
         } else {
             this.ttQnt += localItem.quantity;
             this.ttPrice += localItem.subTotal;
+            this.ttPriceStr= this.ttPrice+'';
         }
         this.ttNoOfItems = Object.keys(this.selectedMediList).length;
     }
@@ -595,6 +599,7 @@ export class MedicineBiling implements OnInit {
         console.log(this.ttPrice);
         this.ttPrice = this.getFormattedNumber(ttp);
         console.log(this.ttPrice);
+        this.ttPriceStr= this.ttPrice+'';
         
         
         // this.disableBtn=true;

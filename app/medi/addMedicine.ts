@@ -2,17 +2,17 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core'
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { RestSrvc } from '../srvc/srvc.service';
 import { Observable } from 'rxjs';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, DatePipe } from '@angular/common';
 
 @Component({
     selector: 'addMedicine',
     templateUrl: 'addMedicine.html',
     styleUrls: ['addMedicine.css'],
-    providers: [DecimalPipe]
+    providers: [DecimalPipe,DatePipe,]
 })
 export class AddMedicine implements OnInit {
     @Output() messageEvent = new EventEmitter();
-    constructor(private modalService: NgbModal, private restSrvc: RestSrvc,  private decimalPipe: DecimalPipe) { }
+    constructor(private modalService: NgbModal, private restSrvc: RestSrvc, private dateObj: DatePipe,  private decimalPipe: DecimalPipe) { }
     closeResult: string;
 
     open(content: any) {
@@ -41,6 +41,9 @@ export class AddMedicine implements OnInit {
         // if(this.dummyItem.isActive){
         //     this.dummyItem.isActive='1';
         // }
+        if(this.dummyItem.expDate == undefined || this.dummyItem.expDate.length==0){
+            this.dummyItem.expDate = this.dateObj.transform(new Date(), 'dd-MM-yyyy');
+        }
         console.log(this.dummyItem)
         this.restSrvc.reqRespAjax("rest/medi/addMedi", JSON.stringify(this.dummyItem)).subscribe(responseData => {
             console.log(responseData)
