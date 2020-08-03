@@ -20,8 +20,8 @@ export class EditMedicine implements OnInit {
     closeResult: string;
 
 
-
-
+alrt:string='';
+messageSuccess=false;
     saveChanges() {
         console.log("Sending updateMedi info request  to server");
         // if(this.dummyItem.isActive){
@@ -29,11 +29,23 @@ export class EditMedicine implements OnInit {
         // }
         console.log(this.dummyItem)
         delete this.dummyItem['addedOn'];
-        this.restSrvc.reqRespAjax("rest/medi/updateMedi", JSON.stringify(this.dummyItem)).subscribe(responseData => {
+        this.restSrvc.reqRespAjax("rest/medi/updateMedi", JSON.stringify(this.dummyItem)).subscribe((responseData:string) => {
             console.log(responseData)
+            this.alrt="Successfully updated";
+            this.messageSuccess = true;
 
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                  this.messageSuccess = false;
+             }, 5000);
         }, error => {
             console.error("Error updateMedi!");
+            this.alrt="Error in updating medicine!";
+            $('#alrt').css('color','red');
+            this.messageSuccess = true;
+
+            setTimeout(()=>{                           //<<<---using ()=> syntax
+                  this.messageSuccess = false;
+             }, 5000);
             return Observable.throw(error);
         }
 
