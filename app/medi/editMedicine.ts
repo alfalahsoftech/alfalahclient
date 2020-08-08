@@ -3,20 +3,20 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { RestSrvc } from '../srvc/srvc.service';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router'
-import { Location, DecimalPipe } from '@angular/common';
+import { Location, DecimalPipe, DatePipe } from '@angular/common';
 
 @Component(
     {
         selector: 'editMedicine',
         templateUrl: 'editMedicine.html',
         styleUrls: ['editMedicine.css'],
-        providers: [DecimalPipe]
+        providers: [DecimalPipe,DatePipe]
     }
 )
 export class EditMedicine implements OnInit {
 
     @Output() messageEvent = new EventEmitter();
-    constructor(private decimalPipe: DecimalPipe, private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private restSrvc: RestSrvc, private location: Location) { }
+    constructor( private dateObj: DatePipe,private decimalPipe: DecimalPipe, private route: ActivatedRoute, private router: Router, private modalService: NgbModal, private restSrvc: RestSrvc, private location: Location) { }
     closeResult: string;
 
 
@@ -27,24 +27,32 @@ messageSuccess=false;
         // if(this.dummyItem.isActive){
         //     this.dummyItem.isActive='1';
         // }
+        // if(this.dummyItem.expDate == undefined || this.dummyItem.expDate.length==0){
+        //     this.dummyItem.expDate = this.dateObj.transform(new Date(), 'dd-MM-yyyy');
+        // }
         console.log(this.dummyItem)
         delete this.dummyItem['addedOn'];
         this.restSrvc.reqRespAjax("rest/medi/updateMedi", JSON.stringify(this.dummyItem)).subscribe((responseData:string) => {
             console.log(responseData)
             this.alrt="Successfully updated";
-            this.messageSuccess = true;
+            // this.messageSuccess = true;
 
             setTimeout(()=>{                           //<<<---using ()=> syntax
-                  this.messageSuccess = false;
-             }, 5000);
+                //   this.messageSuccess = false;
+                this.alrt='';
+             }, 3000);
         }, error => {
             console.error("Error updateMedi!");
             this.alrt="Error in updating medicine!";
-            $('#alrt').css('color','red');
-            this.messageSuccess = true;
+            // $('#alrt').css('color','red');
+            console.log( document.getElementById("alrtMsg"));
+          //  document.getElementById("alrtMsg").style.color = "blue";
+            $("#alrtMsg").css("color", "red");
+            // this.messageSuccess = true;
 
             setTimeout(()=>{                           //<<<---using ()=> syntax
-                  this.messageSuccess = false;
+                //   this.messageSuccess = false;
+                this.alrt='';
              }, 5000);
             return Observable.throw(error);
         }
@@ -56,7 +64,8 @@ messageSuccess=false;
     dummyItem: any;
     pk: string;
     ngOnInit() {
-
+        console.log( document.getElementById("alrtMsg"));//btn1
+        // console.log( document.getElementById("alrtMsg"));//btn1
         this.route.paramMap.subscribe(params => {
             this.pk = params.get("pk");
             console.log(params);

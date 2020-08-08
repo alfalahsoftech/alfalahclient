@@ -165,7 +165,7 @@ function printPage(items,custInfo,ttPrice) {
                                     '<td align="center">'+item.quantity+'</td>'+
                                     '<td align="center">'+item.mediName+'</td>'+
                                     '<td align="center">'+(item.mfgBy==undefined?'':item.mfgBy)+' </td>'+
-                                    '<td align="center">'+item.expDate+' </td>'+
+                                    '<td align="center">'+item.billExpDate+' </td>'+
                                     '<td align="center">'+item.unitCost+'</td>'+
                                     '<td align="center">'+item.discount+'</td>'+
                                     // '<td align="center">'+item.pack+' </td>'+

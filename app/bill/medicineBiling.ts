@@ -440,10 +440,12 @@ export class MedicineBiling implements OnInit {
 
         if (selectedMedi.mrp == 0) {
             this.alrt = "Please add M.R.P for medicine =>: ";
+            alert(this.alrt);
             return;
         }
         if (selectedMedi.qnt == 0 || selectedMedi.qnt == undefined) {
             this.alrt = "Please enter quantity!";
+            alert(this.alrt);
             return;
         }
 
@@ -474,7 +476,8 @@ export class MedicineBiling implements OnInit {
             this.medi.mediName = selectedMedi.mediName;
             this.medi.quantity = selectedMedi.qnt;
             this.medi.discount = selectedMedi.discount;
-            this.medi.expDate = selectedMedi.expDate;
+            this.medi.expDate =selectedMedi.expDate;
+            this.medi.billExpDate = this.dateObj.transform( selectedMedi.expDate, 'MM/yyyy');
             this.medi.mfgBy = selectedMedi.mfgBy;
             this.medi.unitCost = selectedMedi.mrp
             //Select itemID,mediName,unitCost,qunatity from EOMedicine where
@@ -490,12 +493,12 @@ export class MedicineBiling implements OnInit {
             console.log('discount:::: '+this.getNum('2.345'));
             
         if ((selectedMedi.discount !=undefined && selectedMedi.discount != 0) ||(selectedMedi.disc !=undefined &&  selectedMedi.disc != 0)) {
-            console.log("#discountttttttttttttttttttttt"+selectedMedi.discount.length+"   disc="+selectedMedi.disc.length);
+            // console.log("#discountttttttttttttttttttttt"+selectedMedi.discount.length+"   disc="+selectedMedi.disc.length);
             
             if(selectedMedi.disc != 0){
                 selectedMedi.discount = selectedMedi.disc;
             }
-            console.log(selectedMedi.discount);
+            console.log('selectedMedi.discount==> '+selectedMedi.discount);
             
         // var  disc = selectedMedi.discount.subStr(1);
         // console.log('disc===>'+disc);
@@ -827,6 +830,7 @@ export class MediSold {
     pack: string = '1X15';
     unitCost: number;
     expDate: string;
+    billExpDate:string;
     mfgBy: string;
     discount: number;
     scheme: string
