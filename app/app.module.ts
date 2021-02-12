@@ -80,6 +80,9 @@ import { SearchByNamePipe } from './helper/search-by-name.pipe';
 import { AFUtil } from './helper/util';
 import { DispSoldMedi } from './medi/dispSoldMedi';
 import { DataBody } from './header/data.body';
+import { UploadWebResources } from './admin/uploadWebResources';
+import { FileUploadComponent } from "./admin/FileUploadComponent";
+// import { UploadeRescources } from './admin/uploadeRescources';
 
 
 @NgModule({
@@ -152,7 +155,10 @@ import { DataBody } from './header/data.body';
         SearchComponent,
         SearchByNamePipe,
         DispSoldMedi,
-        DataBody
+        DataBody,
+        UploadWebResources,
+        FileUploadComponent
+    
         
     
     

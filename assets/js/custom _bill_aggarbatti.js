@@ -1,8 +1,4 @@
-function myTest() {
-    alert('Welcome to custom js');
-}
-
-function printPage(items,custInfo,ttPrice) {
+function printPageAgbt(items,custInfo,ttPrice) {
     console.log(items)
     console.log('Print method called')
    // var w = window.open();
@@ -111,13 +107,13 @@ function printPage(items,custInfo,ttPrice) {
     '		    				<td rowSpan="8">'+
     '		    					<table>'+
     '									<tr>'+
-    '										<td> <b>The Hindustan Medical Store</b> </td>'+
+    '										<td> <b>M.H Agarbatti</b> </td>'+
     '									</tr>'+
     '									<tr>'+
     '										<td>Auth. Dealer Bihar and Jharkhand </td>'+
     '									</tr>'+
     '									<tr>'+
-    '										<td>House No.89, PANCHITYA AKHARA </td>'+
+    '										<td>House No.89, Muzzafarpur </td>'+
     '									</tr>'+
     '									<tr>'+
     '										<td>GAYA-823001(BIHAR) </td>'+
@@ -276,7 +272,7 @@ function printPage(items,custInfo,ttPrice) {
     return myvar;
 };
 
-function printPDF(tab){
+function printPDFAgbt(tab){
     setTimeout(function(){
         tab.document.close();
         tab.focus()
@@ -284,7 +280,7 @@ function printPDF(tab){
      }, 2000);
    
 }
-function onPrintRequest(value) {
+function onPrintRequestAgbt(value) {
     var w = window.open("about:blank");
     w.document.write(value);
    

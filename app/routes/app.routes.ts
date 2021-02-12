@@ -33,6 +33,8 @@ import { DispMedicine } from '../medi/dispMedicine';
 import { EditMedicine } from '../medi/editMedicine';
 import { AgarbattiBilling } from '../bill/agarbattiBilling';
 import { DispSoldMedi } from '../medi/dispSoldMedi';
+import { UploadWebResources } from '../admin/uploadWebResources';
+
 
 
 // import { LoginComponent } from '../security/LoginComponent';
@@ -181,6 +183,10 @@ const routes: Routes = [
       {
         path: 'dispSoldMedi',
         component: DispSoldMedi
+      },
+      {
+        path:'uploadeResc',
+        component:UploadWebResources
       }
     ]
   },

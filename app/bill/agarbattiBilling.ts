@@ -12,9 +12,9 @@ import { DecimalPipe, DatePipe, registerLocaleData } from '@angular/common';
 import localeIN from '@angular/common/locales/en-IN';
 import { stringify } from 'querystring';
 declare const myTest: any; //Solved by https://www.truecodex.com/course/angular-6/how-to-use-external-js-files-and-javascript-code-in-angular
-declare const printPage: any;
-declare const printPDF:any;
-declare const onPrintRequest:any;
+declare const printPageAgbt: any;
+declare const printPDFAgbt:any;
+declare const onPrintRequestAgbt:any;
 // the second parameter 'fr' is optional
 registerLocaleData(localeIN, 'en-IN');
 @Component(
@@ -200,7 +200,7 @@ export class AgarbattiBilling implements OnInit {
     }
     downloadPDF(): any {
        
-        const v=  printPage(this.itemToBeSoldArray, this.custInfo,this.decimalPipe.transform(this.ttPrice));
+        const v=  printPageAgbt(this.itemToBeSoldArray, this.custInfo,this.decimalPipe.transform(this.ttPrice));
      var pk =this.extraParam['clientPK']==undefined?0:this.extraParam['clientPK'];
         const data = {'pdfDetails':v,'clientPK':pk};
         return this.http.post(this.restSrvc.appBaseUrl+'rest/pdf/genPDF',data, { responseType: 'blob'})
@@ -231,7 +231,7 @@ export class AgarbattiBilling implements OnInit {
             console.log("fileUrl=====>"+fileUrl)
             // onPrintRequest(data);
             tab.location.href = fileUrl;
-            printPDF(tab);
+            printPDFAgbt(tab);
           });
            //this.saveData();
         }

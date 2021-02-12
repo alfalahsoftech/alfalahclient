@@ -38,6 +38,9 @@ export class UserInfoDisplay implements OnInit, AfterViewInit {
   private userDetails = [];
 
   getUserDetails() {
+    console.log("Getting usersss==============>");
+    
+
     this.restSrvc.reqRespAjax('rest/UserService/allUsers',null).subscribe((res: any[]) => {
       this.userDetails = res;
       console.log(this.userDetails)

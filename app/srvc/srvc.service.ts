@@ -23,7 +23,10 @@ export class RestSrvc {
   // appBaseUrl=   window.location.host =='clientdemoapp.herokuapp.com'?'https://clientdemoapp.herokuapp.com/':  'http://192.168.43.36:8080/alfalahsoftech/'
   // appBaseUrl=   window.location.host =='alfalahtech.herokuapp.com'?'https://alfalahtech.herokuapp.com/': (window.location.host =='localhost:3000' ? 'http://localhost:8080/alfalahsoftech/': 'http://192.168.43.36:8080/alfalahsoftech/')
   //https://al-falahsoftech.herokuapp.com/
-  appBaseUrl=   window.location.host =='al-falahsoftech.herokuapp.com'?'https://al-falahsoftech.herokuapp.com/': (window.location.host =='localhost:3000' ? 'http://localhost:8080/alfalahsoftech/': 'http://192.168.43.36:8080/alfalahsoftech/')
+  // appBaseUrl=   window.location.host =='al-falahsoftech.herokuapp.com'?'https://al-falahsoftech.herokuapp.com/': (window.location.host =='localhost:3000' ? 'http://localhost:8080/alfalahsoftech/': 'http://192.168.43.36:8080/alfalahsoftech/')
+  //3 Feb 20201
+  appBaseUrl=   window.location.hostname!='localhost'? window.location.origin: (window.location.host =='localhost:3000' ? 'http://localhost:8080/alfalahsoftech/': 'http://192.168.43.36:8080/alfalahsoftech/')
+ 
   /////////////////////////////////////////////////////////
     //////local
     
@@ -36,13 +39,7 @@ export class RestSrvc {
 
   getAllData(url:string,extraData:any):any {
     
-    this.reqRespAjax(url,extraData).subscribe((res:any[]) => {
-      return res;
-    }, error => {
-      console.error("Error in fetching data!");
-      return Observable.throw(error);
-    });
-    
+    return  this._httpClient.get(this.appBaseUrl+url);
   }
 
   getClientDetails(){
@@ -119,6 +116,8 @@ export class RestSrvc {
       return response;
   }
   ajax(urlStr:string, requestMap:any){
+    console.log('window.location===> '+window.location)
+    console.log('window.location.host===> '+window.location.host)
     console.log('Below is the Request Map: =>')
     console.log(requestMap);
     urlStr = this.appBaseUrl+urlStr;
@@ -132,6 +131,9 @@ export class RestSrvc {
 
 
    reqRespAjax(urlStr:string, requestMap:any){
+    console.log('window ' + window);
+    console.log('window.location===> ' + window.location);
+    console.log('window.location.host===> ' + window.location.origin);
        console.log('Below is the Request Map: =>')
        console.log(requestMap);
        urlStr = this.appBaseUrl+urlStr;
@@ -158,20 +160,31 @@ export class RestSrvc {
        'Content-Type':  'application/json'
        
      })
+     
  };
   return   this._httpClient.post(urlStr,data,httpOptions);
 }
 
-   fileReqRespAjax(urlStr:string, requestMap:any){
-    console.log('Below is the Request Map: =>')
+   fileReqRespAjax(urlStr:string, requestMap:any,contentType:string){
+    console.log('File Sending :Below is the Request Map: =>')
     console.log(requestMap);
     urlStr = this.appBaseUrl+urlStr;
-   const httpOptions = {
-     headers: new HttpHeaders({
-       'Content-Type':  'application/pdf'
-       
-     })
- };
+    var httpOptions;
+    if(contentType){
+       httpOptions = {
+        headers: new HttpHeaders({
+         
+          'Content-Type':  contentType != null ? contentType : 'application/pdf'
+          
+        })
+      };
+    }else{
+       httpOptions = {
+        headers: new HttpHeaders({
+        })
+    };
+  }
+   
   return   this._httpClient.post(urlStr,requestMap,httpOptions);
 }
  
