@@ -61,7 +61,8 @@ export class AddMedicine implements OnInit {
     dummyItem: DummyItem
     ngOnInit() {
         this.dummyItem = new DummyItem();
-        $('input[type=checkbox]').removeAttr('checked');
+        console.log("Addmedicine.ngOnInit()")
+       // $('input[type=checkbox]').removeAttr('checked');
     }
     dropdownOptions =['Dabba','Pc',"gm","Litter","Strip","Bottle","Kartoon"];
     selectionChanged(ev){
